@@ -45,7 +45,7 @@ const MicOff = FaMicrophoneSlash as any;
 const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
-  
+
   // Handler functions to prevent code repetition
   const handleButtonClick = (event: Event) => () => emitter.emit(event);
 
@@ -162,35 +162,26 @@ const Gameboy = ({ children }: Props) => {
       </div>
       {/* Only show connect wallet button on smaller screens (< 1000px) */}
       {isSmallScreen && (
-        <div className="connect" style={{ display: "flex", alignItems: "center" }}>
-          <CustomConnectButton/>
-          
+        <div
+          className="connect"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <CustomConnectButton />
         </div>
       )}
-      <button
-  aria-label="Toggle music"
-  onClick={() => { 
-    setMusicUiMuted((v) => !v); 
-    emitter.emit(Event.ToggleMusic); 
-  }}
-  style={{
-    marginRight: 294,
-    padding: 6,
-    borderRadius: 8,
-    border: "2px solid rgb(51, 51, 51)",
-    background: "#2c313e",
-    fontWeight: 700,
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    gap: 6,
-    position: "relative",
-    top: -39,
-  }}
->
-  {musicUiMuted ? <MicOff size={14}/> : <Mic size={14}/>}
-</button>
 
+      {isSmallScreen && (
+        <button
+          className="connect1"
+          aria-label="Toggle music"
+          onClick={() => {
+            setMusicUiMuted((v) => !v);
+            emitter.emit(Event.ToggleMusic);
+          }}
+        >
+          {musicUiMuted ? <MicOff size={14} /> : <Mic size={14} />}
+        </button>
+      )}
 
       <div className="control-section">
         <div className="controls">
@@ -199,7 +190,10 @@ const Gameboy = ({ children }: Props) => {
             <div style={{ position: "absolute", right: 24, top: 16 }}>
               <button
                 aria-label="Toggle music"
-                onClick={() => { setMusicUiMuted((v)=>!v); emitter.emit(Event.ToggleMusic); }}
+                onClick={() => {
+                  setMusicUiMuted((v) => !v);
+                  emitter.emit(Event.ToggleMusic);
+                }}
                 style={{
                   padding: "6px 10px",
                   borderRadius: 8,
@@ -212,7 +206,7 @@ const Gameboy = ({ children }: Props) => {
                   gap: 6,
                 }}
               >
-                {musicUiMuted ? <MicOff size={14}/> : <Mic size={14}/>}
+                {musicUiMuted ? <MicOff size={14} /> : <Mic size={14} />}
                 <span>{musicUiMuted ? "Silent" : "Music"}</span>
               </button>
             </div>
@@ -279,7 +273,7 @@ const Gameboy = ({ children }: Props) => {
 
       <Speaker />
       <Speaker />
-      
+
       <Speaker1 />
     </div>
   );
