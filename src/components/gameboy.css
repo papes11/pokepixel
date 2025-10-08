@@ -34,6 +34,8 @@ body {
   font-family: sans-serif;
   user-select: none;
   cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 .gameboy::after {
@@ -326,6 +328,8 @@ body {
   position: absolute;
   background-color: #2e2f32; /* darker black dpad */
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 .gameboy .controls .dpad > * i {

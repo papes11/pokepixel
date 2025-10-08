@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import React from "react";
+import { Buffer } from "buffer";
 import { Provider } from "react-redux";
 import { store } from "../src/state/store";
 import GlobalStyles from "../src/styles/GlobalStyles";
@@ -12,8 +13,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   // Minimal polyfills formerly in CRA's src/index.tsx
   if (typeof window !== "undefined") {
     // Type-safe Buffer polyfill for Solana libs
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    (window as any).Buffer = (window as any).Buffer || require("buffer").Buffer;
+    (window as any).Buffer = (window as any).Buffer || Buffer;
     // Disable vibration/haptics globally
     try {
       const nav: any = navigator as any;

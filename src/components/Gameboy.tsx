@@ -46,12 +46,12 @@ const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
 
-  // Handler functions to prevent code repetition
-  const handleButtonClick = (event: Event) => () => emitter.emit(event);
-
-  const handleTouchStart = (event: Event) => () => emitter.emit(event);
-
-  const handleTouchEnd = (event: Event) => () => emitter.emit(event);
+  // Emit helpers that prevent default to avoid mobile haptics/gestures
+  const emitPrevent = (ev: Event) => (e: React.TouchEvent | React.MouseEvent) => {
+    if (e && typeof (e as any).preventDefault === "function") (e as any).preventDefault();
+    if (e && typeof (e as any).stopPropagation === "function") (e as any).stopPropagation();
+    emitter.emit(ev);
+  };
 
   // Speaker dot pattern data to reduce repetition
   const speakerPattern = [
@@ -214,36 +214,40 @@ const Gameboy = ({ children }: Props) => {
           <div className="dpad">
             <div
               className="up"
-              onClick={handleButtonClick(Event.Up)}
-              onTouchStart={handleTouchStart(Event.StartUp)}
-              onTouchEnd={handleTouchEnd(Event.StopUp)}
+              onMouseDown={emitPrevent(Event.StartUp)}
+              onMouseUp={emitPrevent(Event.StopUp)}
+              onTouchStart={emitPrevent(Event.StartUp)}
+              onTouchEnd={emitPrevent(Event.StopUp)}
             >
               <CaretUp size={24} />
             </div>
 
             <div
               className="right"
-              onClick={handleButtonClick(Event.Right)}
-              onTouchStart={handleTouchStart(Event.StartRight)}
-              onTouchEnd={handleTouchEnd(Event.StopRight)}
+              onMouseDown={emitPrevent(Event.StartRight)}
+              onMouseUp={emitPrevent(Event.StopRight)}
+              onTouchStart={emitPrevent(Event.StartRight)}
+              onTouchEnd={emitPrevent(Event.StopRight)}
             >
               <CaretRight size={24} />
             </div>
 
             <div
               className="down"
-              onClick={handleButtonClick(Event.Down)}
-              onTouchStart={handleTouchStart(Event.StartDown)}
-              onTouchEnd={handleTouchEnd(Event.StopDown)}
+              onMouseDown={emitPrevent(Event.StartDown)}
+              onMouseUp={emitPrevent(Event.StopDown)}
+              onTouchStart={emitPrevent(Event.StartDown)}
+              onTouchEnd={emitPrevent(Event.StopDown)}
             >
               <CaretDown size={24} />
             </div>
 
             <div
               className="left"
-              onClick={handleButtonClick(Event.Left)}
-              onTouchStart={handleTouchStart(Event.StartLeft)}
-              onTouchEnd={handleTouchEnd(Event.StopLeft)}
+              onMouseDown={emitPrevent(Event.StartLeft)}
+              onMouseUp={emitPrevent(Event.StopLeft)}
+              onTouchStart={emitPrevent(Event.StartLeft)}
+              onTouchEnd={emitPrevent(Event.StopLeft)}
             >
               <CaretLeft size={24} />
             </div>
@@ -252,20 +256,20 @@ const Gameboy = ({ children }: Props) => {
           </div>
 
           <div className="a-b">
-            <div className="b" onClick={handleButtonClick(Event.B)}>
+            <div className="b" onMouseDown={emitPrevent(Event.B)} onTouchStart={emitPrevent(Event.B)}>
               B
             </div>
-            <div className="a" onClick={handleButtonClick(Event.A)}>
+            <div className="a" onMouseDown={emitPrevent(Event.A)} onTouchStart={emitPrevent(Event.A)}>
               A
             </div>
           </div>
         </div>
 
         <div className="start-select">
-          <div className="select" onClick={handleButtonClick(Event.B)}>
+          <div className="select" onMouseDown={emitPrevent(Event.B)} onTouchStart={emitPrevent(Event.B)}>
             BACK
           </div>
-          <div className="start" onClick={handleButtonClick(Event.Start)}>
+          <div className="start" onMouseDown={emitPrevent(Event.Start)} onTouchStart={emitPrevent(Event.Start)}>
             SELECT
           </div>
         </div>
