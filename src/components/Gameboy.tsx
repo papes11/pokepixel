@@ -47,8 +47,10 @@ const Gameboy = ({ children }: Props) => {
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
 
   // Emit helpers that stop propagation (avoid passive listener preventDefault warnings)
-  const emitPrevent = (ev: Event) => (e: React.TouchEvent | React.MouseEvent) => {
+  const emitPrevent = (ev: Event, extra?: Event[]) => (e: React.TouchEvent | React.MouseEvent) => {
     if (e && typeof (e as any).stopPropagation === "function") (e as any).stopPropagation();
+    // Emit discrete event(s) first so menus react immediately, then continuous
+    if (extra && extra.length) extra.forEach((x) => emitter.emit(x));
     emitter.emit(ev);
   };
 
@@ -213,9 +215,9 @@ const Gameboy = ({ children }: Props) => {
           <div className="dpad">
             <div
               className="up"
-              onMouseDown={emitPrevent(Event.StartUp)}
+              onMouseDown={emitPrevent(Event.StartUp, [Event.Up, Event.StartUp])}
               onMouseUp={emitPrevent(Event.StopUp)}
-              onTouchStart={emitPrevent(Event.StartUp)}
+              onTouchStart={emitPrevent(Event.StartUp, [Event.Up, Event.StartUp])}
               onTouchEnd={emitPrevent(Event.StopUp)}
             >
               <CaretUp size={24} />
@@ -223,9 +225,9 @@ const Gameboy = ({ children }: Props) => {
 
             <div
               className="right"
-              onMouseDown={emitPrevent(Event.StartRight)}
+              onMouseDown={emitPrevent(Event.StartRight, [Event.Right, Event.StartRight])}
               onMouseUp={emitPrevent(Event.StopRight)}
-              onTouchStart={emitPrevent(Event.StartRight)}
+              onTouchStart={emitPrevent(Event.StartRight, [Event.Right, Event.StartRight])}
               onTouchEnd={emitPrevent(Event.StopRight)}
             >
               <CaretRight size={24} />
@@ -233,9 +235,9 @@ const Gameboy = ({ children }: Props) => {
 
             <div
               className="down"
-              onMouseDown={emitPrevent(Event.StartDown)}
+              onMouseDown={emitPrevent(Event.StartDown, [Event.Down, Event.StartDown])}
               onMouseUp={emitPrevent(Event.StopDown)}
-              onTouchStart={emitPrevent(Event.StartDown)}
+              onTouchStart={emitPrevent(Event.StartDown, [Event.Down, Event.StartDown])}
               onTouchEnd={emitPrevent(Event.StopDown)}
             >
               <CaretDown size={24} />
@@ -243,9 +245,9 @@ const Gameboy = ({ children }: Props) => {
 
             <div
               className="left"
-              onMouseDown={emitPrevent(Event.StartLeft)}
+              onMouseDown={emitPrevent(Event.StartLeft, [Event.Left, Event.StartLeft])}
               onMouseUp={emitPrevent(Event.StopLeft)}
-              onTouchStart={emitPrevent(Event.StartLeft)}
+              onTouchStart={emitPrevent(Event.StartLeft, [Event.Left, Event.StartLeft])}
               onTouchEnd={emitPrevent(Event.StopLeft)}
             >
               <CaretLeft size={24} />
