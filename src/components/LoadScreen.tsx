@@ -28,7 +28,53 @@ const LoadScreen = () => {
   const hasSave = useSelector(selectHasSave); 
   const titleOpen = useSelector(selectTitleMenu); 
   const show = useSelector(selectLoadMenu); 
-  const gameboyOpen = useSelector(selectGameboyMenu); 
+  const gameboyOpen = useSelector(selectGameboyMenu);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        dispatch(showText(["✅ Contract Address copied to clipboard!"]));
+        return;
+      }
+      
+      // Fallback for older browsers and mobile
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      if (successful) {
+        dispatch(showText(["✅ Contract Address copied to clipboard!"]));
+      } else {
+        throw new Error('Copy command failed');
+      }
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      dispatch(showText([
+        "❌ Auto-copy failed on this device",
+        "",
+        "📋 Contract Address:",
+        text,
+        "",
+        "📱 Mobile users:",
+        "1. Long press the address above",
+        "2. Select 'Copy' from the menu",
+        "",
+        "💻 Desktop users:",
+        "1. Select the address above",
+        "2. Press Ctrl+C (or Cmd+C on Mac)"
+      ]));
+    }
+  }; 
  
   const loadComplete = () => { 
     setLoaded(true); 
@@ -154,18 +200,25 @@ const LoadScreen = () => {
           "Social links updating soon...", 
         ]) 
       ), 
+  };
+
+  const contractAddress = { 
+    label: "Offical CA", 
+    action: () => {
+      const ca = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
+      copyToClipboard(ca);
+    }, 
   }; 
  
   if (!show) return null; 
  
   return ( 
-     
     <StyledLoadScreen> 
       <Text/> 
       <Menu 
         disabled={titleOpen || gameboyOpen} 
         show={!loaded} 
-        menuItems={hasSave ? [loadGame, newGame, faq, mysteryBox, social] : [newGame, faq, mysteryBox, social]} 
+        menuItems={hasSave ? [loadGame, newGame, faq, mysteryBox, social, contractAddress] : [newGame, faq, mysteryBox, social, contractAddress]} 
         close={() => setLoaded(true)} 
         noExit 
         top="2px" 
@@ -173,7 +226,7 @@ const LoadScreen = () => {
         padding="7vw" 
       /> 
     </StyledLoadScreen> 
-  ); 
+  );
 }; 
  
 export default LoadScreen;
