@@ -90,51 +90,8 @@ const LoadScreen = () => {
     }, 
   }; 
  
-  const loadGame = { 
-    label: "Continue", 
-    action: () => { 
-      dispatch(load()); 
-      loadComplete(); 
-    }, 
-  }; 
- 
-  const faq = { 
-    label: "FAQ", 
-    action: () => 
-      dispatch( 
-        showText([ 
-          "✨ Pokepixel FAQ ✨", 
-          "🎮 What is Pokepixel?", 
-          "Pokepixel is a free-to-play, ", 
-          "On solana blockchain,", 
-          "play-to-earn game where you explore,", 
-          "and find hidden quest boxes.", 
-          "🧩 How do I play?", 
-          "Connect wallet Hold 10k pokepixel", 
-          "and Start playing now", 
-          "Roam the world map,", 
-          "Hidden boxes spawn randomly", 
-          "collect quest boxes items", 
-          "and level up your airdrop", 
-          "giving you rewards and surprises!", 
-          "🚀 What phase are we in?", 
-          "AlphaNet is OPEN — ", 
-          "join and be part of something huge.", 
-          "🎁 What's coming next?", 
-          "- Massive airdrops for early players", 
-          "- Swap features in BetaNet", 
-          "- More quests and  hidden box events", 
-          "🔥 Don't wait! Start your journey,", 
-          "find quest boxes, and claim your rewards!", 
-          "only on solana blockchain", 
-          "alphanet is open now!", 
-          "Social links updating soon!", 
-        ]) 
-      ), 
-  }; 
-
-  const mysteryBox = { 
-    label: "Mystery Box", 
+  const questBox = { 
+    label: "Quest Box", 
     action: () => 
       dispatch( 
         showText([ 
@@ -165,6 +122,14 @@ const LoadScreen = () => {
           "to maximize your rewards.", 
         ]) 
       ), 
+  }; 
+
+  const contractAddress = { 
+    label: "Official CA", 
+    action: () => {
+      const ca = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
+      copyToClipboard(ca);
+    }, 
   }; 
 
   const social = { 
@@ -202,12 +167,39 @@ const LoadScreen = () => {
       ), 
   };
 
-  const contractAddress = { 
-    label: "Offical CA", 
-    action: () => {
-      const ca = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
-      copyToClipboard(ca);
-    }, 
+  const faq = { 
+    label: "FAQ", 
+    action: () => 
+      dispatch( 
+        showText([ 
+          "✨ Pokepixel FAQ ✨", 
+          "🎮 What is Pokepixel?", 
+          "Pokepixel is a free-to-play,", 
+          "on the Solana blockchain,", 
+          "play-to-earn game where you explore", 
+          "and find hidden quest boxes.", 
+          "🧩 How do I play?", 
+          "Connect wallet, hold 10k Pokepixel,", 
+          "and start playing now!", 
+          "Roam the world map,", 
+          "hidden boxes spawn randomly,", 
+          "collect quest box items,", 
+          "and level up your airdrop,", 
+          "giving you rewards and surprises!", 
+          "🚀 What phase are we in?", 
+          "AlphaNet is OPEN —", 
+          "join and be part of something huge.", 
+          "🎁 What's coming next?", 
+          "- Massive airdrops for early players", 
+          "- Swap features in BetaNet", 
+          "- More quests and hidden box events", 
+          "🔥 Don't wait! Start your journey,", 
+          "find quest boxes, and claim your rewards!", 
+          "Only on the Solana blockchain.", 
+          "AlphaNet is open now!", 
+          "Social links updating soon!", 
+        ]) 
+      ), 
   }; 
  
   if (!show) return null; 
@@ -218,7 +210,7 @@ const LoadScreen = () => {
       <Menu 
         disabled={titleOpen || gameboyOpen} 
         show={!loaded} 
-        menuItems={hasSave ? [loadGame, newGame, faq, mysteryBox, social, contractAddress] : [newGame, faq, mysteryBox, social, contractAddress]} 
+        menuItems={[newGame, questBox, contractAddress, social, faq]} 
         close={() => setLoaded(true)} 
         noExit 
         top="2px" 
@@ -226,7 +218,7 @@ const LoadScreen = () => {
         padding="7vw" 
       /> 
     </StyledLoadScreen> 
-  );
+  ); 
 }; 
  
 export default LoadScreen;

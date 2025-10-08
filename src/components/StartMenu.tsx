@@ -39,10 +39,6 @@ const StartMenu = () => {
         show={show}
         close={() => dispatch(hideStartMenu())}
         menuItems={[
-          // {
-          //   label: "Pokédex",
-          //   action: () => console.log("TODO"),
-          // },
           {
             label: "Pokepixel",
             action: () => {
@@ -51,13 +47,23 @@ const StartMenu = () => {
             },
           },
           {
-            label: "Item",
-            action: () => dispatch(showItemsMenu()),
+            label: "Your Box",
+            action: () =>
+              dispatch(
+                showText([
+                  "✨ Pokepixel Box Info ✨",
+                  "ALL ITEMS WILL BE SHOWN IN BETA.",
+                  "Stay tuned for more updates!",
+                ])
+              ),
           },
-
           {
             label: "Player",
             action: () => dispatch(showPlayerMenu()),
+          },
+          {
+            label: "Item",
+            action: () => dispatch(showItemsMenu()),
           },
           {
             label: "Save",
@@ -73,79 +79,6 @@ const StartMenu = () => {
                 })
               );
             },
-          },
-
-          {
-            label: "faq",
-            action: () =>
-              dispatch(
-                showText([
-                  "✨ Pokepixel FAQ ✨",
-
-                  "🎮 What is Pokepixel?",
-
-                  "Pokepixel is a free-to-play, ",
-
-                  "On solana blockchain,",
-
-                  "play-to-earn game where you explore,",
-
-                  "and find hidden quest boxes.",
-
-                  "🧩 How do I play?",
-
-                  "Connect wallet Hold 10k pokepixel",
-
-                  "and Start playing now",
-
-                  "Roam the world map,",
-
-                  "Hidden boxes spawn randomly",
-
-                  "collect quest boxes items",
-
-                  "and level up your airdrop",
-
-                  "giving you rewards and surprises!",
-
-                  "🚀 What phase are we in?",
-
-                  "AlphaNet is OPEN — ",
-
-                  "join and be part of something huge.",
-
-                  "🎁 What’s coming next?",
-
-                  "- Massive airdrops for early players",
-
-                  "- Swap features in BetaNet",
-
-                  "- More quests and  hidden box events",
-
-                  "🔥 Don’t wait! Start your journey,",
-
-                  "find quest boxes, and claim your rewards!",
-
-                  "only on solana blockchain",
-
-                  "alphanet is open now!",
-
-                  "Social links updating soon!",
-                ])
-              ),
-          },
-
-          {
-            label: "box",
-            action: () =>
-              dispatch(
-                showText([
-                  "✨ Pokepixel Box Info ✨",
-                  "ALL ITEM WILL NE SHOWN IN BETA",
-                  "Stay tuned for more updates!",
-
-                ])
-                ),
           },
         ]}
       />
