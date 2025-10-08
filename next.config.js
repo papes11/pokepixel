@@ -3,6 +3,19 @@ module.exports = {
   compiler: { styledComponents: true },
   images: { disableStaticImages: true },
   typedRoutes: false,
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Permissions-Policy',
+            value: 'vibrate=()'
+          }
+        ]
+      }
+    ];
+  },
   // Fix HMR issues with Next.js 15
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer

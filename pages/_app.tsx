@@ -14,6 +14,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     // Type-safe Buffer polyfill for Solana libs
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     (window as any).Buffer = (window as any).Buffer || require("buffer").Buffer;
+    // Disable vibration/haptics globally
+    try {
+      const nav: any = navigator as any;
+      if (nav && typeof nav.vibrate === "function") {
+        nav.vibrate = () => false;
+      }
+    } catch {}
   }
   return (
     <WalletContextProvider>
