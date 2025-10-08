@@ -47,8 +47,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "next/core-web-vitals"
     ]
   },
   "browserslist": {
@@ -67,7 +66,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@types/dateformat": "^5.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "node-fetch": "2"
   }
 }
