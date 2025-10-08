@@ -54,7 +54,7 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
     <Container>
       <Frame wide tall>
         <div>🎉 Transaction complete!</div>
-        <div>A new box has been added to your airdrop.</div>
+        <div>⚔️Loot acquired And added to your Quest Box</div>
         <LinkButton href={url} target="_blank" rel="noopener noreferrer">
           View on Explorer
         </LinkButton>

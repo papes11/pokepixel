@@ -46,9 +46,8 @@ const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
 
-  // Emit helpers that prevent default to avoid mobile haptics/gestures
+  // Emit helpers that stop propagation (avoid passive listener preventDefault warnings)
   const emitPrevent = (ev: Event) => (e: React.TouchEvent | React.MouseEvent) => {
-    if (e && typeof (e as any).preventDefault === "function") (e as any).preventDefault();
     if (e && typeof (e as any).stopPropagation === "function") (e as any).stopPropagation();
     emitter.emit(ev);
   };

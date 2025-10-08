@@ -41,6 +41,10 @@
     "url": "^0.11.4",
     "util": "^0.12.5"
   },
+  "overrides": {
+    "@noble/curves": "1.4.0",
+    "@noble/hashes": "1.4.0"
+  },
   "scripts": {
     "dev": "set NEXT_DISABLE_DEVTOOLS=1 && next dev",
     "build": "next build",

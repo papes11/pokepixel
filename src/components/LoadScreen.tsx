@@ -168,7 +168,7 @@ const LoadScreen = () => {
   };
 
   const faq = { 
-    label: "FAQ", 
+    label: "FAQs", 
     action: () => 
       dispatch( 
         showText([ 
@@ -201,6 +201,24 @@ const LoadScreen = () => {
         ]) 
       ), 
   }; 
+
+  const docs = {
+    label: "Docs",
+    action: () => {
+      try {
+        const a = document.createElement('a');
+        a.href = "/docs";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        // Required for some mobile browsers to treat as user gesture
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  };
  
   if (!show) return null; 
  
@@ -210,7 +228,7 @@ const LoadScreen = () => {
       <Menu 
         disabled={titleOpen || gameboyOpen} 
         show={!loaded} 
-        menuItems={[newGame, questBox, contractAddress, social, faq]} 
+        menuItems={[newGame, questBox, contractAddress, social, faq, docs]} 
         close={() => setLoaded(true)} 
         noExit 
         top="2px" 

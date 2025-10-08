@@ -1,4 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+import React from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 import nintendo from "../assets/title-screen/solana1.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -121,12 +123,46 @@ const Nintendo = styled(PixelImage)`
   animation: ${apearIn} 0s 300ms 1 linear forwards;
 `;
 
+const flash = keyframes`
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
+`;
+
+const ConnectHint = styled.div<{ $error?: boolean }>`
+  margin-top: 8px;
+  font-family: "PressStart2P", sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  color: ${props => (props.$error ? "#ff3b3b" : "#9fb6c6")};
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  animation: ${apearIn} 0s 300ms 1 linear forwards;
+  ${props => props.$error && css`animation: ${flash} 900ms infinite;`};
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 0.8rem;
+  }
+`;
+
 const GameboyMenu = () => {
   const dispatch = useDispatch();
   const show = useSelector(selectGameboyMenu);
+  const { connected } = useWallet();
+  const [flashError, setFlashError] = React.useState(false);
 
   useEvent(Event.A, () => {
-    dispatch(hideGameboyMenu());
+    if (connected) {
+      dispatch(hideGameboyMenu());
+    } else {
+      setFlashError(true);
+      window.setTimeout(() => setFlashError(false), 1500);
+    }
   });
 
   if (!show) return null;
@@ -134,6 +170,14 @@ const GameboyMenu = () => {
   return (
     <StyledGameboyMenu>
       <Text>SOLBOY</Text>
+      {!connected && (
+        <ConnectHint $error={flashError} onClick={() => {
+          setFlashError(true);
+          window.setTimeout(() => setFlashError(false), 1500);
+        }} role="button" aria-label="Connect wallet to play">
+          Connect wallet to play
+        </ConnectHint>
+      )}
       <Nintendo src={nintendo} />
     </StyledGameboyMenu>
   );
