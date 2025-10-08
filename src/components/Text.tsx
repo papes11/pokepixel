@@ -43,7 +43,7 @@ const StyledText = styled.div<TextProps>`
   width: 100%;
   height: 20%;
   background: var(--bg);
-  z-index: 1001;
+  z-index: 1000;
 
   h1 {
     color: black;
@@ -109,7 +109,6 @@ const Text = () => {
 
   useEffect(() => {
     setLiveIndex(0);
-    setTextIndex(0); // Reset textIndex when text changes
     if (text) {
       const interval = setInterval(() => {
         setLiveIndex((prev) => prev + 1);
@@ -117,16 +116,16 @@ const Text = () => {
 
       return () => clearInterval(interval);
     }
-  }, [text]);
+  }, [text, textIndex]);
 
   useEvent(Event.A, () => {
     // Reading text
-    if (text && text.length > 0) {
-      if (textIndex >= text.length - 1) {
+    if (text) {
+      if (textIndex === text.length - 1) {
         setTextIndex(0);
         dispatch(hideText());
       } else {
-        setTextIndex((prev) => Math.min(prev + 1, text.length - 1));
+        setTextIndex((prev) => prev + 1);
       }
       return;
     }
@@ -169,14 +168,14 @@ const Text = () => {
     }
   });
 
-  if (!text || !text[textIndex]) return null;
+  if (!text) return null;
 
   return (
     <>
       {text[textIndex].length > 300 ? (
         <Image src={text[textIndex]} />
       ) : (
-        <StyledText className="framed no-hd" $done={liveIndex >= text[textIndex].length}>
+        <StyledText className="framed no-hd" $done={liveIndex > text.length}>
           <h1>{text[textIndex].substring(0, liveIndex)}</h1>
         </StyledText>
       )}

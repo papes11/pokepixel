@@ -21,14 +21,14 @@ const Container = styled.div`
 
 const LinkButton = styled.a`
   display: block;
-  padding: 8px 12px;
+  padding: 4px 12px;
   border: 2px solid #333;
   background-color: rgb(249, 242, 250);
   color: #333;
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 3px;
   font-family: Arial, Helvetica, sans-serif;
   word-break: break-all;
   font-variant-numeric: tabular-nums;
@@ -53,7 +53,8 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
   return (
     <Container>
       <Frame wide tall>
-        <div>Transaction successful! Mint successful.</div>
+        <div>🎉 Transaction complete!</div>
+        <div>A new box has been added to your airdrop.</div>
         <LinkButton href={url} target="_blank" rel="noopener noreferrer">
           View on Explorer
         </LinkButton>

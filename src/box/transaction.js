@@ -150,22 +150,26 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
     // Confirm via randomized RPCs to avoid a single endpoint rate-limiting us
     await confirmWithFallback(signature, "confirmed");
 
-    try {
-      const resp = await fetch("/api/mint", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userPublicKey: publicKey.toString() }),
-      });
-      const json = await resp.json();
-      if (!resp.ok || !json.ok) {
-        const msg = json?.error || `Mint failed (${resp.status})`;
-        return [true, signature, null, msg];
-      }
-      return [true, signature, json.signature ?? null, null];
-    } catch (mintErr) {
-      const msg = (mintErr && (mintErr.message || String(mintErr))) || "Mint failed";
-      return [true, signature, null, msg];
-    }
+    // MINT FUNCTIONALITY DISABLED - Just return success without minting
+    // try {
+    //   const resp = await fetch("/api/mint", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ userPublicKey: publicKey.toString() }),
+    //   });
+    //   const json = await resp.json();
+    //   if (!resp.ok || !json.ok) {
+    //     const msg = json?.error || `Mint failed (${resp.status})`;
+    //     return [true, signature, null, msg];
+    //   }
+    //   return [true, signature, json.signature ?? null, null];
+    // } catch (mintErr) {
+    //   const msg = (mintErr && (mintErr.message || String(mintErr))) || "Mint failed";
+    //   return [true, signature, null, msg];
+    // }
+    
+    // Return success without minting
+    return [true, signature, null, null];
   } catch (err) {
     return [false, null, null, err?.message || String(err) || null];
   }

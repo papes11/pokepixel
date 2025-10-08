@@ -1,3 +1,5 @@
+// COMMENTED OUT FOR NOW - MINT FUNCTIONALITY DISABLED
+/*
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
@@ -101,6 +103,15 @@ export default async function handler(req: any, res: any) {
     console.error("Mint API error:", error);
     return res.status(500).json({ ok: false, error: error?.message || String(error) });
   }
+}
+*/
+
+// Temporary placeholder handler while mint functionality is disabled
+export default async function handler(req: any, res: any) {
+  return res.status(503).json({ 
+    ok: false, 
+    error: "Mint functionality is temporarily disabled" 
+  });
 }
 
 
