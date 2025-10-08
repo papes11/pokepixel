@@ -6,6 +6,8 @@ import {
   FaCaretRight,
   FaCaretDown,
   FaCaretLeft,
+  FaMicrophone,
+  FaMicrophoneSlash,
 } from "react-icons/fa";
 import CustomConnectButton from "../wallets/wallets";
 import useIsMobile from "../app/use-is-mobile";
@@ -37,9 +39,12 @@ const CaretUp = FaCaretUp as any;
 const CaretRight = FaCaretRight as any;
 const CaretDown = FaCaretDown as any;
 const CaretLeft = FaCaretLeft as any;
+const Mic = FaMicrophone as any;
+const MicOff = FaMicrophoneSlash as any;
 
 const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
+  const [musicUiMuted, setMusicUiMuted] = React.useState(false);
   
   // Handler functions to prevent code repetition
   const handleButtonClick = (event: Event) => () => emitter.emit(event);
@@ -156,10 +161,62 @@ const Gameboy = ({ children }: Props) => {
         </div>
       </div>
       {/* Only show connect wallet button on smaller screens (< 1000px) */}
-      {isSmallScreen && <div className="connect"><CustomConnectButton/></div>}
+      {isSmallScreen && (
+        <div className="connect" style={{ display: "flex", alignItems: "center" }}>
+          <CustomConnectButton/>
+          
+        </div>
+      )}
+      <button
+  aria-label="Toggle music"
+  onClick={() => { 
+    setMusicUiMuted((v) => !v); 
+    emitter.emit(Event.ToggleMusic); 
+  }}
+  style={{
+    marginRight: 294,
+    padding: 6,
+    borderRadius: 8,
+    border: "2px solid rgb(51, 51, 51)",
+    background: "#2c313e",
+    fontWeight: 700,
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    position: "relative",
+    top: -39,
+  }}
+>
+  {musicUiMuted ? <MicOff size={14}/> : <Mic size={14}/>}
+</button>
+
 
       <div className="control-section">
         <div className="controls">
+          {/* Music toggle for larger screens: place above D-pad near connect area */}
+          {!isSmallScreen && (
+            <div style={{ position: "absolute", right: 24, top: 16 }}>
+              <button
+                aria-label="Toggle music"
+                onClick={() => { setMusicUiMuted((v)=>!v); emitter.emit(Event.ToggleMusic); }}
+                style={{
+                  padding: "6px 10px",
+                  borderRadius: 8,
+                  border: "2px solid #333",
+                  background: "#f9f2fa",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                {musicUiMuted ? <MicOff size={14}/> : <Mic size={14}/>}
+                <span>{musicUiMuted ? "Silent" : "Music"}</span>
+              </button>
+            </div>
+          )}
           <div className="dpad">
             <div
               className="up"

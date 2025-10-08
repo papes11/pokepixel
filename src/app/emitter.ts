@@ -20,6 +20,7 @@ export enum Event {
   StopMoving = "stop-moving",
   EnterDoor = "enter-door",
   HealPokemon = "heal-pokemon",
+  ToggleMusic = "toggle-music",
 }
 
 const emitter = mitt();

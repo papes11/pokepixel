@@ -23,6 +23,7 @@ const SoundHandler = () => {
   const inBattle = !!useSelector(selectPokemonEncounter);
 
   const [musicOverride, setMusicOverride] = useState<string | null>(null);
+  const [musicMuted, setMusicMuted] = useState<boolean>(false);
 
   const isOpening = !isGameboyMenu && isLoadScreen;
 
@@ -42,6 +43,10 @@ const SoundHandler = () => {
     if (mapMusic) return mapMusic;
     return undefined;
   };
+
+  useEvent(Event.ToggleMusic, () => {
+    setMusicMuted((prev) => !prev);
+  });
 
   const playUiSound = (sound: string, volume = 1) => {
     if (uiSoundRef.current) uiSoundRef.current.volume = volume;
@@ -69,7 +74,7 @@ const SoundHandler = () => {
 
   return (
     <>
-      <audio autoPlay loop src={music()} />
+      <audio autoPlay loop src={music()} muted={musicMuted} />
       <audio
         ref={uiSoundRef}
         autoPlay
