@@ -45,6 +45,30 @@ const MicOff = FaMicrophoneSlash as any;
 const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
+  const [caCopied, setCaCopied] = React.useState(false);
+
+  const contractAddress = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
+
+  const copyCA = React.useCallback(async () => {
+    try {
+      if (navigator.clipboard && (window as any).isSecureContext !== false) {
+        await navigator.clipboard.writeText(contractAddress);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = contractAddress;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        ta.style.top = "-9999px";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCaCopied(true);
+      setTimeout(() => setCaCopied(false), 1200);
+    } catch {}
+  }, []);
 
   // Emit helpers that stop propagation (avoid passive listener preventDefault warnings)
   const emitPrevent = (ev: Event, extra?: Event[]) => (e: React.TouchEvent | React.MouseEvent) => {
@@ -222,6 +246,17 @@ const Gameboy = ({ children }: Props) => {
         </button>
       )}
 
+      {isSmallScreen && (
+        <button
+          className="connect2"
+          aria-label="Copy contract address"
+          onClick={copyCA}
+          style={{ right: 15,}}
+        >
+          <span style={{ fontSize: 8, fontWeight: 700 }}>{caCopied ? "Copied" : "CA"}</span>
+        </button>
+      )}
+
       <div className="control-section">
         <div className="controls">
           {/* Music toggle for larger screens: place above D-pad near connect area */}
@@ -247,6 +282,26 @@ const Gameboy = ({ children }: Props) => {
               >
                 {musicUiMuted ? <MicOff size={14} /> : <Mic size={14} />}
                 <span>{musicUiMuted ? "Silent" : "Music"}</span>
+              </button>
+            </div>
+          )}
+          {!isSmallScreen && (
+            <div style={{ position: "absolute", left: 24, top: 16 }}>
+              <button
+                aria-label="Copy contract address"
+                onClick={copyCA}
+                style={{
+                  padding: "6px 10px",
+                  borderRadius: 8,
+                  border: "2px solid #333",
+                  background: "#f9f2fa",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>{caCopied ? "Copied" : "CA"}</span>
               </button>
             </div>
           )}
