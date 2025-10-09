@@ -400,8 +400,14 @@ export const selectPreviousMap = (state: RootState) => {
 
 export const selectName = (state: RootState) => state.game.name;
 
-export const selectHasSave = () =>
-  typeof window !== "undefined" && localStorage.getItem("game") !== null;
+export const selectHasSave = (state: RootState) => {
+  if (typeof window === "undefined") return false;
+  try {
+    return localStorage.getItem(state.game.name) !== null;
+  } catch {
+    return false;
+  }
+};
 
 
 export const selectPokemon = (state: RootState) => state.game.pokemon;

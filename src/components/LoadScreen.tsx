@@ -1,8 +1,8 @@
 import styled from "styled-components"; 
 import Menu from "./Menu"; 
-import { useState } from "react"; 
+import { useState, useEffect } from "react"; 
 import { useDispatch, useSelector } from "react-redux"; 
-import { load, selectHasSave } from "../state/gameSlice"; 
+import { load, selectHasSave, selectName } from "../state/gameSlice"; 
 import { 
   hideLoadMenu, 
   selectGameboyMenu, 
@@ -25,10 +25,23 @@ const StyledLoadScreen = styled.div`
 const LoadScreen = () => { 
   const dispatch = useDispatch(); 
   const [loaded, setLoaded] = useState(false); 
-  const hasSave = useSelector(selectHasSave); 
+  const [hasSave, setHasSave] = useState(false);
   const titleOpen = useSelector(selectTitleMenu); 
   const show = useSelector(selectLoadMenu); 
   const gameboyOpen = useSelector(selectGameboyMenu);
+
+  const playerName = useSelector(selectName);
+
+  // Handle client-side save detection to prevent hydration mismatch
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        setHasSave(localStorage.getItem(playerName) !== null);
+      } catch {
+        setHasSave(false);
+      }
+    }
+  }, [playerName]);
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -88,6 +101,14 @@ const LoadScreen = () => {
     action: () => { 
       loadComplete(); 
     }, 
+  };
+
+  const continueGame = {
+    label: "Continue",
+    action: () => {
+      dispatch(load());
+      loadComplete();
+    },
   }; 
  
   const questBox = { 
@@ -228,7 +249,7 @@ const LoadScreen = () => {
       <Menu 
         disabled={titleOpen || gameboyOpen} 
         show={!loaded} 
-        menuItems={[newGame, questBox, contractAddress, social, faq, docs]} 
+        menuItems={hasSave ? [continueGame, newGame, questBox, contractAddress, social, faq, docs] : [newGame, questBox, contractAddress, social, faq, docs]} 
         close={() => setLoaded(true)} 
         noExit 
         top="2px" 
