@@ -70,6 +70,7 @@ export default function DocsPage() {
       <nav className="docs-nav">
         <div className="nav-container">
           <div className="brand">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo512.png" alt="Pokepixel Logo" />
             <span>Pokepixel Docs</span>
             <button className="menu-btn" aria-label="Toggle navigation" onClick={() => setSidebarOpen((v) => !v)}>
@@ -125,7 +126,7 @@ export default function DocsPage() {
                     <div className="step-number">1</div>
                     <div className="step-content">
                       <h3>Install a Solana Wallet</h3>
-                      <p>Download Phantom, Solflare, or any compatible Solana wallet from your browser's extension store.</p>
+                      <p>Download Phantom, Solflare, or any compatible Solana wallet from your browser&apos;s extension store.</p>
                     </div>
                   </div>
                   <div className="step">
