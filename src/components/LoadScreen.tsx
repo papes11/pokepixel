@@ -173,6 +173,8 @@ const LoadScreen = () => {
           "👥 Our Development Team:", 
           "Developers from multiple successful", 
           "projects are working on Pokepixel.", 
+          "official website:",
+          "www.pokepixel.xyz",
           "", 
           "🚀 Development Phases:", 
           "Alpha Phase: Live on PumpFun now!", 
