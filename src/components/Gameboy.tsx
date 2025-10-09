@@ -54,6 +54,44 @@ const Gameboy = ({ children }: Props) => {
     emitter.emit(ev);
   };
 
+  // Track if we've already emitted discrete events for this press
+  const [emittedDiscrete, setEmittedDiscrete] = React.useState({
+    up: false,
+    down: false,
+    left: false,
+    right: false
+  });
+
+  // Track last event type to prevent double-firing
+  const lastEventTypeRef = React.useRef<string>('');
+
+  const emitDiscreteOnce = (direction: keyof typeof emittedDiscrete, discreteEv: Event, continuousEv: Event) => (e: React.TouchEvent | React.MouseEvent) => {
+    if (e && typeof (e as any).stopPropagation === "function") (e as any).stopPropagation();
+    
+    // Prevent double-firing on mobile (both touch and mouse events fire)
+    const currentEventType = e.type;
+    if (currentEventType === 'mousedown' && lastEventTypeRef.current === 'touchstart') {
+      lastEventTypeRef.current = currentEventType;
+      return;
+    }
+    lastEventTypeRef.current = currentEventType;
+    
+    // Only emit discrete event on first press
+    if (!emittedDiscrete[direction]) {
+      emitter.emit(discreteEv);
+      setEmittedDiscrete(prev => ({ ...prev, [direction]: true }));
+    }
+    
+    // Always emit continuous event for movement
+    emitter.emit(continuousEv);
+  };
+
+  const emitStop = (direction: keyof typeof emittedDiscrete, stopEv: Event) => (e: React.TouchEvent | React.MouseEvent) => {
+    if (e && typeof (e as any).stopPropagation === "function") (e as any).stopPropagation();
+    emitter.emit(stopEv);
+    setEmittedDiscrete(prev => ({ ...prev, [direction]: false }));
+  };
+
   // Speaker dot pattern data to reduce repetition
   const speakerPattern = [
     "placeholder",
@@ -215,40 +253,40 @@ const Gameboy = ({ children }: Props) => {
           <div className="dpad">
             <div
               className="up"
-              onMouseDown={emitPrevent(Event.StartUp, [Event.Up, Event.StartUp])}
-              onMouseUp={emitPrevent(Event.StopUp)}
-              onTouchStart={emitPrevent(Event.StartUp, [Event.Up, Event.StartUp])}
-              onTouchEnd={emitPrevent(Event.StopUp)}
+              onMouseDown={emitDiscreteOnce('up', Event.Up, Event.StartUp)}
+              onMouseUp={emitStop('up', Event.StopUp)}
+              onTouchStart={emitDiscreteOnce('up', Event.Up, Event.StartUp)}
+              onTouchEnd={emitStop('up', Event.StopUp)}
             >
               <CaretUp size={24} />
             </div>
 
             <div
               className="right"
-              onMouseDown={emitPrevent(Event.StartRight, [Event.Right, Event.StartRight])}
-              onMouseUp={emitPrevent(Event.StopRight)}
-              onTouchStart={emitPrevent(Event.StartRight, [Event.Right, Event.StartRight])}
-              onTouchEnd={emitPrevent(Event.StopRight)}
+              onMouseDown={emitDiscreteOnce('right', Event.Right, Event.StartRight)}
+              onMouseUp={emitStop('right', Event.StopRight)}
+              onTouchStart={emitDiscreteOnce('right', Event.Right, Event.StartRight)}
+              onTouchEnd={emitStop('right', Event.StopRight)}
             >
               <CaretRight size={24} />
             </div>
 
             <div
               className="down"
-              onMouseDown={emitPrevent(Event.StartDown, [Event.Down, Event.StartDown])}
-              onMouseUp={emitPrevent(Event.StopDown)}
-              onTouchStart={emitPrevent(Event.StartDown, [Event.Down, Event.StartDown])}
-              onTouchEnd={emitPrevent(Event.StopDown)}
+              onMouseDown={emitDiscreteOnce('down', Event.Down, Event.StartDown)}
+              onMouseUp={emitStop('down', Event.StopDown)}
+              onTouchStart={emitDiscreteOnce('down', Event.Down, Event.StartDown)}
+              onTouchEnd={emitStop('down', Event.StopDown)}
             >
               <CaretDown size={24} />
             </div>
 
             <div
               className="left"
-              onMouseDown={emitPrevent(Event.StartLeft, [Event.Left, Event.StartLeft])}
-              onMouseUp={emitPrevent(Event.StopLeft)}
-              onTouchStart={emitPrevent(Event.StartLeft, [Event.Left, Event.StartLeft])}
-              onTouchEnd={emitPrevent(Event.StopLeft)}
+              onMouseDown={emitDiscreteOnce('left', Event.Left, Event.StartLeft)}
+              onMouseUp={emitStop('left', Event.StopLeft)}
+              onTouchStart={emitDiscreteOnce('left', Event.Left, Event.StartLeft)}
+              onTouchEnd={emitStop('left', Event.StopLeft)}
             >
               <CaretLeft size={24} />
             </div>
