@@ -99,6 +99,17 @@ const LoadScreen = () => {
   const newGame = { 
     label: "New Game", 
     action: () => { 
+      try {
+        if (hasSave && typeof window !== "undefined") {
+          const key = playerName;
+          if (key) {
+            try {
+              localStorage.removeItem(key);
+            } catch {}
+            setHasSave(false);
+          }
+        }
+      } catch {}
       loadComplete(); 
     }, 
   };

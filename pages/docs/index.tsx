@@ -1,8 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
-
-
 import React from "react";
-import './docs-page.css';
 
 type DocKey =
   | "overview"
@@ -26,6 +22,29 @@ const SECTIONS: { key: DocKey; label: string }[] = [
 export default function DocsPage() {
   const [active, setActive] = React.useState<DocKey>("overview");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const contractAddress = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
+  const [copied, setCopied] = React.useState(false);
+
+  const copyContract = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(contractAddress);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = contractAddress;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {}
+  };
 
   React.useEffect(() => {
     const hash = (typeof window !== "undefined" && window.location.hash.replace("#", "")) as DocKey;
@@ -59,7 +78,6 @@ export default function DocsPage() {
           </div>
         </div>
       </nav>
-      <div className="nav-spacer" />
       
       <div className="docs-main">
         <aside className={`docs-sidebar ${sidebarOpen ? "open" : ""}`}>
@@ -156,6 +174,7 @@ export default function DocsPage() {
               <section>
                 <h1>Mystery Boxes</h1>
                 <p>Mystery boxes spawn based on your activity and account level. Higher levels increase spawn frequency and persistence.</p>
+                
                 <div className="rewards-section">
                   <h2>Potential Rewards</h2>
                   <div className="rewards-grid">
@@ -223,7 +242,12 @@ export default function DocsPage() {
                 <h1>Official Contract</h1>
                 <div className="contract-card">
                   <h3>Contract Address</h3>
-                  <code className="contract-address">5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8</code>
+                  <code className="contract-address">{contractAddress}</code>
+                  <div className="contract-actions">
+                    <button className="copy-btn" onClick={copyContract} aria-label="Copy contract address">
+                      {copied ? "Copied" : "Copy"}
+                    </button>
+                  </div>
                   <p className="contract-note">Always verify this address before making any transactions.</p>
                 </div>
               </section>
@@ -263,6 +287,559 @@ export default function DocsPage() {
           <span>© {new Date().getFullYear()} Pokepixel. All rights reserved.</span>
         </div>
       </footer>
+
+      <style jsx>{`
+  * {
+    box-sizing: border-box;
+  }
+  
+  :global(html, body) { 
+    margin: 0; 
+    padding: 0; 
+    background: #ffffff;
+    width: 100%;
+    overflow-x: hidden;
+    scroll-padding-top: 80px; /* Smooth scrolling offset for fixed navbar */
+  }
+  /* Override global game CSS on docs: ensure normal flow and no centering */
+  :global(body) {
+    display: block;
+    justify-content: initial;
+    align-items: initial;
+    padding: 0; /* ensure no body padding pushes content */
+  }
+  
+  .docs-root { 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    background: #ffffff; 
+    color: #111826; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .docs-nav { 
+    height: 64px; 
+    border-bottom: 1px solid #e5e7eb; 
+    background: #ffffff; 
+    position: sticky; 
+    top: 0; 
+    z-index: 30; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .brand { 
+    width: 100%;
+    height: 64px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 0 24px; 
+    margin: 0;
+  }
+  
+  .brand img { 
+    width: 32px; 
+    height: 32px; 
+    border-radius: 8px; 
+  }
+  
+  .brand span { 
+    font-weight: 700; 
+    font-size: 18px; 
+    color: #111827; 
+    flex: 1; 
+  }
+  
+  .menu-btn { 
+    display: none; 
+    background: transparent; 
+    border: none; 
+    font-size: 22px; 
+    line-height: 1; 
+    cursor: pointer; 
+    padding: 6px 8px; 
+  }
+
+  .docs-main { 
+    flex: 1; 
+    display: grid; 
+    grid-template-columns: 280px 1fr; 
+    gap: 0; 
+    width: 100%; 
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 64px);
+  }
+  
+  .docs-sidebar { 
+    border-right: 1px solid #e5e7eb; 
+    background: #fafafa; 
+    position: sticky; 
+    top: 64px; 
+    height: calc(100vh - 64px); 
+    overflow-y: auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar-content {
+    padding: 24px 0;
+    width: 100%;
+  }
+  
+  .nav-item { 
+    display: block; 
+    width: 100%; 
+    text-align: left; 
+    border: none; 
+    background: transparent; 
+    padding: 14px 24px; 
+    margin: 0;
+    color: #374151; 
+    cursor: pointer; 
+    border-right: 3px solid transparent;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+  
+  .nav-item:hover { 
+    background: #f3f4f6; 
+    color: #111827; 
+  }
+  
+  .nav-item.active { 
+    background: #eff6ff; 
+    color: #1d4ed8; 
+    font-weight: 600; 
+    border-right-color: #1d4ed8;
+  }
+
+  .docs-content { 
+    min-width: 0; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .content-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 40px 48px;
+    margin: 0;
+  }
+  
+  .docs-content h1 { 
+    margin: 0 0 24px 0; 
+    font-size: 32px; 
+    color: #111827; 
+    font-weight: 700;
+    /* Add scroll margin to account for fixed navbar */
+    scroll-margin-top: 80px;
+    /* Add padding top to ensure visibility */
+    padding-top: 16px;
+  }
+  
+  .docs-content h2 { 
+    margin: 32px 0 16px 0;
+    font-size: 24px;
+    color: #111827;
+    font-weight: 600;
+    /* Add scroll margin for h2 as well */
+    scroll-margin-top: 80px;
+    padding-top: 16px;
+  }
+
+  /* Ensure all heading levels account for sticky nav when linked via hash */
+  .docs-content h3,
+  .docs-content h4,
+  .docs-content h5,
+  .docs-content h6 {
+    scroll-margin-top: 80px;
+  }
+  
+  .docs-content h3 { 
+    margin: 24px 0 12px 0; 
+    font-size: 18px; 
+    color: #111827; 
+    font-weight: 600;
+  }
+  
+  .docs-content p, .docs-content li { 
+    color: #374151; 
+    line-height: 1.7; 
+    font-size: 16px; 
+    margin-bottom: 16px;
+  }
+  
+  .docs-content code { 
+    background:rgb(5, 5, 5); 
+    padding: 4px 8px; 
+    border-radius: 6px; 
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+  }
+  
+  .docs-content ul, .docs-content ol { 
+    padding-left: 24px; 
+  }
+
+  /* Feature Grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .feature-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .feature-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+  }
+
+  .feature-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    background: #1d4ed8;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .step-content h3 {
+    margin: 0 0 8px 0;
+  }
+
+  .step-content p {
+    margin: 0;
+    color: #64748b;
+  }
+
+  /* Gameplay Grid */
+  .gameplay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .gameplay-item {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #1d4ed8;
+  }
+
+  .gameplay-item h3 {
+    margin: 0 0 8px 0;
+  }
+
+  .gameplay-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+
+  /* Rewards */
+  .rewards-section {
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .reward-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #f0f9ff;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .reward-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  /* Roadmap */
+  .roadmap-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .roadmap-phase {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid #1d4ed8;
+  }
+
+  .phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .phase-header h3 {
+    margin: 0;
+    flex: 1;
+  }
+
+  .phase-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .phase-status.current {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .phase-status.upcoming {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  /* Contract */
+  .contract-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 8px;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .contract-address {
+    display: block;
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 16px;
+    border-radius: 8px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    margin: 16px 0;
+    word-break: break-all;
+    width: 100%;
+  }
+
+  .contract-note {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .contract-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .copy-btn {
+    background: #1d4ed8;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .copy-btn:hover {
+    background: #1e40af;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .faq-item {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 8px;
+  }
+
+  .faq-item h3 {
+    margin: 0 0 12px 0;
+  }
+
+  .faq-item p {
+    margin: 0;
+    color: #64748b;
+  }
+
+  /* Tips */
+  .tips {
+    background: #f0f9ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .tips h3 {
+    margin: 0 0 12px 0;
+  }
+
+  .tips ul {
+    margin: 0;
+  }
+
+  .docs-footer { 
+    border-top: 1px solid #e5e7eb; 
+    background: #ffffff; 
+    padding: 24px; 
+    text-align: center; 
+    color: #6b7280; 
+    width: 100%;
+    margin: 0;
+  }
+
+  .footer-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .menu-btn { display: inline-block; }
+    .docs-main { grid-template-columns: 1fr; }
+    .docs-sidebar { 
+      position: fixed; 
+      top: 64px; 
+      left: 0; 
+      bottom: 0; 
+      width: 82%; 
+      max-width: 320px; 
+      border-right: 1px solid #e5e7eb; 
+      border-bottom: none; 
+      background: #ffffff; 
+      transform: translateX(-100%); 
+      transition: transform 200ms ease; 
+      z-index: 40; 
+      height: auto; 
+      padding: 0;
+      overflow: auto; 
+    }
+    .sidebar-content {
+      padding: 16px 0;
+    }
+    .docs-sidebar.open { transform: translateX(0); box-shadow: 2px 0 12px rgba(0,0,0,0.15); }
+    .backdrop { position: fixed; top: 64px; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.25); z-index: 35; }
+    .nav-item { padding: 16px 24px; font-size: 16px; }
+    .content-container { padding: 24px; }
+    
+    /* Add mobile-specific scroll margin */
+    .docs-content h1,
+    .docs-content h2 {
+      scroll-margin-top: 72px;
+    }
+    
+    .feature-grid,
+    .gameplay-grid,
+    .rewards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .brand {
+      padding: 0 16px;
+    }
+    .content-container {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .content-container {
+      padding: 16px;
+    }
+    
+    .feature-card,
+    .gameplay-item,
+    .faq-item {
+      padding: 16px;
+    }
+    
+    /* Adjust scroll margin for very small screens */
+    .docs-content h1,
+    .docs-content h2 {
+      scroll-margin-top: 68px;
+    }
+  }
+`}</style>
     </div>
   );
 }

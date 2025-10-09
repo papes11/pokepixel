@@ -28,7 +28,7 @@ const LinkButton = styled.a`
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  margin-top: 3px;
+  margin-top: 2px;
   font-family: Arial, Helvetica, sans-serif;
   word-break: break-all;
   font-variant-numeric: tabular-nums;
@@ -53,8 +53,9 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
   return (
     <Container>
       <Frame wide tall>
-        <div>🎉 Transaction complete!</div>
-        <div>⚔️Loot acquired And added to your Quest Box</div>
+        <div>  ⚔️ !Loot acquired! ⚔️</div>
+       <div>Added to your Quest Box ✅</div>
+
         <LinkButton href={url} target="_blank" rel="noopener noreferrer">
           View on Explorer
         </LinkButton>

@@ -109,11 +109,11 @@ const Text = () => {
 
   useEffect(() => {
     setLiveIndex(0);
-    if (text) {
+    const hasValidCurrent = Array.isArray(text) && textIndex >= 0 && textIndex < text.length;
+    if (hasValidCurrent) {
       const interval = setInterval(() => {
         setLiveIndex((prev) => prev + 1);
       }, 30);
-
       return () => clearInterval(interval);
     }
   }, [text, textIndex]);
@@ -168,15 +168,19 @@ const Text = () => {
     }
   });
 
-  if (!text) return null;
+  if (!Array.isArray(text) || text.length === 0) return null;
+  const outOfBounds = textIndex < 0 || textIndex >= text.length;
+  if (outOfBounds) return null;
+  const current = text[textIndex];
+  if (typeof current !== "string") return null;
 
   return (
     <>
-      {text[textIndex].length > 300 ? (
-        <Image src={text[textIndex]} />
+      {current.length > 300 ? (
+        <Image src={current} />
       ) : (
-        <StyledText className="framed no-hd" $done={liveIndex > text.length}>
-          <h1>{text[textIndex].substring(0, liveIndex)}</h1>
+        <StyledText className="framed no-hd" $done={liveIndex > current.length}>
+          <h1>{current.substring(0, liveIndex)}</h1>
         </StyledText>
       )}
     </>

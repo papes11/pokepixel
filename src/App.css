@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "PokemonGB";
   src: url("./assets/fonts/Pokemon-GB.ttf") format("truetype");
