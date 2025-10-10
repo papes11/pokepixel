@@ -217,7 +217,7 @@ const Gameboy = ({ children }: Props) => {
 
           <div className="display">{children}</div>
 
-          <div className="label flex">
+          <div className="label">
             <div className="title">SolBOY</div>
             <img src="/sol.jpg" />
           </div>

@@ -37,6 +37,7 @@ import ConfirmationMenu from "./ConfirmationMenu";
 import Evolution from "./Evolution";
 import Box from "../box/box";
 import React, { useEffect } from "react";
+import swampTimer from "../box/swamp-timer";
 import TransactionSuccess from "./TransactionSuccess";
 import MintSuccess from "./MintSuccess";
 import { selectTransactionSuccess, selectMintSuccess } from "../state/uiSlice";
@@ -105,9 +106,7 @@ const Game = () => {
   const timerRef = React.useRef<NodeJS.Timeout>();
   const cycleStartedRef = React.useRef<boolean>(false);
 
-  const VISIBLE_DURATION = 30000; // 30 seconds (visible window)
-  const HIDDEN_DURATION = 30000; // 5 minutes (hidden window)
-  const INITIAL_DELAY = 30000; // 2 minutes delay after new game/continue
+  const VISIBLE_DURATION = 30000; // 30 seconds visible window
 
   const showBoxes = React.useCallback(() => {
     if (!map) return;
@@ -132,7 +131,10 @@ const Game = () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    timerRef.current = setTimeout(hideBoxes, VISIBLE_DURATION);
+    // After visible window, hide and schedule next 4–5m via swampTimer
+    timerRef.current = setTimeout(() => {
+      hideBoxes();
+    }, VISIBLE_DURATION);
   }, [map]);
 
   const hideBoxes = React.useCallback(() => {
@@ -140,19 +142,28 @@ const Game = () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    timerRef.current = setTimeout(showBoxes, HIDDEN_DURATION);
+    // Persist and schedule next interval (4–5m randomized)
+    const next = swampTimer.scheduleNext();
+    const waitMs = Math.max(0, next.nextAtMs - Date.now());
+    timerRef.current = setTimeout(showBoxes, waitMs);
   }, [showBoxes]);
 
-  // Start the initial 2-minute delay only when entering the game (load menu closes),
-  // then run the 30s show / 5min hide loop.
+  // On entering game (load menu closes), restore persisted schedule:
   useEffect(() => {
     if (!loadMenu) {
       cycleStartedRef.current = true;
       setBoxPositions([]);
       if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(() => {
+
+      // Read persisted state; if visible window, show immediately, else wait until next time
+      const msUntil = swampTimer.msUntilVisible();
+      if (swampTimer.isVisible(VISIBLE_DURATION)) {
         showBoxes();
-      }, INITIAL_DELAY);
+      } else {
+        timerRef.current = setTimeout(() => {
+          showBoxes();
+        }, msUntil);
+      }
     } else {
       // If returning to load menu, stop any timers and reset state
       cycleStartedRef.current = false;
@@ -166,6 +177,7 @@ const Game = () => {
   }, [loadMenu, showBoxes]);
 
   const handleOpen = (x: number, y: number) => {
+    // On open, hide and schedule next randomized interval
     hideBoxes();
   };
 
