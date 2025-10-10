@@ -123,10 +123,17 @@ const Nintendo = styled(PixelImage)`
   animation: ${apearIn} 0s 300ms 1 linear forwards;
 `;
 
-const flash = keyframes`
-  0% { opacity: 1; }
-  50% { opacity: 0.2; }
-  100% { opacity: 1; }
+// New blue-red flash animation
+const blueRedFlash = keyframes`
+  0% {
+    color: #3493f8; /* Blue */
+  }
+  50% {
+    color: #ff3b3b; /* Red */
+  }
+  100% {
+    color: #3493f8; /* Blue */
+  }
 `;
 
 const ConnectHint = styled.div<{ $error?: boolean }>`
@@ -134,12 +141,19 @@ const ConnectHint = styled.div<{ $error?: boolean }>`
   font-family: "PressStart2P", sans-serif;
   font-size: 0.9rem;
   text-align: center;
-  color: ${props => (props.$error ? "#ff3b3b" : "#9fb6c6")};
+  color: #3493f8; /* Start with blue */
   cursor: pointer;
   user-select: none;
   opacity: 0;
-  animation: ${apearIn} 0s 300ms 1 linear forwards;
-  ${props => props.$error && css`animation: ${flash} 900ms infinite;`};
+  animation: 
+    ${apearIn} 0s 300ms 1 linear forwards,
+    ${blueRedFlash} 1s infinite;
+
+  ${props => props.$error && css`
+    animation: 
+      ${apearIn} 0s 300ms 1 linear forwards,
+      ${blueRedFlash} 0.5s infinite;
+  `}
 
   &:hover {
     text-decoration: underline;
