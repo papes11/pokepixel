@@ -28,7 +28,7 @@
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#4CAF50",
+  "theme_color": "#000000",
   "background_color": "#F9F2F9",
   "categories": ["games", "entertainment"],
   "display_override": ["window-controls-overlay", "minimal-ui", "standalone"],
