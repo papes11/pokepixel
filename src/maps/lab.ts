@@ -21,7 +21,7 @@ const lab: MapType = {
   },
   text: {
     1: {
-      0: ["ASH turned on the PC.", "It's not working..."],
+      0: ["ASH turned on the PC.", "Connected to Solana blockchain!", "Welcome to Pokepixel!"],
     },
   },
   maps: {},

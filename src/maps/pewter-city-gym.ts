@@ -57,8 +57,9 @@ const pewterCityGym: MapType = {
       intro: [
         "Stop right there, kid!",
         "You're still light years from facing BROCK!",
+        "But you're getting stronger in this Solana world!",
       ],
-      outtro: ["Darn!", "Light years isn't time, it measures distance!"],
+      outtro: ["Darn!", "Light years isn't time, it measures distance!", "Your progress here is measured on-chain!"],
       facing: Direction.Right,
       pos: {
         x: 3,
@@ -84,6 +85,7 @@ const pewterCityGym: MapType = {
         "That's why my POKEMON are all the rock-type!",
         "Do you still want to challenge me?",
         "Fine then! Show me your best!",
+        "This Solana world has made trainers stronger!",
       ],
       outtro: [
         "I took you for granted!",
@@ -91,6 +93,7 @@ const pewterCityGym: MapType = {
         "That's an official POKEMON LEAGUE badge!",
         "Its bearer's POKEMON become more powerful!",
         "The technique FLASH can now be used any time!",
+        "Your achievement is now recorded on-chain!",
       ],
       facing: Direction.Down,
       pos: {

@@ -34,14 +34,16 @@ const viridianCityGym: MapType = {
   text: {
     15: {
       15: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "This gym is currently locked...",
+        "But our Solana world is always active!",
+        "Mystery boxes appear while you explore!",
+        "Your progress is saved on the blockchain!",
       ],
       18: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Giovanni's whereabouts are unknown...",
+        "But this blockchain world continues!",
+        "Every action here has lasting value!",
+        "Your adventures are permanently recorded!",
       ],
     },
   },

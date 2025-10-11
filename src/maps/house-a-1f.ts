@@ -20,8 +20,9 @@ const houseA1f: MapType = {
     1: {
       3: [
         "There's a movie on TV.",
-        "Four boys are walking on railraod tracks.",
-        "I better go too.",
+        "Four boys are walking on railroad tracks.",
+        "This Solana world has endless adventures too!",
+        "I better go explore!",
       ],
     },
   },

@@ -25,7 +25,9 @@ const pewterCityPokemonCenter: MapType = {
       0: [
         "Yawn!",
         "When Jigglypuff sings, POKEMON get drowsy.",
-        "...Me too...",
+        "But this Solana world keeps me excited!",
+        "So many blockchain features to explore!",
+        "...Maybe just a quick nap...",
         "Snore...",
       ],
     },

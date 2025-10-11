@@ -151,8 +151,8 @@ const mtMoon2f: MapType = {
         },
       ],
       facing: Direction.Down,
-      intro: ["We, Team Rocket, are POKEMON gangsters!"],
-      outtro: ["Darn it all! MY associates won't stand for this!"],
+      intro: ["We, Team Rocket, are POKEMON gangsters!", "But we can't hack Solana blockchain!"],
+      outtro: ["Darn it all! MY associates won't stand for this!", "Should've invested in Pokepixel instead!"],
       money: 330,
       pos: {
         x: 15,
@@ -172,8 +172,8 @@ const mtMoon2f: MapType = {
         },
       ],
       facing: Direction.Up,
-      intro: ["We're pulling a big job here! Get lost, kid!"],
-      outtro: ["If you find a fossil, give it to me and scram!"],
+      intro: ["We're pulling a big job here! Get lost, kid!", "Can't steal from a blockchain though!"],
+      outtro: ["If you find a fossil, give it to me and scram!", "Digital fossils are worth more anyway!"],
       money: 360,
       pos: {
         x: 29,
@@ -189,8 +189,8 @@ const mtMoon2f: MapType = {
         },
       ],
       facing: Direction.Left,
-      intro: ["Little kid should leave grown-ups alone!"],
-      outtro: ["Pokemon lived here long before people came."],
+      intro: ["Little kid should leave grown-ups alone!", "This Solana world is dangerous!"],
+      outtro: ["Pokemon lived here long before people came.", "Now they're stored on blockchain forever!"],
       money: 390,
       pos: {
         x: 29,
@@ -212,8 +212,9 @@ const mtMoon2f: MapType = {
       facing: Direction.Down,
       intro: [
         "TEAM ROCKET will find the fossils, revive and sell them for cash!",
+        "But Pokepixel rewards are worth more!",
       ],
-      outtro: ["You made me mad! TEAM ROCKET will blacklist you!"],
+      outtro: ["You made me mad! TEAM ROCKET will blacklist you!", "Good thing Pokepixel is decentralized!"],
       money: 390,
       pos: {
         x: 11,
@@ -237,8 +238,8 @@ const mtMoon2f: MapType = {
         },
       ],
       facing: Direction.Right,
-      intro: ["Hey stop!", "I found these fossils! They're both mine!"],
-      outtro: ["We'll each take one!", "No being greedy!"],
+      intro: ["Hey stop!", "I found these fossils! They're both mine!", "Like my Pokepixel collection!"],
+      outtro: ["We'll each take one!", "No being greedy!", "Share the Pokepixel wealth too!"],
       money: 300,
       pos: {
         x: 12,

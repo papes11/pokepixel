@@ -195,8 +195,8 @@ const viridianForrest: MapType = {
           level: 9,
         },
       ],
-      intro: ["Lorem ipsum dolor sit amet, consectetur"],
-      outtro: ["Lorem ipsum dolor sit amet, consectetur"],
+      intro: ["Welcome to the Pokepixel ecosystem!", "Where blockchain meets classic gaming!"],
+      outtro: ["Play-to-earn is the future!", "Solana makes it all possible!"],
       money: 60,
       pos: {
         x: 2,
@@ -220,8 +220,8 @@ const viridianForrest: MapType = {
           level: 7,
         },
       ],
-      intro: ["Lorem ipsum dolor sit amet, consectetur"],
-      outtro: ["Lorem ipsum dolor sit amet, consectetur"],
+      intro: ["Catch bugs and earn Pokepixel tokens!", "Each battle brings real rewards!"],
+      outtro: ["Solana's speed amazes me!", "Instant transactions for gaming!"],
       money: 70,
       pos: {
         x: 29,
@@ -241,8 +241,8 @@ const viridianForrest: MapType = {
           level: 6,
         },
       ],
-      intro: ["Lorem ipsum dolor sit amet, consectetur"],
-      outtro: ["Lorem ipsum dolor sit amet, consectetur"],
+      intro: ["Mystery boxes hide throughout Pokepixel!", "Find them for incredible rewards!"],
+      outtro: ["Blockchain gaming is revolutionary!", "True ownership of digital assets!"],
       money: 60,
       pos: {
         x: 30,

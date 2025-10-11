@@ -54,9 +54,10 @@ const route1: MapType = {
   text: {
     27: {
       9: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Welcome to your Pokepixel adventure!",
+        "This world runs on Solana blockchain!",
+        "Every step you take can earn rewards!",
+        "Find mystery boxes for special prizes!",
       ],
     },
   },

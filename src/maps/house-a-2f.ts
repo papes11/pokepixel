@@ -20,10 +20,10 @@ const houseA2f: MapType = {
   },
   text: {
     5: {
-      3: ["ASH is playing the SNES!", "... Okay! It's time to go!"],
+      3: ["ASH is playing Pokepixel!", "This Solana world is amazing!", "... Okay! It's time to go earn rewards!"],
     },
     1: {
-      0: ["ASH turned on the PC.", "It's not working..."],
+      0: ["ASH turned on the PC.", "Blockchain connection established!", "Ready for on-chain adventures!"],
     },
   },
   maps: {},

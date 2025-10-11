@@ -23,9 +23,10 @@ const viridianCityPokemonCenter: MapType = {
   text: {
     4: {
       0: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Welcome to our Solana-powered Pokemon Center!",
+        "Your Pokemon data is stored on-chain!",
+        "Healing and progress are permanent here!",
+        "This blockchain world is revolutionary!",
       ],
     },
   },

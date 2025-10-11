@@ -21,9 +21,10 @@ const viridianCityNpcHouse: MapType = {
   text: {
     0: {
       3: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Welcome to Pokepixel, the future of gaming!",
+        "Experience play-to-earn on Solana blockchain!",
+        "Mystery boxes spawn with real rewards inside!",
+        "Join thousands already earning through play!",
       ],
     },
   },

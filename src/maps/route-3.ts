@@ -162,6 +162,7 @@ const route3: MapType = {
       outtro: [
         "There are other kinds of POKEMON",
         "than those found in the forests!",
+        "In our Solana world, everything has value!",
       ],
       money: 100,
       pos: {
@@ -182,10 +183,12 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Down,
-      intro: ["Hi! I like shorts! They're comfy and easy to wear!"],
+      intro: ["Hi! I like shorts! They're comfy and easy to wear!", "Just like Pokepixel - easy and rewarding!"],
       outtro: [
         "Are you storing your POKEMON on PC?",
         "Each box can hold up to 20 POKEMON!",
+        "But Pokepixel stores rewards on Solana!",
+        "True blockchain ownership forever!",
       ],
       money: 165,
       pos: {
@@ -214,10 +217,12 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Down,
-      intro: ["Are you a trainer? Let's fight!"],
+      intro: ["Are you a trainer? Let's fight!", "Winner gets Pokepixel rewards!"],
       outtro: [
         "If a POKEMON BOX on the PC gets full,",
         "just switch to another BOX!",
+        "Mystery boxes in Pokepixel never get full!",
+        "Infinite rewards on Solana blockchain!",
       ],
       money: 90,
       pos: {
@@ -234,8 +239,8 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Left,
-      intro: ["Hey! You're not wearing shorts!"],
-      outtro: ["I always wear shorts, even in winter!"],
+      intro: ["Hey! You're not wearing shorts!", "But you should try Pokepixel gaming!"],
+      outtro: ["I always wear shorts, even in winter!", "And I always play Pokepixel for rewards!"],
       money: 210,
       pos: {
         x: 22,
@@ -255,8 +260,8 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Left,
-      intro: ["That look you gave me,", "it's so intriguing!"],
-      outtro: ["Avoid fights by not letting people see you!"],
+      intro: ["That look you gave me,", "it's so intriguing!", "Like discovering Pokepixel!"],
+      outtro: ["Avoid fights by not letting people see you!", "But don't avoid Pokepixel rewards!"],
       money: 150,
       pos: {
         x: 23,
@@ -276,8 +281,8 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Right,
-      intro: ["You can fight my new POKEMON!"],
-      outtro: ["Trained POKEMON are stronger than the wild ones!"],
+      intro: ["You can fight my new POKEMON!", "Then try fighting for Pokepixel tokens!"],
+      outtro: ["Trained POKEMON are stronger than the wild ones!", "Pokepixel rewards are better than any prize!"],
       money: 110,
       pos: {
         x: 24,
@@ -293,8 +298,8 @@ const route3: MapType = {
         },
       ],
       facing: Direction.Up,
-      intro: ["Eek! Did you touch me?"],
-      outtro: ["ROUTE 4 is at the foot of MT. MOON."],
+      intro: ["Eek! Did you touch me?", "Touch Pokepixel instead - it's amazing!"],
+      outtro: ["ROUTE 4 is at the foot of MT. MOON.", "Pokepixel is at the heart of Solana!"],
       money: 210,
       pos: {
         x: 33,

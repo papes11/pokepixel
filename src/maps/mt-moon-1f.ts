@@ -120,8 +120,8 @@ const mtMoon1f: MapType = {
         },
       ],
       facing: Direction.Down,
-      intro: ["Suspicious men are in the cave.", "What about you?"],
-      outtro: ["I saw them! I'm sure they're from TEAM ROCKET!"],
+      intro: ["Suspicious men are in the cave.", "What about you?", "Are you here for Pokepixel treasures?"],
+      outtro: ["I saw them! I'm sure they're from TEAM ROCKET!", "Better stick to Pokepixel - it's safer!"],
       money: 110,
       pos: {
         x: 7,
@@ -137,8 +137,8 @@ const mtMoon1f: MapType = {
         },
       ],
       facing: Direction.Down,
-      intro: ["What? I'm waiting for my friends to find me here."],
-      outtro: ["I heard there are some very rare fossils here."],
+      intro: ["What? I'm waiting for my friends to find me here.", "Just like waiting for Pokepixel rewards!"],
+      outtro: ["I heard there are some very rare fossils here.", "Pokepixel has rare digital treasures too!"],
       money: 210,
       pos: {
         x: 17,
@@ -158,8 +158,8 @@ const mtMoon1f: MapType = {
         },
       ],
       facing: Direction.Up,
-      intro: ["What! Don't sneak up on me!"],
-      outtro: ["I have to find stronger pokemon."],
+      intro: ["What! Don't sneak up on me!", "This Solana cave echoes everything!"],
+      outtro: ["I have to find stronger pokemon.", "And more valuable on-chain assets!"],
       money: 275,
       pos: {
         x: 24,

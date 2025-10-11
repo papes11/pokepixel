@@ -67,44 +67,50 @@ const viridianCity: MapType = {
   text: {
     29: {
       21: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Welcome to the future of gaming!",
+        "Pokepixel combines nostalgia with innovation!",
+        "Play-to-earn on Solana blockchain!",
+        "Find mystery boxes, earn real rewards!",
       ],
     },
     25: {
       24: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Did you know Pokepixel runs on Solana?",
+        "Lightning-fast transactions, minimal fees!",
+        "Your game progress is stored on-chain!",
+        "True digital ownership at its finest!",
       ],
     },
     19: {
       30: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Pokepixel is revolutionizing gaming!",
+        "Collect mystery boxes with real value!",
+        "Built on Solana for speed and security!",
+        "Join the play-to-earn revolution!",
       ],
     },
     17: {
       17: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Have you tried the mystery box system?",
+        "Hidden throughout the Pokepixel world!",
+        "Each box contains valuable rewards!",
+        "Powered by Solana blockchain technology!",
       ],
     },
     7: {
       27: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Solana's speed amazes me every day!",
+        "Pokepixel transactions happen instantly!",
+        "No more waiting for blockchain confirms!",
+        "The future of Web3 gaming is here!",
       ],
     },
     1: {
       19: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "Alpha phase is just the beginning!",
+        "Pokepixel will expand across Solana!",
+        "Early players get the best rewards!",
+        "Don't miss this incredible opportunity!",
       ],
     },
   },

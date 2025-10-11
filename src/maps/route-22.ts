@@ -47,9 +47,10 @@ const route22: MapType = {
   text: {
     11: {
       7: [
-        "Lorem ipsum dolor sit amet, consectetur",
-        "adipiscing elit, sed do eiusmod tempor",
-        "incididunt ut labore et dolore magna aliqua.",
+        "This path leads to great challenges!",
+        "Just like our Solana-powered world!",
+        "Every battle here has real meaning!",
+        "Your progress is stored on-chain forever!",
       ],
     },
   },
@@ -96,8 +97,9 @@ const route22: MapType = {
         "Forget it! You probably don't have any BADGEs!",
         "The guard won't let you through!",
         "By the way, did your POKEMON get any stronger?",
+        "This Solana world makes them more valuable!",
       ],
-      outtro: ["Awww! You just lucked out!"],
+      outtro: ["Awww! You just lucked out!", "Your blockchain victory is recorded forever!"],
       money: 280,
       pos: {
         x: 25,
