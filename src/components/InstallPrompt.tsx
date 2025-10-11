@@ -1,66 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Frame from './Frame';
 
-const Container = styled.div`
+const Banner = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: #4CAF50;
+  color: white;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 10000;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
 `;
 
-const Content = styled.div`
-  max-width: 400px;
-  padding: 20px;
-  text-align: center;
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   
-  h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: black;
-    font-family: "PokemonGB";
+  .logo {
+    font-weight: bold;
+    font-size: 14px;
+    
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
   }
   
-  p {
-    font-size: 12px;
-    margin-bottom: 20px;
-    line-height: 1.4;
-    color: black;
+  .message {
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  gap: 8px;
   
   button {
-    padding: 8px 16px;
-    border: 2px solid black;
-    background: white;
-    color: black;
-    font-size: 12px;
-    font-family: "PokemonGB";
+    padding: 4px 12px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-size: 11px;
     cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
     
     &:hover {
-      background: #f0f0f0;
+      background: rgba(255, 255, 255, 0.1);
     }
     
     &.install {
-      background: #4CAF50;
-      color: white;
-      border-color: #4CAF50;
+      background: white;
+      color: #4CAF50;
+      font-weight: bold;
       
       &:hover {
-        background: #45a049;
+        background: #f0f0f0;
       }
+    }
+    
+    @media (max-width: 480px) {
+      padding: 3px 8px;
+      font-size: 10px;
     }
   }
 `;
@@ -72,30 +85,20 @@ interface InstallPromptProps {
 
 const InstallPrompt: React.FC<InstallPromptProps> = ({ onInstall, onDismiss }) => {
   return (
-    <Container>
-      <Frame>
-        <Content>
-          <h2>📱 Install Pokepixel</h2>
-          <p>
-            Install Pokepixel as an app on your device for the best gaming experience!
-            You'll get faster loading, offline access, and it will feel like a native app.
-          </p>
-          <p>
-            🎮 Quick access from your home screen<br/>
-            ⚡ Faster performance<br/>
-            🔒 Secure Solana wallet integration
-          </p>
-          <div className="buttons">
-            <button onClick={onDismiss}>
-              Maybe Later
-            </button>
-            <button className="install" onClick={onInstall}>
-              Install App
-            </button>
-          </div>
-        </Content>
-      </Frame>
-    </Container>
+    <Banner>
+      <LeftSection>
+        <div className="logo">🎮 Pokepixel</div>
+        <div className="message">Install our app for the best gaming experience!</div>
+      </LeftSection>
+      <RightSection>
+        <button onClick={onDismiss}>
+          Cancel
+        </button>
+        <button className="install" onClick={onInstall}>
+          Install
+        </button>
+      </RightSection>
+    </Banner>
   );
 };
 
