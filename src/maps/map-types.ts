@@ -129,4 +129,5 @@ export interface MapType {
   stoppers?: Record<number, number[]>;
   trainers?: TrainerType[];
   items?: MapItemType[];
+  boxes?: PosType[];
 }

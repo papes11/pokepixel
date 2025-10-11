@@ -4,34 +4,51 @@ import useEvent from "../app/use-event";
 import { Event } from "../app/emitter";
 import { useDispatch, useSelector } from "react-redux";
 import { showConfirmationMenu, hideConfirmationMenu, showText, showTransactionSuccess } from "../state/uiSlice";
-import { selectPos } from "../state/gameSlice";
+import { selectPos, selectMap } from "../state/gameSlice";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 // Switch to JS implementation to avoid TS/ESM bundling issues at runtime
 import { sendSolana } from "./transaction";
+import { boxStorage, BoxId } from "./box-storage";
 
 const BOX_SIZE = 16;
 
 interface BoxProps {
   x: number;
   y: number;
+  type?: 'static' | 'dynamic';
   onOpen: (x: number, y: number) => void;
 }
 
-const Box: React.FC<BoxProps> = ({ x, y, onOpen }) => {
+const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
   const dispatch = useDispatch();
   const playerPos = useSelector(selectPos);
+  const map = useSelector(selectMap);
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected } = useWallet();
 
   const isPlayerOnBox = playerPos.x === x && playerPos.y === y;
+  
+  // Create box identifier
+  const boxId: BoxId = {
+    mapId: map.name,
+    x,
+    y,
+    type
+  };
+  
+  // Check if this box has already been opened
+  const isBoxOpened = boxStorage.isBoxOpened(boxId);
 
   useEvent(Event.A, () => {
-    if (isPlayerOnBox) {
+    if (isPlayerOnBox && !isBoxOpened) {
       if (!connected) {
         dispatch(showText(["Connect wallet"]));
         return;
       }
 
+      // Mark box as opened immediately when player interacts
+      boxStorage.markBoxAsOpened(boxId);
+      
       onOpen(x, y);
       dispatch(
         showConfirmationMenu({
@@ -64,6 +81,11 @@ const Box: React.FC<BoxProps> = ({ x, y, onOpen }) => {
       );
     }
   });
+  
+  // Don't render if box is already opened - moved after all hooks
+  if (isBoxOpened) {
+    return null;
+  }
 
   return (
     <img

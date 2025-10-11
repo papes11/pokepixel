@@ -20,7 +20,15 @@ const viridianCityPokeMart: MapType = {
     5: [1],
     6: [0, 1],
   },
-  text: {},
+  text: {
+    3: {
+      6: [
+        "Welcome to our Solana-powered Poke Mart!",
+        "Buy items and find mystery boxes too!",
+        "Everything here runs on blockchain technology!",
+      ],
+    },
+  },
   maps: {},
   exits: {
     7: [3, 4],
@@ -41,6 +49,9 @@ const viridianCityPokeMart: MapType = {
     // ItemType.Antidote, TODO Add this
     // ItemType.ParalyzeHeal, TODO Add this
     // ItemType.BurnHeal, TODO Add this
+  ],
+  boxes: [
+    { x: 6, y: 4 }, // Corner area away from the store counter
   ],
 };
 

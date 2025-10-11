@@ -49,6 +49,9 @@ const viridianCityPokemonCenter: MapType = {
     x: 13,
     y: 3,
   },
+  boxes: [
+    { x: 8, y: 4 }, // Center area, easily accessible
+  ],
 };
 
 export default viridianCityPokemonCenter;

@@ -40,7 +40,9 @@ import React, { useEffect } from "react";
 import swampTimer from "../box/swamp-timer";
 import TransactionSuccess from "./TransactionSuccess";
 import MintSuccess from "./MintSuccess";
+import InstallPrompt from "./InstallPrompt";
 import { selectTransactionSuccess, selectMintSuccess } from "../state/uiSlice";
+import { usePWAInstall } from "../hooks/usePWAInstall";
 
 
 const Container = styled.div`
@@ -99,6 +101,9 @@ const Game = () => {
   const transactionSuccessSignature = useSelector(selectTransactionSuccess);
   const mintSuccessSignature = useSelector(selectMintSuccess);
   const loadMenu = useSelector(selectLoadMenu);
+  
+  // PWA Install functionality
+  const { showInstallPrompt, installApp, dismissPrompt } = usePWAInstall();
 
   // Generate multiple random box positions when the map changes
   const NUM_BOXES = 1; // Change this number for more/less boxes
@@ -209,8 +214,13 @@ const Game = () => {
             ))}
           {/* Render multiple boxes at random positions for the current map */}
           {boxPositions.map((box, idx) => (
-            <Box key={idx} x={box.x} y={box.y} onOpen={handleOpen} />
+            <Box key={idx} x={box.x} y={box.y} type="dynamic" onOpen={handleOpen} />
           ))}
+          {/* Render static boxes defined in map data */}
+          {map.boxes &&
+            map.boxes.map((boxPos, index) => (
+              <Box key={`static-${index}`} x={boxPos.x} y={boxPos.y} type="static" onOpen={handleOpen} />
+            ))}
           <DebugOverlay />
         </BackgroundContainer>
         <Character />
@@ -235,6 +245,12 @@ const Game = () => {
       <ConfirmationMenu />
       {transactionSuccessSignature && <TransactionSuccess signature={transactionSuccessSignature} />}
       {mintSuccessSignature && <MintSuccess signature={mintSuccessSignature} />}
+      {showInstallPrompt && (
+        <InstallPrompt 
+          onInstall={installApp} 
+          onDismiss={dismissPrompt} 
+        />
+      )}
       <LoadScreen />
       <TitleScreen />
       <GameboyMenu />

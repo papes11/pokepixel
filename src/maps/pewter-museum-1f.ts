@@ -49,6 +49,9 @@ const pewterMuseum1f: MapType = {
     y: 8,
   },
   exitReturnMap: MapId.PewterCity,
+  boxes: [
+    { x: 15, y: 4 }, // Near the fossil displays
+  ],
 };
 
 export default pewterMuseum1f;

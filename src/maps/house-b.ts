@@ -18,7 +18,15 @@ const houseB: MapType = {
     6: [0, 7],
     7: [0, 7],
   },
-  text: {},
+  text: {
+    2: {
+      2: [
+        "A cozy home in the Pokepixel world!",
+        "Even here, mystery boxes can appear!",
+        "Your Solana adventure continues everywhere!",
+      ],
+    },
+  },
   maps: {},
   exits: {
     7: [2, 3],
@@ -29,6 +37,9 @@ const houseB: MapType = {
   },
   exitReturnMap: MapId.PalletTown,
   grass: {},
+  boxes: [
+    { x: 5, y: 2 }, // Upper right area of the house
+  ],
 };
 
 export default houseB;

@@ -21,7 +21,15 @@ const route2GateNorth: MapType = {
   },
   fences: {},
   grass: {},
-  text: {},
+  text: {
+    4: {
+      7: [
+        "Northern gate to Pokepixel adventures!",
+        "Your journey continues on the blockchain!",
+        "Every gate holds hidden treasures!",
+      ],
+    },
+  },
   maps: {
     0: {
       5: MapId.PewterCity,
@@ -35,6 +43,9 @@ const route2GateNorth: MapType = {
     y: 1,
   },
   exitReturnMap: MapId.ViridianForrest,
+  boxes: [
+    { x: 7, y: 3 }, // Open space in the northern gate
+  ],
 };
 
 export default route2GateNorth;

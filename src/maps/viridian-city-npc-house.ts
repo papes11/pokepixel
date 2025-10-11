@@ -38,6 +38,9 @@ const viridianCityNpcHouse: MapType = {
     x: 21,
     y: 10,
   },
+  boxes: [
+    { x: 5, y: 2 }, // Corner of the house, easy to spot
+  ],
 };
 
 export default viridianCityNpcHouse;

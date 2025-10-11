@@ -18,7 +18,15 @@ const peweterCityNpcA: MapType = {
     6: [0, 7],
     7: [0, 7],
   },
-  text: {},
+  text: {
+    1: {
+      5: [
+        "Welcome to my blockchain-powered home!",
+        "Mystery boxes are everywhere in Pokepixel!",
+        "Keep exploring for more Solana rewards!",
+      ],
+    },
+  },
   maps: {},
   exits: {
     7: [2, 3],
@@ -29,6 +37,9 @@ const peweterCityNpcA: MapType = {
   },
   exitReturnMap: MapId.PewterCity,
   grass: {},
+  boxes: [
+    { x: 5, y: 3 }, // Open area in the house
+  ],
 };
 
 export default peweterCityNpcA;

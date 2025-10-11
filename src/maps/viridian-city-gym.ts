@@ -103,6 +103,9 @@ const viridianCityGym: MapType = {
     16: [7],
     17: [1],
   },
+  boxes: [
+    { x: 10, y: 10 }, // Central area with spinner mechanics
+  ],
 };
 
 export default viridianCityGym;

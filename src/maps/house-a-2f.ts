@@ -36,6 +36,9 @@ const houseA2f: MapType = {
   },
   exitReturnMap: MapId.PalletTownHouseA1F,
   grass: {},
+  boxes: [
+    { x: 2, y: 3 }, // Left side of the room, away from furniture
+  ],
 };
 
 export default houseA2f;

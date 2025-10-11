@@ -40,6 +40,9 @@ const houseA1f: MapType = {
   },
   exitReturnMap: MapId.PalletTown,
   grass: {},
+  boxes: [
+    { x: 5, y: 3 }, // Upper right corner, easily accessible
+  ],
 };
 
 export default houseA1f;

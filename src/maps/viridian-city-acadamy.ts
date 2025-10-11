@@ -46,6 +46,9 @@ const viridianCityAcadamy: MapType = {
     x: 21,
     y: 16,
   },
+  boxes: [
+    { x: 5, y: 5 }, // Back of the classroom
+  ],
 };
 
 export default viridianCityAcadamy;

@@ -23,6 +23,13 @@ const gateHouse: MapType = {
       4: ["The door is locked."],
       5: ["The door is locked."],
     },
+    2: {
+      2: [
+        "This gate house is part of Pokepixel!",
+        "Even security checkpoints have mystery boxes!",
+        "The blockchain protects all our borders!",
+      ],
+    },
   },
   maps: {},
   exits: {
@@ -33,6 +40,9 @@ const gateHouse: MapType = {
     y: 6,
   },
   exitReturnMap: MapId.Route22,
+  boxes: [
+    { x: 7, y: 3 }, // Right side of the gate house
+  ],
 };
 
 export default gateHouse;

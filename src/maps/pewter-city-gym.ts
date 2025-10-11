@@ -115,6 +115,9 @@ const pewterCityGym: MapType = {
       },
     },
   ],
+  boxes: [
+    { x: 7, y: 8 }, // Open area in the gym
+  ],
 };
 
 export default pewterCityGym;

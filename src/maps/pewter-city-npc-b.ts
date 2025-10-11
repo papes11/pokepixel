@@ -18,7 +18,15 @@ const peweterCityNpcB: MapType = {
     6: [0, 7],
     7: [0, 7],
   },
-  text: {},
+  text: {
+    4: {
+      5: [
+        "This house is part of the Pokepixel network!",
+        "Every location has hidden treasures!",
+        "Your on-chain journey is full of surprises!",
+      ],
+    },
+  },
   maps: {},
   exits: {
     7: [2, 3],
@@ -29,6 +37,9 @@ const peweterCityNpcB: MapType = {
   },
   exitReturnMap: MapId.PewterCity,
   grass: {},
+  boxes: [
+    { x: 2, y: 2 }, // Upper left corner, accessible area
+  ],
 };
 
 export default peweterCityNpcB;

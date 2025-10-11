@@ -51,6 +51,9 @@ const pewterCityPokemonCenter: MapType = {
     x: 13,
     y: 3,
   },
+  boxes: [
+    { x: 10, y: 4 }, // Open area near the center
+  ],
 };
 
 export default pewterCityPokemonCenter;

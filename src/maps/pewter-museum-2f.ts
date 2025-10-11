@@ -38,6 +38,9 @@ const pewterMuseum2f: MapType = {
     y: 6,
   },
   exitReturnMap: MapId.PewterCityMuseum1f,
+  boxes: [
+    { x: 6, y: 3 }, // Near the space exhibits
+  ],
 };
 
 export default pewterMuseum2f;

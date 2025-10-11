@@ -21,7 +21,15 @@ const route2Gate: MapType = {
   },
   fences: {},
   grass: {},
-  text: {},
+  text: {
+    3: {
+      7: [
+        "Welcome to the Pokepixel route gate!",
+        "Safe passage through our Solana world!",
+        "Mystery boxes await in every checkpoint!",
+      ],
+    },
+  },
   maps: {
     0: {
       5: MapId.ViridianForrest,
@@ -35,6 +43,9 @@ const route2Gate: MapType = {
     y: 44,
   },
   exitReturnMap: MapId.Route2,
+  boxes: [
+    { x: 7, y: 4 }, // Open area in the gate
+  ],
 };
 
 export default route2Gate;

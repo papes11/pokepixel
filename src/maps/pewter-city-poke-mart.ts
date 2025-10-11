@@ -20,7 +20,15 @@ const pewterCityPokeMart: MapType = {
     5: [1],
     6: [0, 1],
   },
-  text: {},
+  text: {
+    2: {
+      6: [
+        "Our Poke Mart is part of the Pokepixel network!",
+        "Items and mystery boxes for all trainers!",
+        "Blockchain shopping at its finest!",
+      ],
+    },
+  },
   maps: {},
   exits: {
     7: [3, 4],
@@ -44,6 +52,9 @@ const pewterCityPokeMart: MapType = {
     // ItemType.BurnHeal, TODO Add this
     // ItemType.Awakening, TODO Add this
     // ItemType.ParalyzeHeal, TODO Add this
+  ],
+  boxes: [
+    { x: 5, y: 3 }, // Open area near the entrance
   ],
 };
 

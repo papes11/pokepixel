@@ -44,6 +44,9 @@ const route3PokemonCenter: MapType = {
     x: 13,
     y: 3,
   },
+  boxes: [
+    { x: 9, y: 5 }, // Near the waiting area
+  ],
 };
 
 export default route3PokemonCenter;

@@ -35,6 +35,9 @@ const lab: MapType = {
   exitReturnMap: MapId.PalletTown,
   music,
   grass: {},
+  boxes: [
+    { x: 7, y: 5 }, // Near the research equipment area
+  ],
 };
 
 export default lab;
