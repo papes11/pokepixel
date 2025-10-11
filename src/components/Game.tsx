@@ -196,7 +196,7 @@ const Game = () => {
 
 
   return (
-    <Container style={{ paddingTop: showInstallPrompt ? '40px' : '0' }}>
+    <Container style={{ paddingTop: showInstallPrompt ? '72px' : '0' }}>
       <StyledGame>
         <BackgroundContainer
           style={{

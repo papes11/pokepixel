@@ -14,8 +14,22 @@ export const usePWAInstall = () => {
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [isInstallable, setIsInstallable] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ['android', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone', 'mobile'];
+      const isMobileUA = mobileKeywords.some(keyword => userAgent.includes(keyword));
+      const isMobileScreen = window.innerWidth <= 768;
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      return isMobileUA || (isMobileScreen && isTouchDevice);
+    };
+    
+    setIsMobile(checkMobile());
+    
     // Check if app is already installed
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     const isIOSStandalone = (window.navigator as any).standalone === true;
@@ -30,8 +44,8 @@ export const usePWAInstall = () => {
       setDeferredPrompt(event);
       setIsInstallable(true);
       
-      // Show install prompt if user hasn't seen it and app isn't installed
-      if (!hasSeenInstallPrompt && !isInstalled) {
+      // Only show install prompt on mobile devices if user hasn't seen it and app isn't installed
+      if (!hasSeenInstallPrompt && !isInstalled && checkMobile()) {
         setShowInstallPrompt(true);
       }
     };
@@ -77,7 +91,7 @@ export const usePWAInstall = () => {
 
   const showPromptAgain = () => {
     localStorage.removeItem('pokepixel_install_prompt_seen');
-    if (isInstallable && !isInstalled) {
+    if (isInstallable && !isInstalled && isMobile) {
       setShowInstallPrompt(true);
     }
   };
@@ -86,6 +100,7 @@ export const usePWAInstall = () => {
     showInstallPrompt,
     isInstallable,
     isInstalled,
+    isMobile,
     installApp,
     dismissPrompt,
     showPromptAgain
