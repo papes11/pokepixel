@@ -1,13 +1,17 @@
 import { PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection, TransactionInstruction } from "@solana/web3.js";
 
 // DEBUG: hardcoded for now; replace with REACT_APP_prgoram_ADDRESS later
-const PROGRAM_ADDRESS = "8FTc9SPtG9Gaxm52adTXuAWfnKqJAdyCU2yyDM1W2Aaz";
+const PROGRAM_ADDRESS = "FSNCrDoTdNxaESEzp6gUzytffFPTx1qyARz8N9Wj8zs4";
 
 const TARGET_USD = 0.1; // $0.10
 
 // Multiple MAINNET RPC endpoints to reduce rate limit issues
 const MAINNET_RPCS = [
-  "https://neat-red-wish.solana-devnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0/",
+  "https://neat-red-wish.solana-mainnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0",
+  "https://mainnet.helius-rpc.com/?api-key=fb1251b4-9828-40cb-a869-09bc2a7a9ee5",
+  "https://go.getblock.us/6b8fece990f4411b8326f167b641910d",
+  "https://solana-mainnet.g.alchemy.com/v2/Umm2LP16pOXNGKVUQl-5b",
+
   
 ];
 

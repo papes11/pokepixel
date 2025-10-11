@@ -44,7 +44,7 @@ interface TransactionSuccessProps {
 
 const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) => {
   const dispatch = useDispatch();
-  const url = `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
+  const url = `https://explorer.solana.com/tx/${signature}?cluster=mainnet`;
 
   useEvent(Event.A, () => {
     dispatch(hideTransactionSuccess());

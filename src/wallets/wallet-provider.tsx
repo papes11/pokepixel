@@ -1,41 +1,64 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useMemo, useState, useEffect } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { clusterApiUrl } from "@solana/web3.js";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-  MathWalletAdapter,
   TrustWalletAdapter,
-  CoinbaseWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { useMemo } from "react";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { useWallet } from "@solana/wallet-adapter-react";
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const network = WalletAdapterNetwork.Devnet;
+  const network = WalletAdapterNetwork.Mainnet;
 
-  //initiate auto connect
-  const { autoConnect } = useWallet();
+  // A list of endpoints to rotate through if one fails or rate-limits
+  const RPC_ENDPOINTS = [
+    "https://mainnet.helius-rpc.com/?api-key=fb1251b4-9828-40cb-a869-09bc2a7a9ee5",
+    "https://go.getblock.us/6b8fece990f4411b8326f167b641910d",
+    "https://neat-red-wish.solana-mainnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0",
+    "https://solana-mainnet.g.alchemy.com/v2/Umm2LP16pOXNGKVUQl-5b",
+    
+  ];
 
-  // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(
-    () =>
-      "https://neat-red-wish.solana-devnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0/",
-    []
-  );
+  const [endpoint, setEndpoint] = useState(RPC_ENDPOINTS[0]);
 
-  //wallets
+  // Try switching RPCs automatically if one starts failing or rate limits
+  useEffect(() => {
+    const testEndpoints = async () => {
+      for (const url of RPC_ENDPOINTS) {
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              jsonrpc: "2.0",
+              id: 1,
+              method: "getHealth",
+            }),
+          });
+          const data = await response.json();
+          if (data.result === "ok") {
+            setEndpoint(url);
+            console.log("✅ Using endpoint:", url);
+            return;
+          }
+        } catch {
+          console.warn("❌ Endpoint failed:", url);
+        }
+      }
+      console.error("⚠️ No healthy Solana RPC endpoints found!");
+    };
+    testEndpoints();
+  }, []);
+
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter(),
-
       new TrustWalletAdapter(),
     ],
     [network]
