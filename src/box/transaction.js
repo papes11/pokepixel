@@ -1,25 +1,25 @@
 import { PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection, TransactionInstruction } from "@solana/web3.js";
 
-// DEBUG: hardcoded for now; replace with REACT_APP_RECIPIENT_ADDRESS later
-const RECIPIENT_ADDRESS = "8FTc9SPtG9Gaxm52adTXuAWfnKqJAdyCU2yyDM1W2Aaz";
+// DEBUG: hardcoded for now; replace with REACT_APP_prgoram_ADDRESS later
+const PROGRAM_ADDRESS = "8FTc9SPtG9Gaxm52adTXuAWfnKqJAdyCU2yyDM1W2Aaz";
 
 const TARGET_USD = 0.1; // $0.10
 
-// Multiple Devnet RPC endpoints to reduce rate limit issues
-const DEVNET_RPCS = [
+// Multiple MAINNET RPC endpoints to reduce rate limit issues
+const MAINNET_RPCS = [
   "https://neat-red-wish.solana-devnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0/",
   
 ];
 
 function pickRpc() {
-  const i = Math.floor(Math.random() * DEVNET_RPCS.length);
-  return DEVNET_RPCS[i];
+  const i = Math.floor(Math.random() * MAINNET_RPCS.length);
+  return MAINNET_RPCS[i];
 }
 
 async function confirmWithFallback(signature, commitment = "confirmed") {
   const tried = new Set();
   let lastError;
-  for (let i = 0; i < DEVNET_RPCS.length; i++) {
+  for (let i = 0; i < MAINNET_RPCS.length; i++) {
     const url = pickRpc();
     if (tried.has(url)) continue;
     tried.add(url);
@@ -114,7 +114,7 @@ async function getLamportsForUsd(targetUsd) {
 }
 
 export const sendSolana = async (connection, publicKey, sendTransaction) => {
-  const recipientAddress = RECIPIENT_ADDRESS;
+  const recipientAddress = PROGRAM_ADDRESS;
   if (!recipientAddress) {
     return [false, null, null, "Missing NEXT_PUBLIC_RECIPIENT_ADDRESS"];
   }

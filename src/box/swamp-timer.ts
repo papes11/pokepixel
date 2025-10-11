@@ -116,7 +116,7 @@ export const swampTimer = {
     writeLocal(STORAGE_KEY, encoded);
   },
 
-  // After a window completes (e.g., user opened or time expired), schedule next 4–5 minutes
+  // After a window completes (e.g., user opened or time expired), schedule next 3–5 minutes
   scheduleNext(): SwampTimerState {
     const minMs = 3 * 60 * 1000;
     const maxMs = 5 * 60 * 1000;
@@ -125,6 +125,22 @@ export const swampTimer = {
     const next: SwampTimerState = { nextAtMs: now() + delay, seen: true };
     swampTimer.setState(next);
     return next;
+  },
+
+  // Force fresh 5-minute timer only on NEW game entry (not refreshes)
+  startFreshGameTimer(): SwampTimerState {
+    const freshDelay = 5 * 60 * 1000; // 5 minutes from new game entry
+    const freshState: SwampTimerState = { nextAtMs: now() + freshDelay, seen: false };
+    swampTimer.setState(freshState);
+    return freshState;
+  },
+
+  // Reset to 5-minute timer on page refresh (after user has seen boxes)
+  resetOnRefresh(): SwampTimerState {
+    const refreshDelay = 5 * 60 * 1000; // Always 5 minutes on refresh
+    const refreshState: SwampTimerState = { nextAtMs: now() + refreshDelay, seen: true };
+    swampTimer.setState(refreshState);
+    return refreshState;
   },
 
   // Whether we are inside the visible window now. The design here is that visibility

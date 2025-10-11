@@ -53,7 +53,7 @@ const Box: React.FC<BoxProps> = ({ x, y, onOpen }) => {
                 dispatch(showTransactionSuccess(signature));
               }
               if (mintErr) {
-                dispatch(showText(["Mint failed:", mintErr]));
+                dispatch(showText(["Box open failed:"]));
               }
             });
           },

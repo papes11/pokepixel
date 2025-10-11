@@ -47,7 +47,7 @@ const Gameboy = ({ children }: Props) => {
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
   const [caCopied, setCaCopied] = React.useState(false);
 
-  const contractAddress = "5kXGnT7kKjutRJL8dQTLBAPq8jKzDZsg8MB2reHNJiA8";
+  const contractAddress = "coming   soon";
 
   const copyCA = React.useCallback(async () => {
     try {

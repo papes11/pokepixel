@@ -148,22 +148,30 @@ const Game = () => {
     timerRef.current = setTimeout(showBoxes, waitMs);
   }, [showBoxes]);
 
-  // On entering game (load menu closes), restore persisted schedule:
+  // On entering game (load menu closes), handle new vs refresh appropriately:
   useEffect(() => {
     if (!loadMenu) {
       cycleStartedRef.current = true;
       setBoxPositions([]);
       if (timerRef.current) clearTimeout(timerRef.current);
 
-      // Read persisted state; if visible window, show immediately, else wait until next time
-      const msUntil = swampTimer.msUntilVisible();
-      if (swampTimer.isVisible(VISIBLE_DURATION)) {
-        showBoxes();
+      // Check if this is a first-time user or returning user
+      const currentState = swampTimer.getState();
+      
+      let waitMs: number;
+      if (!currentState.seen) {
+        // First-time user - start fresh 5-minute timer
+        const freshState = swampTimer.startFreshGameTimer();
+        waitMs = Math.max(0, freshState.nextAtMs - Date.now());
       } else {
-        timerRef.current = setTimeout(() => {
-          showBoxes();
-        }, msUntil);
+        // User has seen boxes before - always reset to 5 minutes on page refresh
+        const refreshState = swampTimer.resetOnRefresh();
+        waitMs = Math.max(0, refreshState.nextAtMs - Date.now());
       }
+      
+      timerRef.current = setTimeout(() => {
+        showBoxes();
+      }, waitMs);
     } else {
       // If returning to load menu, stop any timers and reset state
       cycleStartedRef.current = false;
