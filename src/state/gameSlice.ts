@@ -33,7 +33,7 @@ const initialState: GameState = {
       amount: 2,
     },
   ],
-  name: "Pixel",
+  name: "",
   pokemon: [
     {
       id: 1,
@@ -89,6 +89,17 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
+    // Initialize name from localStorage on app start
+    initializeName: (state) => {
+      try {
+        const savedPlayerName = localStorage.getItem('pokepixel_player_name');
+        if (savedPlayerName && savedPlayerName.trim()) {
+          state.name = savedPlayerName;
+        }
+      } catch (error) {
+        console.log('No saved name found during initialization');
+      }
+    },
     moveLeft: (state) => {
       state.direction = Direction.Left;
       if (state.pos.x === 0) return;
@@ -342,6 +353,7 @@ export const gameSlice = createSlice({
 });
 
 export const {
+  initializeName,
   moveLeft,
   moveRight,
   moveUp,

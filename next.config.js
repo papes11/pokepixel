@@ -10,6 +10,11 @@ module.exports = withPWA({
   compiler: { styledComponents: true },
   images: { disableStaticImages: true },
   typedRoutes: false,
+  // Disable specific ESLint rules that cause build warnings
+  eslint: {
+    ignoreDuringBuilds: false,
+    dirs: ['pages', 'src'],
+  },
   // Fix HMR issues with Next.js 15
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer

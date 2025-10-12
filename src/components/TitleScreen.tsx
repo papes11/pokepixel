@@ -13,7 +13,9 @@ import {
   hideTitleMenu,
   selectGameboyMenu,
   selectTitleMenu,
+  showNameInput,
 } from "../state/uiSlice";
+import { setName } from "../state/gameSlice";
 
 const StyledTitleScreen = styled.div`
   position: absolute;
@@ -136,7 +138,23 @@ const TitleScreen = () => {
 
   useEvent(Event.A, () => {
     if (!show || gameboyMenuOpen) return;
+    
+    // Check if player name is already saved
+    try {
+      const savedPlayerName = localStorage.getItem('pokepixel_player_name');
+      if (savedPlayerName && savedPlayerName.trim()) {
+        // Load saved name and skip name input
+        dispatch(setName(savedPlayerName));
+        dispatch(hideTitleMenu());
+        return;
+      }
+    } catch (error) {
+      console.log('No saved name found');
+    }
+    
+    // No saved name, show name input
     dispatch(hideTitleMenu());
+    dispatch(showNameInput());
   });
 
   if (!show) return null;

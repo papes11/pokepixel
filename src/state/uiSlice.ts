@@ -33,6 +33,7 @@ interface UiState {
   itemsMenu: boolean;
   playerMenu: boolean;
   titleMenu: boolean;
+  nameInput: boolean;
   loadMenu: boolean;
   gameboyMenu: boolean;
   pokemonCenterMenu: boolean;
@@ -56,6 +57,7 @@ const initialState: UiState = {
   itemsMenu: false,
   playerMenu: false,
   titleMenu: true,
+  nameInput: false,
   loadMenu: true,
   gameboyMenu: true,
   actionOnPokemon: null,
@@ -97,6 +99,12 @@ export const uiSlice = createSlice({
     },
     hideTitleMenu: (state) => {
       state.titleMenu = false;
+    },
+    showNameInput: (state) => {
+      state.nameInput = true;
+    },
+    hideNameInput: (state) => {
+      state.nameInput = false;
     },
     hideLoadMenu: (state) => {
       state.loadMenu = false;
@@ -205,6 +213,8 @@ export const {
   showPlayerMenu,
   hidePlayerMenu,
   hideTitleMenu,
+  showNameInput,
+  hideNameInput,
   hideLoadMenu,
   hideGameboyMenu,
   showText,
@@ -248,6 +258,8 @@ export const selectPlayerMenu = (state: RootState) => state.ui.playerMenu;
 
 export const selectTitleMenu = (state: RootState) => state.ui.titleMenu;
 
+export const selectNameInput = (state: RootState) => state.ui.nameInput;
+
 export const selectLoadMenu = (state: RootState) => state.ui.loadMenu;
 
 export const selectGameboyMenu = (state: RootState) => state.ui.gameboyMenu;
@@ -268,6 +280,7 @@ export const selectMenuOpen = (state: RootState) =>
   state.ui.itemsMenu ||
   state.ui.playerMenu ||
   state.ui.titleMenu ||
+  state.ui.nameInput ||
   state.ui.loadMenu ||
   state.ui.gameboyMenu ||
   state.game.pokemonEncounter !== undefined ||

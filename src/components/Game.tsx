@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-
-import { useSelector } from "react-redux";
-import { selectPos, selectMap } from "../state/gameSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectPos, selectMap, initializeName } from "../state/gameSlice";
 import { selectLoadMenu } from "../state/uiSlice";
 import Character from "./Character";
 import Text from "./Text";
@@ -41,7 +40,8 @@ import swampTimer from "../box/swamp-timer";
 import TransactionSuccess from "./TransactionSuccess";
 import MintSuccess from "./MintSuccess";
 import InstallPrompt from "./InstallPrompt";
-import { selectTransactionSuccess, selectMintSuccess } from "../state/uiSlice";
+import NameInput from "./NameInput";
+import { selectTransactionSuccess, selectMintSuccess, selectNameInput } from "../state/uiSlice";
 import { usePWAInstall } from "../hooks/usePWAInstall";
 
 
@@ -96,11 +96,18 @@ const ColorOverlay = styled.div`
 `;
 
 const Game = () => {
+  const dispatch = useDispatch();
   const pos = useSelector(selectPos);
   const map = useSelector(selectMap);
   const transactionSuccessSignature = useSelector(selectTransactionSuccess);
   const mintSuccessSignature = useSelector(selectMintSuccess);
+  const showNameInput = useSelector(selectNameInput);
   const loadMenu = useSelector(selectLoadMenu);
+  
+  // Initialize name from localStorage on component mount
+  useEffect(() => {
+    dispatch(initializeName());
+  }, [dispatch]);
   
   // PWA Install functionality
   const { showInstallPrompt, installApp, dismissPrompt } = usePWAInstall();
@@ -253,6 +260,7 @@ const Game = () => {
       )}
       <LoadScreen />
       <TitleScreen />
+      <NameInput />
       <GameboyMenu />
 
       {/* Handlers */}

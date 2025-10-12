@@ -8,6 +8,7 @@ import {
   selectGameboyMenu, 
   selectLoadMenu, 
   selectTitleMenu, 
+  selectNameInput,
   showText, 
 } from "../state/uiSlice"; 
 import Text from "./Text"; 
@@ -26,7 +27,9 @@ const LoadScreen = () => {
   const dispatch = useDispatch(); 
   const [loaded, setLoaded] = useState(false); 
   const [hasSave, setHasSave] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const titleOpen = useSelector(selectTitleMenu); 
+  const nameInputOpen = useSelector(selectNameInput);
   const show = useSelector(selectLoadMenu); 
   const gameboyOpen = useSelector(selectGameboyMenu);
 
@@ -42,6 +45,19 @@ const LoadScreen = () => {
       }
     }
   }, [playerName]);
+
+  // Reset loaded state when transitioning from nameInput to LoadScreen
+  useEffect(() => {
+    if (!titleOpen && !nameInputOpen && show) {
+      setLoaded(false);
+      setIsActive(false);
+      // Add delay to prevent immediate event triggering
+      const timer = setTimeout(() => {
+        setIsActive(true);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [titleOpen, nameInputOpen, show]);
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -254,13 +270,13 @@ const LoadScreen = () => {
     },
   };
  
-  if (!show) return null; 
+  if (!show || titleOpen || nameInputOpen) return null; 
  
   return ( 
     <StyledLoadScreen> 
       <Text/> 
       <Menu 
-        disabled={titleOpen || gameboyOpen} 
+        disabled={titleOpen || gameboyOpen || nameInputOpen || !isActive} 
         show={!loaded} 
         menuItems={hasSave ? [continueGame, newGame, questBox, contractAddress, social, faq, docs] : [newGame, questBox, contractAddress, social, faq, docs]} 
         close={() => setLoaded(true)} 

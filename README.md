@@ -6,7 +6,7 @@ A recreation of the classic Pokemon Red/Blue games built with React and TypeScri
 
 ## Features
 
-- 🎮 Classic Pokemon gameplay mechanics
+- 🎮 Classic Pokepixel gameplay mechanics
 - 🗺️ Multiple maps and locations from the original games
 - ⚔️ Turn-based battle system
 - 🎵 Original game music and sound effects

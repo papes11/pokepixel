@@ -9,13 +9,13 @@ export default function Document() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Pokepixel" />
-        <meta name="description" content="Play Pokepixel, the blockchain Pokemon game on Solana. Collect NFTs, earn SOL, and explore the world!" />
+        <meta name="description" content="Play Pokepixel, the blockchain Pokepixel on Solana. Collect NFTs, earn SOL, and explore the world!" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-config" content="/icons/browserconfig.xml" />
-        <meta name="msapplication-TileColor" content="#4CAF50" />
+        <meta name="msapplication-TileColor" content="#d0d3d4" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#4CAF50" />
+        <meta name="theme-color" content="#d0d3d4" />
 
         {/* Apple Icons */}
         <link rel="apple-touch-icon" href="/logo192.png" />
