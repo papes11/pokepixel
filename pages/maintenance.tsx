@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Gameboy from '../src/components/Gameboy';
+import GlobalStyles from '../src/styles/GlobalStyles';
+import WalletContextProvider from '../src/wallets/wallet-provider';
+import { Provider } from 'react-redux';
+import { store } from '../src/state/store';
+import InstallPrompt from '../src/components/InstallPrompt';
+import { usePWAInstall } from '../src/hooks/usePWAInstall';
 
 const StyledApp = styled.div`
   background: black;
@@ -54,23 +60,37 @@ const AnimatedDots = styled.span`
 `;
 
 export default function MaintenancePage() {
+  // PWA Install functionality
+  const { showInstallPrompt, installApp, dismissPrompt } = usePWAInstall();
+
   return (
-    <StyledApp>
-      <Gameboy>
-        <MaintenanceScreen>
-          <MaintenanceText>
-            UNDER
-            <br />
-            MAINTENANCE
-            <AnimatedDots>...</AnimatedDots>
-          </MaintenanceText>
-          <MaintenanceText style={{ fontSize: '12px', marginTop: '30px' }}>
-            WE&apos;LL BE
-            <br />
-            BACK SOON!
-          </MaintenanceText>
-        </MaintenanceScreen>
-      </Gameboy>
-    </StyledApp>
+    <WalletContextProvider>
+      <Provider store={store}>
+        <GlobalStyles />
+        {showInstallPrompt && (
+          <InstallPrompt 
+            onInstall={installApp} 
+            onDismiss={dismissPrompt} 
+          />
+        )}
+        <StyledApp>
+          <Gameboy>
+            <MaintenanceScreen>
+              <MaintenanceText>
+                UNDER
+                <br />
+                MAINTENANCE
+                <AnimatedDots>...</AnimatedDots>
+              </MaintenanceText>
+              <MaintenanceText style={{ fontSize: '12px', marginTop: '30px' }}>
+                WE&apos;LL BE
+                <br />
+                BACK SOON!
+              </MaintenanceText>
+            </MaintenanceScreen>
+          </Gameboy>
+        </StyledApp>
+      </Provider>
+    </WalletContextProvider>
   );
 }
