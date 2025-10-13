@@ -5,8 +5,10 @@ import Gameboy from "../src/components/Gameboy";
 import Paint from "../src/components/Paint";
 import { PAINT_MODE } from "../src/app/constants";
 import Game from "components/Game";
+import MaintenancePage from "./maintenance";
 
-
+// Toggle this to enable/disable maintenance mode
+const MAINTENANCE_MODE = true;
 
 const StyledApp = styled.div`
   background: black;
@@ -25,6 +27,11 @@ const StyledApp = styled.div`
 `;
 
 export default function HomePage() {
+  // Show maintenance page if maintenance mode is enabled
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />;
+  }
+
   return (
     <StyledApp>
       <Gameboy>
@@ -34,5 +41,3 @@ export default function HomePage() {
     </StyledApp>
   );
 }
-
-
