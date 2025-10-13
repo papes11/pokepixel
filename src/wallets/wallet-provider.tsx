@@ -18,7 +18,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   // A list of endpoints to rotate through if one fails or rate-limits
   const RPC_ENDPOINTS = [
     "https://mainnet.helius-rpc.com/?api-key=fb1251b4-9828-40cb-a869-09bc2a7a9ee5",
-    "https://go.getblock.us/6b8fece990f4411b8326f167b641910d",
     "https://neat-red-wish.solana-mainnet.quiknode.pro/3b91b098dabb643aa72b4007138eb1775062d9f0",
     "https://solana-mainnet.g.alchemy.com/v2/Umm2LP16pOXNGKVUQl-5b",
     
@@ -43,11 +42,11 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
           const data = await response.json();
           if (data.result === "ok") {
             setEndpoint(url);
-            console.log("✅ Using endpoint:", url);
+            // console.log("✅ Using endpoint:", url);
             return;
           }
         } catch {
-          console.warn("❌ Endpoint failed:", url);
+          // console.warn("❌ Endpoint failed:", url);
         }
       }
       console.error("⚠️ No healthy Solana RPC endpoints found!");

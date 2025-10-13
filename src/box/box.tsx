@@ -39,6 +39,14 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
   // Check if this box has already been opened
   const isBoxOpened = boxStorage.isBoxOpened(boxId);
 
+  // Mobile detection helper
+  const isMobileBrowser = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = ['android', 'iphone', 'ipad', 'ipod', 'mobile'].some(keyword => userAgent.includes(keyword));
+    const isInWalletBrowser = userAgent.includes('phantom') || userAgent.includes('solflare') || userAgent.includes('trust');
+    return isMobile && !isInWalletBrowser;
+  };
+
   useEvent(Event.A, () => {
     if (isPlayerOnBox && !isBoxOpened) {
       if (!connected) {
@@ -50,15 +58,38 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
       boxStorage.markBoxAsOpened(boxId);
       
       onOpen(x, y);
+      
+      // Check if mobile browser and show appropriate message
+      const postMessage = isMobileBrowser() 
+        ? "Use wallet built-in browser (Phantom, Solflare, Trust, etc)" 
+        : "Transaction sent wait up!";
+      
       dispatch(
         showConfirmationMenu({
           preMessage: "BOX found accept or decline?",
-          postMessage: "Transaction sent wait up!",
+          postMessage: postMessage,
           confirm: () => {
             if (!publicKey) {
               // This should not happen due to the connected check, but as a safeguard
               return;
             }
+            
+            // Show guidance for mobile browser users
+            if (isMobileBrowser()) {
+              dispatch(hideConfirmationMenu());
+              dispatch(showText([
+                "Mobile Browser Detected",
+                "",
+                "For Box opening, please:",
+                "1. Use built-in browser",
+                "2. Open your wallet app",
+                " (Phantom, Solflare, Trust)",
+                "3. Navigate to this site",
+                "4. Try again"
+              ]));
+              return;
+            }
+            
             sendSolana(
               connection,
               publicKey,
