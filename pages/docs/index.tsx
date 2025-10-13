@@ -7,7 +7,10 @@ type DocKey =
   | "mystery-boxes"
   | "roadmap"
   | "contract"
-  | "faq";
+  | "faq"
+  | "license"
+  | "credit";
+  
 
 const SECTIONS: { key: DocKey; label: string }[] = [
   { key: "overview", label: "Overview" },
@@ -17,6 +20,8 @@ const SECTIONS: { key: DocKey; label: string }[] = [
   { key: "roadmap", label: "Roadmap" },
   { key: "contract", label: "Official Contract" },
   { key: "faq", label: "FAQ" },
+  { key: "license", label: "License" },
+  { key: "credit", label: "Credits" },
 ];
 
 export default function DocsPage() {
@@ -99,21 +104,64 @@ export default function DocsPage() {
           <div className="content-container">
             {active === "overview" && (
               <section>
-                <h1>Overview</h1>
-                <p>Pokepixel is a retro adventure on Solana. Explore, discover hidden quest boxes, and collect rewards that contribute to future airdrops.</p>
+                <h1>🎮 About the Game</h1>
+                <p>
+                  PokéPixel is a free-to-play pixel adventure game built on Solana, where you can explore, earn rewards, and level up — no tokens required to start!
+                </p>
+                <p>
+                  During the <strong>AlphaNet</strong>, everyone can play for free. In future updates, some features may require holding a small amount of PokéPixel tokens to unlock special gameplay options.
+                </p>
+                <p>
+                  <strong>Your main mission?</strong><br />
+                  Find hidden boxes, open them directly on Solana using your wallet, and earn rewards.
+                </p>
+
+                <h2>📦 Quest Box & Reward Box</h2>
+                <div className="box-types">
+                  <div className="box-type-card">
+                    <h3>Quest Box</h3>
+                    <p>Unlocks as you complete in-game quests and gain experience (EXP).</p>
+                  </div>
+                  <div className="box-type-card">
+                    <h3>Reward Box</h3>
+                    <p>Randomly appears across the map; open these on-chain using your Solana wallet for exclusive rewards.</p>
+                  </div>
+                </div>
+                <p>
+                  The more you play and level up, the faster boxes will swamp (respawn).<br />
+                  Each box you open increases your chances of earning airdrops, NFTs, and other rewards.
+                </p>
+
+                <h2>🚀 Gameplay Highlights</h2>
                 <div className="feature-grid">
                   <div className="feature-card">
-                    <h3>🎮 Play to Earn</h3>
-                    <p>Collect items and progress your account for future rewards and airdrops.</p>
+                    <h3>⛓️ Built on Solana</h3>
+                    <p>Built entirely on Solana blockchain for fast, secure transactions.</p>
                   </div>
                   <div className="feature-card">
-                    <h3>🔍 Explore</h3>
-                    <p>Discover hidden quest boxes and mysterious locations across the map.</p>
+                    <h3>👛 Multi-Wallet Support</h3>
+                    <p>Works with popular browser wallets: Phantom, Solflare, Trust, and others.</p>
                   </div>
                   <div className="feature-card">
-                    <h3>🎯 Complete Quests</h3>
-                    <p>Engage with NPCs and complete challenges to earn exclusive rewards.</p>
+                    <h3>📈 Level Up & Earn</h3>
+                    <p>Gain EXP and level up as you play. The more boxes you open, the higher your airdrops and bonus chances.</p>
                   </div>
+                  <div className="feature-card">
+                    <h3>🎁 Hidden Rewards</h3>
+                    <p>Hidden boxes spawn over time — open them instantly using your connected wallet.</p>
+                  </div>
+                </div>
+
+                <div className="info-box">
+                  <h3>🧪 Currently in AlphaNet</h3>
+                  <p>Everything is free and experimental. In <strong>BetaNet</strong>, players can look forward to:</p>
+                  <ul>
+                    <li>More box types and hidden locations</li>
+                    <li>Reward NFTs</li>
+                    <li>Solana-based collectibles</li>
+                    <li>Enhanced play-to-earn systems</li>
+                  </ul>
+                  <p>If you missed the earlier Jupiter, Pixel, and other airdrops, this is your chance to join the early alpha and be part of the next wave.</p>
                 </div>
               </section>
             )}
@@ -121,19 +169,21 @@ export default function DocsPage() {
             {active === "getting-started" && (
               <section>
                 <h1>Getting Started</h1>
+                
+                <h2>💻 Desktop Users</h2>
                 <div className="steps">
                   <div className="step">
                     <div className="step-number">1</div>
                     <div className="step-content">
                       <h3>Install a Solana Wallet</h3>
-                      <p>Download Phantom, Solflare, or any compatible Solana wallet from your browser&apos;s extension store.</p>
+                      <p>Download Phantom, Solflare, or any compatible Solana wallet extension for your browser.</p>
                     </div>
                   </div>
                   <div className="step">
                     <div className="step-number">2</div>
                     <div className="step-content">
                       <h3>Connect Your Wallet</h3>
-                      <p>Open the game and click the connect button to link your wallet securely.</p>
+                      <p>Open the game and click the "Connect Wallet" button to link your wallet securely.</p>
                     </div>
                   </div>
                   <div className="step">
@@ -143,6 +193,47 @@ export default function DocsPage() {
                       <p>Use keyboard arrows or on-screen D-pad to move and interact with the game world.</p>
                     </div>
                   </div>
+                </div>
+
+                <h2>📱 Mobile Users</h2>
+                <div className="mobile-warning">
+                  <p>🚨 <strong>Important for Mobile Players:</strong></p>
+                  <p>To complete transactions on mobile devices, you <strong>must</strong> use your wallet app's built-in browser.</p>
+                </div>
+                <div className="steps">
+                  <div className="step">
+                    <div className="step-number">1</div>
+                    <div className="step-content">
+                      <h3>Install a Mobile Wallet App</h3>
+                      <p>Download Phantom, Solflare, or Trust Wallet from your app store (iOS/Android).</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">2</div>
+                    <div className="step-content">
+                      <h3>Open Wallet's Built-in Browser</h3>
+                      <p>Launch your wallet app and find the "Browser" or "DApp" section (usually in the menu or bottom navigation).</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">3</div>
+                    <div className="step-content">
+                      <h3>Navigate to PokéPixel</h3>
+                      <p>Type or paste the PokéPixel website URL into the wallet browser's address bar.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">4</div>
+                    <div className="step-content">
+                      <h3>Connect & Play</h3>
+                      <p>Click "Connect Wallet" in the game. Your wallet will automatically connect since you're in its browser.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="tip-box">
+                  <h3>💡 Why use the wallet browser?</h3>
+                  <p>Mobile browsers (Safari, Chrome) don't support wallet extensions. Wallet apps provide built-in browsers specifically designed for blockchain apps like PokéPixel.</p>
                 </div>
               </section>
             )}
@@ -260,19 +351,88 @@ export default function DocsPage() {
                 <div className="faq-list">
                   <div className="faq-item">
                     <h3>What is Pokepixel?</h3>
-                    <p>A free-to-play exploration game on Solana with play-to-earn elements. Explore the world, complete quests, and collect rewards.</p>
+                    <p>A free-to-play pixel adventure game built on Solana where you explore, complete quests, and earn rewards. It's inspired by classic monster-catching games but operates as an independent Web3 project.</p>
                   </div>
                   <div className="faq-item">
                     <h3>How do I play?</h3>
-                    <p>Connect your Solana wallet, explore the map using keyboard or on-screen controls, and interact with objects and NPCs to find mystery boxes.</p>
+                    <p>Connect your Solana wallet, explore the map using keyboard arrows or on-screen controls, and interact with objects and NPCs to find mystery boxes. Each box you open on-chain contributes to future airdrops and rewards.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Is there a cost to play?</h3>
-                    <p>Pokepixel is free to play. You only need a Solana wallet to get started and track your progress.</p>
+                    <p>PokéPixel is completely free to play during AlphaNet. You only need a Solana wallet to get started. Opening reward boxes requires a small on-chain transaction fee (paid in SOL).</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>📱 Can I play on mobile?</h3>
+                    <p>Yes! But you <strong>must use your wallet app's built-in browser</strong> (not Safari or Chrome). Download Phantom, Solflare, or Trust Wallet, open their built-in browser, and navigate to PokéPixel from there.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>Why can't I make transactions on mobile Safari/Chrome?</h3>
+                    <p>Mobile browsers don't support wallet extensions. You need to use the built-in browser inside your wallet app (Phantom, Solflare, Trust) to connect and make transactions.</p>
                   </div>
                   <div className="faq-item">
                     <h3>What are the system requirements?</h3>
-                    <p>Any modern browser with a Solana wallet extension. Chrome, Firefox, and Safari are all supported.</p>
+                    <p><strong>Desktop:</strong> Any modern browser (Chrome, Firefox, Safari) with a Solana wallet extension.<br /><strong>Mobile:</strong> Wallet app with built-in browser (Phantom, Solflare, Trust).</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>What rewards can I earn?</h3>
+                    <p>Players can earn NFTs, cNFTs, SOL rewards, rare items, and PokéPixel tokens by opening boxes and progressing through the game. Higher levels unlock better rewards and faster box spawns.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>Is this affiliated with Pokémon?</h3>
+                    <p>No. PokéPixel is an independent fan-made project inspired by the monster-catching genre. We are not affiliated with Nintendo, Game Freak, or The Pokémon Company.</p>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {active === "license" && (
+              <section>
+                <h1>⚠️ License & Disclaimer</h1>
+                <div className="license-content">
+                  <p>
+                    PokéPixel is an independent fan-made project inspired by the classic monster-catching genre.
+                  </p>
+                  <p>
+                    We are <strong>not affiliated, connected, or endorsed</strong> by Nintendo, Game Freak, The Pokémon Company, or any related entity.
+                    All references are purely creative tributes to the legendary Pokémon series, and PokéPixel operates as its own independent project.
+                  </p>
+                  <p>
+                    Our team consists of passionate Web3 developers and artists creating new, blockchain-based gaming experiences.
+                  </p>
+                  
+                  <div className="disclaimer-box">
+                    <h3>📜 Important Notice</h3>
+                    <ul>
+                      <li>This is a fan-made, independent Web3 project</li>
+                      <li>No official connection to Nintendo or The Pokémon Company</li>
+                      <li>All game assets are original or properly licensed</li>
+                      <li>Built on Solana blockchain for transparency and decentralization</li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {active === "credit" && (
+              <section>
+                <h1>👾 Credits</h1>
+                <div className="credits-content">
+                  <div className="credit-card">
+                    <h3>Development Team</h3>
+                    <p>Developed by <strong>[RB_pokepixel],[PS_pokepixel]</strong></p>
+                    
+                    <p>A passionate team of Web3 developers and pixel artists bringing blockchain gaming to life.</p>
+                  </div>
+
+                  <div className="credit-card">
+                    <h3>Community</h3>
+                    <p>Thank you for playing and supporting the early PokéPixel Alpha — your journey is just beginning! 🌟</p>
+                    <p>Join us on this adventure and be part of the next generation of blockchain gaming.</p>
+                  </div>
+
+                  <div className="credit-card">
+                    <h3>Special Thanks</h3>
+                    <p>To all early alpha testers, community members, and supporters who believed in this project from the start.</p>
                   </div>
                 </div>
               </section>
@@ -756,6 +916,161 @@ export default function DocsPage() {
 
   .tips ul {
     margin: 0;
+  }
+
+  /* Box Types */
+  .box-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .box-type-card {
+    background: #f0f9ff;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .box-type-card h3 {
+    margin: 0 0 8px 0;
+    color: #1e40af;
+  }
+
+  .box-type-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+  }
+
+  /* Info Box */
+  .info-box {
+    background: #fef3c7;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid #f59e0b;
+    margin: 32px 0;
+    width: 100%;
+  }
+
+  .info-box h3 {
+    margin: 0 0 12px 0;
+    color: #92400e;
+  }
+
+  .info-box p {
+    margin: 8px 0;
+    color: #78350f;
+  }
+
+  .info-box ul {
+    margin: 12px 0;
+    padding-left: 24px;
+    color: #78350f;
+  }
+
+  .info-box li {
+    margin: 6px 0;
+  }
+
+  /* Mobile Warning */
+  .mobile-warning {
+    background: #fee2e2;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .mobile-warning p {
+    margin: 8px 0;
+    color: #991b1b;
+  }
+
+  .mobile-warning strong {
+    color: #7f1d1d;
+  }
+
+  /* Tip Box */
+  .tip-box {
+    background: #dcfce7;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #22c55e;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .tip-box h3 {
+    margin: 0 0 12px 0;
+    color: #166534;
+  }
+
+  .tip-box p {
+    margin: 0;
+    color: #15803d;
+  }
+
+  /* License & Credits */
+  .license-content {
+    margin: 24px 0;
+  }
+
+  .license-content p {
+    margin: 16px 0;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  .disclaimer-box {
+    background: #fef3c7;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #f59e0b;
+    margin: 24px 0;
+  }
+
+  .disclaimer-box h3 {
+    margin: 0 0 12px 0;
+    color: #92400e;
+  }
+
+  .disclaimer-box ul {
+    margin: 12px 0;
+    padding-left: 24px;
+    color: #78350f;
+  }
+
+  .disclaimer-box li {
+    margin: 8px 0;
+  }
+
+  .credits-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 24px 0;
+  }
+
+  .credit-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+  }
+
+  .credit-card h3 {
+    margin: 0 0 12px 0;
+    color: #1e40af;
+  }
+
+  .credit-card p {
+    margin: 8px 0;
+    color: #475569;
+    line-height: 1.6;
   }
 
   .docs-footer { 
