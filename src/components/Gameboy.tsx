@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import CustomConnectButton from "../wallets/wallets";
 import useIsMobile from "../app/use-is-mobile";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 // Custom hook for gameboy-specific responsive behavior
 const useIsSmallScreen = () => {
@@ -46,6 +47,7 @@ const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
   const [caCopied, setCaCopied] = React.useState(false);
+  const { connected } = useWallet();
 
   const contractAddress = "coming   soon";
 
@@ -206,10 +208,9 @@ const Gameboy = ({ children }: Props) => {
         <div className="screen-area">
           <div className="power">
             <div className="indicator">
+              {/* <div className={`led ${connected ? 'connected' : 'disconnected'}`}></div> */}
               <div className="led"></div>
-              <span className="arc" style={{ zIndex: 2 }}></span>
-              <span className="arc" style={{ zIndex: 1 }}></span>
-              <span className="arc" style={{ zIndex: 0 }}></span>
+              
             </div>
             Alphanet
           </div>
@@ -226,7 +227,7 @@ const Gameboy = ({ children }: Props) => {
       {/* Only show connect wallet button on smaller screens (< 1000px) */}
       {isSmallScreen && (
         <div
-          className="connect"
+          className="walletconnect"
           style={{ display: "flex", alignItems: "center" }}
         >
           <CustomConnectButton />
@@ -235,7 +236,7 @@ const Gameboy = ({ children }: Props) => {
 
       {isSmallScreen && (
         <button
-          className="connect1"
+          className="music-toggle"
           aria-label="Toggle music"
           onClick={() => {
             setMusicUiMuted((v) => !v);
@@ -248,7 +249,7 @@ const Gameboy = ({ children }: Props) => {
 
       {isSmallScreen && (
         <button
-          className="connect2"
+          className="copyca"
           aria-label="Copy contract address"
           onClick={copyCA}
           style={{ right: 15,}}
