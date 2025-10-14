@@ -9,8 +9,11 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 // Switch to JS implementation to avoid TS/ESM bundling issues at runtime
 import { sendSolana } from "./transaction";
 import { boxStorage, BoxId } from "./box-storage";
+import useIsMobile from "../app/use-is-mobile";
 
-const BOX_SIZE = 16;
+const BOX_SIZE_MOBILE = 16;
+const BOX_SIZE_TABLET = 32;
+const BOX_SIZE_DESKTOP = 64;
 
 interface BoxProps {
   x: number;
@@ -25,6 +28,16 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
   const map = useSelector(selectMap);
   const { connection } = useConnection();
   const { publicKey, sendTransaction, connected } = useWallet();
+  const isMobile = useIsMobile();
+
+  // Determine box size based on screen width
+  const getBoxSize = () => {
+    if (isMobile) return BOX_SIZE_MOBILE;
+    if (window.innerWidth >= 768 && window.innerWidth < 1000) return BOX_SIZE_TABLET;
+    return BOX_SIZE_DESKTOP;
+  };
+
+  const BOX_SIZE = getBoxSize();
 
   const isPlayerOnBox = playerPos.x === x && playerPos.y === y;
   
