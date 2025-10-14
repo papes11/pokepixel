@@ -163,14 +163,14 @@ export default function LaunchPage() {
     <WalletContextProvider>
       <Provider store={store}>
         <GlobalStyles />
-        {showInstallPrompt && (
+        <StyledApp>
+          <Gameboy>
+            {showInstallPrompt && (
           <InstallPrompt 
             onInstall={installApp} 
             onDismiss={dismissPrompt} 
           />
         )}
-        <StyledApp>
-          <Gameboy>
             <LaunchScreen>
               <LaunchText>
                 ALPHANET
