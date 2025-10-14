@@ -226,10 +226,7 @@ const Gameboy = ({ children }: Props) => {
       </div>
       {/* Only show connect wallet button on smaller screens (< 1000px) */}
       {isSmallScreen && (
-        <div
-          className="walletconnect"
-          style={{ display: "flex", alignItems: "center" }}
-        >
+        <div className="walletconnect">
           <CustomConnectButton />
         </div>
       )}
