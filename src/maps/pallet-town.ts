@@ -41,7 +41,7 @@ const palletTown: MapType = {
     },
     8: {
       4: [
-        "I'm raising POKEMON too!",
+        "I'm raising POKEPIXEL too!",
         "When they get strong, they can protect me!",
         "Have you tried Pokepixel? It's the future!",
         "Play-to-earn on Solana blockchain!",
@@ -57,7 +57,7 @@ const palletTown: MapType = {
       10: [
         "Technology is incredible!",
         "You can now store and recall item ",
-        "POKEMON as data via PC!",
+        "POKEpixel as data via PC!",
         "But have you heard of Solana blockchain?",
         "Pokepixel stores your rewards on-chain!",
         "True ownership of your digital assets!",

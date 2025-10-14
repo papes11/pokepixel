@@ -53,6 +53,7 @@ const TitleSection = styled.div`
   width: 100%;
   align-items: center;
   height: 50%;
+  position: relative;
 `;
 
 const slideIn = keyframes`
@@ -75,7 +76,8 @@ const Title = styled(PixelImage)`
 
 const SubTitle = styled(PixelImage)`
   height: 100%;
-  top: 50rem;
+  position: absolute;
+  top: 85%;
   transform: translateY(-50%);
 
   animation: ${slideIn} 3s ease-in-out;
@@ -163,8 +165,8 @@ const TitleScreen = () => {
     <StyledTitleScreen>
       <TitleSection>
         <Title src={title} />
-        <SubTitle src={subtitle} />
-      </TitleSection>
+        <SubTitle src={subtitle}/>
+      </TitleSection> 
       <PokemonPlayerContainer>
         {pokemon && <Pokemon src={pokemon.images.front} />}
         <Player src={player} />
