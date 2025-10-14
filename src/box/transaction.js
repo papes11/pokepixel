@@ -128,7 +128,7 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
 
     // Add a memo so wallets show context (many display memos in the approval UI)
     const memoProgramId = new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
-    const memoData = new TextEncoder().encode(`Approx $${TARGET_USD.toFixed(2)} USD`);
+    const memoData = new TextEncoder().encode(`Approx $${TARGET_USD.toFixed(2)} USD for BOX program`);
     const memoIx = new TransactionInstruction({
       keys: [
         { pubkey: publicKey, isSigner: true, isWritable: false },
