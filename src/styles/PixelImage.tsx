@@ -31,7 +31,7 @@ export const CleanPixelImage = styled.img`
   -ms-interpolation-mode: nearest-neighbor;
 
   /* Enhanced color depth for pixel-art appearance */
-  filter: saturate(1.2) contrast(1.1);
+  
 
   -webkit-user-drag: none;
   -khtml-user-drag: none;

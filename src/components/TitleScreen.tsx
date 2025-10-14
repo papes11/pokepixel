@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import PixelImage from "../styles/PixelImage";
+import { CleanPixelImage } from "../styles/PixelImage";
 
 import title from "../assets/title-screen/poke.png";
 import subtitle from "../assets/title-screen/pixel.png";
