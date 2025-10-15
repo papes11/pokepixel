@@ -21,14 +21,14 @@ const Container = styled.div`
 
 const LinkButton = styled.a`
   display: block;
-  padding: 4px 12px;
+  padding: 1px 0px;
   border: 2px solid #333;
   background-color: rgb(249, 242, 250);
   color: #333;
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  margin-top: 2px;
+  margin-top: 0px;
   font-family: Arial, Helvetica, sans-serif;
   word-break: break-all;
   font-variant-numeric: tabular-nums;

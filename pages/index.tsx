@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Gameboy from "../src/components/Gameboy";
 import Paint from "../src/components/Paint";
 import { PAINT_MODE } from "../src/app/constants";
-import Game from "components/Game";
+import Game from "../src/components/Game";
 import MaintenancePage from "./maintenance";
 
 // Toggle this to enable/disable maintenance mode
