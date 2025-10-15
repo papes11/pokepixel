@@ -41,10 +41,10 @@ const palletTown: MapType = {
     },
     8: {
       4: [
-        "I'm raising POKEPIXEL too!",
-        "When they get strong, they can protect me!",
-        "Have you tried Pokepixel? It's the future!",
-        "Play-to-earn on Solana blockchain!",
+        "Training my POKEPIXEL like my bag 💰",
+        "She levels up, I glow up 💋",
+        "Play now, earn later 😎",
+        "Solana girls play smart 💎",
       ],
     },
     9: {
