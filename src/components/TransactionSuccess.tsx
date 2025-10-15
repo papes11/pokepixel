@@ -38,6 +38,26 @@ const LinkButton = styled.a`
   }
 `;
 
+const ActionButton = styled.button`
+  padding: 1px 0px;
+  border: 2px solid #333;
+  background-color: rgb(249, 242, 250);
+  color: #333;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  word-break: break-all;
+  font-variant-numeric: tabular-nums;
+  width: 100%;
+  margin-top: 0px;
+
+  &:hover {
+    background-color: #ddd;
+  }
+`;
+
 interface TransactionSuccessProps {
   signature: string;
 }
@@ -45,6 +65,15 @@ interface TransactionSuccessProps {
 const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) => {
   const dispatch = useDispatch();
   const url = `https://explorer.solana.com/tx/${signature}?cluster=mainnet`;
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      // You might want to show a confirmation message here
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
 
   useEvent(Event.A, () => {
     dispatch(hideTransactionSuccess());
@@ -54,11 +83,11 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
     <Container>
       <Frame wide tall>
         <div>  ⚔️ !Loot acquired! ⚔️</div>
-       <div>Added to your Quest Box ✅</div>
-
-        <LinkButton href={url} target="_blank" rel="noopener noreferrer">
-          View on Explorer
-        </LinkButton>
+        <div>Added to your Quest Box ✅</div>
+        
+        <ActionButton onClick={copyToClipboard}>
+          Copy Transaction
+        </ActionButton>
       </Frame>
     </Container>
   );
