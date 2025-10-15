@@ -120,15 +120,15 @@ export default function DocsPage() {
                 <div className="box-types">
                   <div className="box-type-card">
                     <h3>Quest Box</h3>
-                    <p>Unlocks as you complete in-game quests and gain experience (EXP).</p>
+                    <p>Unlocks as you complete in-game quests and gain experience (EXP). These boxes are tied to your progression and achievements in the game.</p>
                   </div>
                   <div className="box-type-card">
                     <h3>Reward Box</h3>
-                    <p>Randomly appears across the map; open these on-chain using your Solana wallet for exclusive rewards.</p>
+                    <p>Randomly appears across the map; open these on-chain using your Solana wallet for exclusive rewards. These boxes respawn periodically as you explore.</p>
                   </div>
                 </div>
                 <p>
-                  The more you play and level up, the faster boxes will swamp (respawn).<br />
+                  The more you play and level up, the more opportunities you'll have to find boxes.<br />
                   Each box you open increases your chances of earning airdrops, NFTs, and other rewards.
                 </p>
 
@@ -265,7 +265,22 @@ export default function DocsPage() {
             {active === "mystery-boxes" && (
               <section>
                 <h1>Mystery Boxes</h1>
-                <p>Mystery boxes spawn based on your activity and account level. Higher levels increase spawn frequency and persistence.</p>
+                <p>Mystery boxes are special in-game items that can be found and opened for rewards. There are two main types of mystery boxes in Pokepixel:</p>
+                
+                <div className="box-types">
+                  <div className="box-type-card">
+                    <h3>Quest Boxes</h3>
+                    <p>These boxes are earned through completing quests and advancing through the game. They are tied to your character's progression and achievements.</p>
+                  </div>
+                  <div className="box-type-card">
+                    <h3>Reward Boxes</h3>
+                    <p>These boxes appear randomly throughout the game world. They respawn periodically as you explore different areas, giving you ongoing opportunities to find rewards.</p>
+                  </div>
+                </div>
+                
+                <h2>How to Find and Open Boxes</h2>
+                <p>To find boxes, explore different areas of the game world. When you walk over a box, you can interact with it using your Solana wallet.</p>
+                <p>Each box can only be opened once. After opening a box, it will disappear and may respawn after a period of time, depending on the box type.</p>
                 
                 <div className="rewards-section">
                   <h2>Potential Rewards</h2>
@@ -292,9 +307,10 @@ export default function DocsPage() {
                 <div className="tips">
                   <h3>💡 Pro Tips</h3>
                   <ul>
-                    <li>Explore daily to trigger more box spawns</li>
-                    <li>Higher level accounts get better rewards</li>
-                    <li>Complete quests to increase spawn chances</li>
+                    <li>Explore different areas regularly to find new boxes</li>
+                    <li>Higher level accounts get access to better rewards</li>
+                    <li>Complete quests to unlock special Quest Boxes</li>
+                    <li>Boxes that have been opened will respawn after some time</li>
                   </ul>
                 </div>
               </section>
@@ -375,7 +391,15 @@ export default function DocsPage() {
                   </div>
                   <div className="faq-item">
                     <h3>What rewards can I earn?</h3>
-                    <p>Players can earn NFTs, cNFTs, SOL rewards, rare items, and PokéPixel tokens by opening boxes and progressing through the game. Higher levels unlock better rewards and faster box spawns.</p>
+                    <p>Players can earn NFTs, cNFTs, SOL rewards, rare items, and PokéPixel tokens by opening boxes and progressing through the game. Higher levels unlock better rewards and more frequent box spawns.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>How do mystery boxes work?</h3>
+                    <p>There are two types of boxes in Pokepixel: Quest Boxes and Reward Boxes. Quest Boxes are earned through completing in-game quests and achievements. Reward Boxes appear randomly throughout the game world and respawn periodically as you explore. Each box can only be opened once, after which it will disappear and may respawn after some time.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>Can I get boxes to respawn faster?</h3>
+                    <p>Yes! The more you play and the higher your character level, the more frequently boxes will appear and respawn. Regular exploration and quest completion will increase your opportunities to find new boxes.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Is this affiliated with Pokémon?</h3>

@@ -101,8 +101,8 @@ export const swampTimer = {
       }
     }
 
-    // New install or tampered: set first-run to 5 minutes
-    const firstDelay = 1 * 60 * 1000; // 5m
+    // New install or tampered: set first-run to 3 minutes
+    const firstDelay = 3 * 60 * 1000; // 
     const state: SwampTimerState = { nextAtMs: now() + firstDelay, seen: false };
     swampTimer.setState(state);
     // Mark seen helper key (redundant signal)
