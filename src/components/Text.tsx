@@ -168,6 +168,16 @@ const Text = () => {
     }
   });
 
+  // Add B button event handler to close text
+  useEvent(Event.B, () => {
+    // If text is showing, close it
+    if (text) {
+      setTextIndex(0);
+      dispatch(hideText());
+      return;
+    }
+  });
+
   if (!Array.isArray(text) || text.length === 0) return null;
   const outOfBounds = textIndex < 0 || textIndex >= text.length;
   if (outOfBounds) return null;

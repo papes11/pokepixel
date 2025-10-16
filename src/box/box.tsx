@@ -10,6 +10,8 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { sendSolana } from "./transaction";
 import { boxStorage, BoxId } from "./box-storage";
 import useIsMobile from "../app/use-is-mobile";
+import { hasAnySPLToken } from "./wallet-check";
+import { REQUIRED_SPL_TOKEN_ADDRESSES } from "../app/constants";
 
 const BOX_SIZE_MOBILE = 16;
 const BOX_SIZE_TABLET = 32;
@@ -67,63 +69,95 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
         return;
       }
 
-      // Mark box as opened immediately when player interacts
-      boxStorage.markBoxAsOpened(boxId);
-      
-      onOpen(x, y);
-      
-      // Check if mobile browser and show appropriate message
-      const postMessage = isMobileBrowser() 
-        ? "Use wallet built-in browser (Phantom, Solflare, Trust, etc)" 
-        : "Transaction sent wait up!";
-      
-      dispatch(
-        showConfirmationMenu({
-          preMessage: "BOX found accept or decline?",
-          postMessage: postMessage,
-          confirm: () => {
-            if (!publicKey) {
-              // This should not happen due to the connected check, but as a safeguard
-              return;
-            }
+      // Check if user holds required SPL tokens
+      const checkTokensAndProceed = async () => {
+        if (!publicKey) {
+          dispatch(showText(["Wallet not connected properly"]));
+          return;
+        }
+
+        try {
+          const hasRequiredTokens = await hasAnySPLToken(
+            connection,
+            publicKey,
+            REQUIRED_SPL_TOKEN_ADDRESSES
+          );
+
+          if (!hasRequiredTokens) {
+            dispatch(showText([
+              "Box Locked 🔒",
+              "Hold POKEPIXEL to open it!",
+              "No minimum required.",
+              "See docs for more info."
             
-            // Show guidance for mobile browser users
-            if (isMobileBrowser()) {
-              dispatch(hideConfirmationMenu());
-              dispatch(showText([
-                "Mobile Browser Detected",
-                "",
-                "For Box opening, please:",
-                "",
-                "1. Use wallet built-in browser",
-                "2. Open your wallet app",
-                " (Phantom, Solflare, Trust)",
-                "3. Navigate to this site",
-                "4. Try again"
-              ]));
-              return;
-            }
-            
-            sendSolana(
-              connection,
-              publicKey,
-              sendTransaction
-            ).then(([success, signature, mintSig, mintErr]) => {
-              dispatch(hideConfirmationMenu());
-              if (success && signature) {
-                // Show a combined success message and link via TransactionSuccess
-                dispatch(showTransactionSuccess(signature));
-              }
-              if (mintErr) {
-                dispatch(showText(["Box open failed"]));
-              }
-            });
-          },
-          cancel: () => {
-            dispatch(hideConfirmationMenu());
-          },
-        })
-      );
+            ]));
+            return;
+          }
+
+          // Mark box as opened immediately when player interacts
+          boxStorage.markBoxAsOpened(boxId);
+          
+          onOpen(x, y);
+          
+          // Check if mobile browser and show appropriate message
+          const postMessage = isMobileBrowser() 
+            ? "Use wallet built-in browser (Phantom, Solflare, Trust, etc)" 
+            : "Transaction sent wait up!";
+          
+          dispatch(
+            showConfirmationMenu({
+              preMessage: "BOX found accept or decline?",
+              postMessage: postMessage,
+              confirm: () => {
+                if (!publicKey) {
+                  // This should not happen due to the connected check, but as a safeguard
+                  return;
+                }
+                
+                // Show guidance for mobile browser users
+                if (isMobileBrowser()) {
+                  dispatch(hideConfirmationMenu());
+                  dispatch(showText([
+                    "Mobile Browser Detected",
+                    "",
+                    "For Box opening, please:",
+                    "",
+                    "1. Use wallet built-in browser",
+                    "2. Open your wallet app",
+                    " (Phantom, Solflare, Trust)",
+                    "3. Navigate to this site",
+                    "4. Try again"
+                  ]));
+                  return;
+                }
+                
+                sendSolana(
+                  connection,
+                  publicKey,
+                  sendTransaction
+                ).then(([success, signature, mintSig, mintErr]) => {
+                  dispatch(hideConfirmationMenu());
+                  if (success && signature) {
+                    // Show a combined success message and link via TransactionSuccess
+                    dispatch(showTransactionSuccess(signature));
+                  }
+                  if (mintErr) {
+                    dispatch(showText(["Box open failed"]));
+                  }
+                });
+              },
+              cancel: () => {
+                dispatch(hideConfirmationMenu());
+              },
+            })
+          );
+        } catch (error) {
+          console.error("Error checking tokens:", error);
+          dispatch(showText(["Error checking token balance"]));
+        }
+      };
+
+      checkTokensAndProceed();
     }
   });
   
