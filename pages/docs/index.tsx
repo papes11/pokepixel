@@ -189,6 +189,13 @@ export default function DocsPage() {
                   <div className="step">
                     <div className="step-number">3</div>
                     <div className="step-content">
+                      <h3>Acquire Required SPL Tokens</h3>
+                      <p>Ensure you hold at least one of the required SPL tokens in your wallet to open boxes.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">4</div>
+                    <div className="step-content">
                       <h3>Start Playing</h3>
                       <p>Use keyboard arrows or on-screen D-pad to move and interact with the game world.</p>
                     </div>
@@ -227,6 +234,13 @@ export default function DocsPage() {
                     <div className="step-content">
                       <h3>Connect & Play</h3>
                       <p>Click "Connect Wallet" in the game. Your wallet will automatically connect since you're in its browser.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">5</div>
+                    <div className="step-content">
+                      <h3>Ensure Token Holdings</h3>
+                      <p>Verify you hold the required SPL tokens in your wallet to open boxes.</p>
                     </div>
                   </div>
                 </div>
@@ -281,6 +295,13 @@ export default function DocsPage() {
                 <h2>How to Find and Open Boxes</h2>
                 <p>To find boxes, explore different areas of the game world. When you walk over a box, you can interact with it using your Solana wallet.</p>
                 <p>Each box can only be opened once. After opening a box, it will disappear and may respawn after a period of time, depending on the box type.</p>
+                
+                <h3>Opening Requirements</h3>
+                <p>To open a box, you must:</p>
+                <ol>
+                  <li>Have a Solana wallet connected</li>
+                  <li>Hold at least Pokepixel tokens in your wallet-no minimum required</li>
+                </ol>
                 
                 <div className="rewards-section">
                   <h2>Potential Rewards</h2>
@@ -400,6 +421,10 @@ export default function DocsPage() {
                   <div className="faq-item">
                     <h3>Can I get boxes to respawn faster?</h3>
                     <p>Yes! The more you play and the higher your character level, the more frequently boxes will appear and respawn. Regular exploration and quest completion will increase your opportunities to find new boxes.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>What SPL tokens are required to open boxes?</h3>
+                    <p>To open boxes, you must hold at least one of the specific SPL tokens in your wallet. The exact token addresses are configured by the game developers and can be found in the game's documentation or by checking the required token list in the game settings.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Is this affiliated with Pokémon?</h3>
