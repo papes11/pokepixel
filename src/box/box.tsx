@@ -74,14 +74,6 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
     };
   }, [isShowingMessage]);
 
-  // Mobile detection helper
-  const isMobileBrowser = () => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobile = ['android', 'iphone', 'ipad', 'ipod', 'mobile'].some(keyword => userAgent.includes(keyword));
-    const isInWalletBrowser = userAgent.includes('phantom') || userAgent.includes('solflare') || userAgent.includes('trust');
-    return isMobile && !isInWalletBrowser;
-  };
-
   useEvent(Event.A, () => {
     // If we're already showing a message, don't process the event
     if (isShowingMessage) {
@@ -134,10 +126,8 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
           
           onOpen(x, y);
           
-          // Check if mobile browser and show appropriate message
-          const postMessage = isMobileBrowser() 
-            ? "Use wallet built-in browser (Phantom, Solflare, Trust, etc)" 
-            : "Transaction sent wait up!";
+          // Always show the same message regardless of device
+          const postMessage = "Transaction sent wait up!";
           
           dispatch(
             showConfirmationMenu({
@@ -162,17 +152,24 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   } else if (!success) {
                     // Handle transaction failure
                     const errorMessage = mintErr || "Transaction failed. Please try again.";
-                    dispatch(showText([
-                      "Transaction failed",
-                      errorMessage,
-                      "Please try again"
-                    ]));
+                    // Check if it's a cancellation message
+                    if (errorMessage.includes("cancelled") || errorMessage.includes("rejected")) {
+                      dispatch(showText([
+                        "Transaction cancelled",
+                        "You cancelled the transaction",
+                        "Click box again to retry",
+                        "or use build in wallet browser"
+                      ]));
+                    } else {
+                      dispatch(showText([
+                        "Transaction failed",
+                        errorMessage,
+                        "Please try again use build in wallet browser"
+                      ]));
+                    }
                   } else if (mintErr) {
                     dispatch(showText([
-                      "Box open failed",
-                      "Check network or use wallet built-in browser",
-                      "like Phantom, Trust, Mises",
-                      "Recommended: Mises browser"
+                      "Transaction sent wait up!",
                     ]));
                   }
                 }).catch((error) => {
@@ -185,11 +182,11 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   let errorMessage = "Transaction failed. Please try again.";
                   
                   if (error?.name === "WalletSendTransactionError") {
-                    errorMessage = "Wallet connection error. Please check your wallet connection and try again.";
+                    errorMessage = "Transaction cancelled. You cancelled the transaction. Click box again to retry.";
                   } else if (error?.message) {
                     // Check for specific wallet errors
                     if (error.message.includes("WalletSendTransactionError")) {
-                      errorMessage = "Wallet connection error. Please check your wallet connection and try again.";
+                      errorMessage = "Transaction cancelled. You cancelled the transaction. Click box again to retry.";
                     } else if (error.message.includes("User rejected the request") || error.code === 4001) {
                       errorMessage = "Transaction cancelled. You cancelled the transaction. Click box again to retry.";
                     } else if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
@@ -199,11 +196,20 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                     }
                   }
                   
-                  dispatch(showText([
-                    "Transaction failed",
-                    errorMessage,
-                    "Please try again"
-                  ]));
+                  // Check if it's a cancellation message
+                  if (errorMessage.includes("cancelled") || errorMessage.includes("rejected")) {
+                    dispatch(showText([
+                      "Transaction cancelled",
+                      "You cancelled the transaction",
+                      "Click box again to retry"
+                    ]));
+                  } else {
+                    dispatch(showText([
+                      "Transaction failed",
+                      errorMessage,
+                      "Please try again"
+                    ]));
+                  }
                 });
               },
               cancel: () => {

