@@ -49,7 +49,7 @@ const Gameboy = ({ children }: Props) => {
   const [caCopied, setCaCopied] = React.useState(false);
   const { connected } = useWallet();
 
-  const contractAddress = "coming   soon";
+  const contractAddress = "76u9dmw7hRXqbgxTVohggdrPP5mev4Q2KPWtkyijpump";
 
   const copyCA = React.useCallback(async () => {
     try {

@@ -13,6 +13,6 @@ export const MENU_MAX_HEIGHT = 9;
 // SPL Token addresses required to open boxes
 // TODO: Replace with actual token contract addresses
 export const REQUIRED_SPL_TOKEN_ADDRESSES = [
-  "",
+  "76u9dmw7hRXqbgxTVohggdrPP5mev4Q2KPWtkyijpump",
   
 ];

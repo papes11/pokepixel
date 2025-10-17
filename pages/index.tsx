@@ -8,7 +8,7 @@ import Game from "../src/components/Game";
 import MaintenancePage from "./maintenance";
 
 // Toggle this to enable/disable maintenance mode
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 const StyledApp = styled.div`
   background: black;

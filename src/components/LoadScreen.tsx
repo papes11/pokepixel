@@ -175,7 +175,7 @@ const LoadScreen = () => {
   const contractAddress = { 
     label: "Official CA", 
     action: () => {
-      const ca = "coming soon";
+      const ca = "76u9dmw7hRXqbgxTVohggdrPP5mev4Q2KPWtkyijpump";
       copyToClipboard(ca);
     }, 
   }; 
