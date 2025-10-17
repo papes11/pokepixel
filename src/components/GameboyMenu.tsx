@@ -117,8 +117,8 @@ const apearIn = keyframes`
 `;
 
 const Nintendo = styled(PixelImage)`
-  height: 5%;
-  opacity: 0;
+  height: 8%;
+  opacity: 100%;
 
   animation: ${apearIn} 0s 300ms 1 linear forwards;
 `;
