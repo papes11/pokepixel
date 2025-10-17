@@ -3,7 +3,7 @@ import { xToPx, yToPx } from "../app/position-helper";
 import useEvent from "../app/use-event";
 import { Event } from "../app/emitter";
 import { useDispatch, useSelector } from "react-redux";
-import { showConfirmationMenu, hideConfirmationMenu, showText, showTransactionSuccess } from "../state/uiSlice";
+import { showConfirmationMenu, hideConfirmationMenu, showText, showTransactionSuccess, hideText, selectText } from "../state/uiSlice";
 import { selectPos, selectMap } from "../state/gameSlice";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 // Switch to JS implementation to avoid TS/ESM bundling issues at runtime
@@ -54,6 +54,26 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
   // Check if this box has already been opened
   const isBoxOpened = boxStorage.isBoxOpened(boxId);
 
+  // State to track if we're currently showing a message for this box
+  const [isShowingMessage, setIsShowingMessage] = React.useState(false);
+  const currentText = useSelector(selectText);
+
+  // Reset the message state when the text is hidden
+  React.useEffect(() => {
+    if (isShowingMessage && !currentText) {
+      setIsShowingMessage(false);
+    }
+  }, [isShowingMessage, currentText]);
+
+  // Clean up the message state when the component unmounts
+  React.useEffect(() => {
+    return () => {
+      if (isShowingMessage) {
+        setIsShowingMessage(false);
+      }
+    };
+  }, [isShowingMessage]);
+
   // Mobile detection helper
   const isMobileBrowser = () => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -63,8 +83,14 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
   };
 
   useEvent(Event.A, () => {
+    // If we're already showing a message, don't process the event
+    if (isShowingMessage) {
+      return;
+    }
+
     if (isPlayerOnBox && !isBoxOpened) {
       if (!connected) {
+        setIsShowingMessage(true);
         dispatch(showText(["Connect wallet"]));
         return;
       }
@@ -72,6 +98,7 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
       // Check if user holds required SPL tokens
       const checkTokensAndProceed = async () => {
         if (!publicKey) {
+          setIsShowingMessage(true);
           dispatch(showText(["Wallet not connected properly"]));
           return;
         }
@@ -84,12 +111,13 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
           );
 
           if (!hasRequiredTokens) {
+            setIsShowingMessage(true);
+            dispatch(hideConfirmationMenu());
             dispatch(showText([
               "Box Locked 🔒",
               "Hold POKEPIXEL to open it!",
               "No minimum required.",
               "See docs for more info."
-            
             ]));
             return;
           }
@@ -114,46 +142,71 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   return;
                 }
                 
-                // Show guidance for mobile browser users
-                if (isMobileBrowser()) {
-                  dispatch(hideConfirmationMenu());
-                  dispatch(showText([
-                    "Mobile Browser Detected",
-                    "",
-                    "For Box opening, please:",
-                    "",
-                    "1. Use wallet built-in browser",
-                    "2. Open your wallet app",
-                    " (Phantom, Solflare, Trust)",
-                    "3. Navigate to this site",
-                    "4. Try again"
-                  ]));
-                  return;
-                }
-                
                 sendSolana(
                   connection,
                   publicKey,
                   sendTransaction
                 ).then(([success, signature, mintSig, mintErr]) => {
                   dispatch(hideConfirmationMenu());
+                  setIsShowingMessage(false); // Reset the message state
                   if (success && signature) {
                     // Show a combined success message and link via TransactionSuccess
                     dispatch(showTransactionSuccess(signature));
                   }
                   if (mintErr) {
-                    dispatch(showText(["Box open failed"]));
+                    dispatch(showText(["Box open failed",
+                      "check network or use wallet built-in browser",
+                      "like phantom,trust,mises",
+                      "recomended mises browser"
+
+                   ]));
+                  }
+                }).catch((error) => {
+                  dispatch(hideConfirmationMenu());
+                  setIsShowingMessage(false); // Reset the message state
+                  
+                  // Handle network errors specifically
+                  if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                    dispatch(showText(["Box open failed",
+                      "check network or use wallet built-in browser",
+                      "like phantom,trust,mises",
+                      "recomended mises browser"
+
+                   ]));
+                  } else {
+                    dispatch(showText([
+                      "Transaction failed",
+                      "Please try again later."
+                    ]));
                   }
                 });
               },
               cancel: () => {
                 dispatch(hideConfirmationMenu());
+                setIsShowingMessage(false); // Reset the message state
               },
             })
           );
         } catch (error) {
           console.error("Error checking tokens:", error);
-          dispatch(showText(["Error checking token balance"]));
+          setIsShowingMessage(false); // Reset the message state
+          
+          // Check if the error is a network issue
+          if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+            dispatch(showText([
+              "Network Error",
+              "Please check your internet connection",
+              "and try again."
+            ]));
+          } else {
+            dispatch(showText([
+              "Error checking token balance",
+              "Please try again later."
+            ]));
+          }
+          
+          // Re-throw the error so it can be handled as a mint error
+          throw error;
         }
       };
 

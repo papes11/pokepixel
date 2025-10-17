@@ -37,6 +37,10 @@ export async function hasSPLToken(
     return false;
   } catch (error) {
     console.error("Error checking SPL token balance:", error);
+    // Re-throw network errors so they can be handled upstream
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      throw error;
+    }
     return false;
   }
 }
@@ -80,6 +84,10 @@ export async function hasAnySPLToken(
     return false;
   } catch (error) {
     console.error("Error checking SPL token balances:", error);
+    // Re-throw network errors so they can be handled upstream
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      throw error;
+    }
     return false;
   }
 }
