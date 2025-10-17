@@ -173,9 +173,10 @@ export default function LaunchPage() {
         )}
             <LaunchScreen>
               <LaunchText>
-                ALPHANET
+                Maintenance
+
                 <br />
-                IS LIVE
+                IS in progress
                 <AnimatedDots>...</AnimatedDots>
               </LaunchText>
               <LaunchText style={{ fontSize: '12px', marginTop: '30px' }}>

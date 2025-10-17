@@ -103,6 +103,13 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
           return;
         }
 
+        // Additional check to ensure wallet is still connected
+        if (!connected || !publicKey) {
+          setIsShowingMessage(true);
+          dispatch(showText(["Wallet disconnected. Please reconnect your wallet."]));
+          return;
+        }
+
         try {
           const hasRequiredTokens = await hasAnySPLToken(
             connection,
@@ -152,33 +159,51 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   if (success && signature) {
                     // Show a combined success message and link via TransactionSuccess
                     dispatch(showTransactionSuccess(signature));
-                  }
-                  if (mintErr) {
-                    dispatch(showText(["Box open failed",
-                      "check network or use wallet built-in browser",
-                      "like phantom,trust,mises",
-                      "recomended mises browser"
-
-                   ]));
+                  } else if (!success) {
+                    // Handle transaction failure
+                    const errorMessage = mintErr || "Transaction failed. Please try again.";
+                    dispatch(showText([
+                      "Transaction failed",
+                      errorMessage,
+                      "Please try again"
+                    ]));
+                  } else if (mintErr) {
+                    dispatch(showText([
+                      "Box open failed",
+                      "Check network or use wallet built-in browser",
+                      "like Phantom, Trust, Mises",
+                      "Recommended: Mises browser"
+                    ]));
                   }
                 }).catch((error) => {
                   dispatch(hideConfirmationMenu());
                   setIsShowingMessage(false); // Reset the message state
                   
-                  // Handle network errors specifically
-                  if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-                    dispatch(showText(["Box open failed",
-                      "check network or use wallet built-in browser",
-                      "like phantom,trust,mises",
-                      "recomended mises browser"
-
-                   ]));
-                  } else {
-                    dispatch(showText([
-                      "Transaction failed",
-                      "Please try again later."
-                    ]));
+                  console.error("SendSolana error:", error);
+                  
+                  // Handle different types of errors
+                  let errorMessage = "Transaction failed. Please try again.";
+                  
+                  if (error?.name === "WalletSendTransactionError") {
+                    errorMessage = "Wallet connection error. Please check your wallet connection and try again.";
+                  } else if (error?.message) {
+                    // Check for specific wallet errors
+                    if (error.message.includes("WalletSendTransactionError")) {
+                      errorMessage = "Wallet connection error. Please check your wallet connection and try again.";
+                    } else if (error.message.includes("User rejected the request") || error.code === 4001) {
+                      errorMessage = "Transaction cancelled. You cancelled the transaction. Click box again to retry.";
+                    } else if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                      errorMessage = "Network Error. Check network or use wallet browser like Phantom, Trust, Mises.";
+                    } else {
+                      errorMessage = error.message;
+                    }
                   }
+                  
+                  dispatch(showText([
+                    "Transaction failed",
+                    errorMessage,
+                    "Please try again"
+                  ]));
                 });
               },
               cancel: () => {

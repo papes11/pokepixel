@@ -33,9 +33,15 @@ async function confirmWithFallback(signature, commitment = "confirmed") {
       return;
     } catch (e) {
       lastError = e;
+      console.warn(`RPC confirmation failed for ${url}:`, e.message);
     }
   }
-  if (lastError) throw lastError;
+  if (lastError) {
+    console.error("All RPC confirmation attempts failed:", lastError);
+    // Don't throw an error here, as the transaction may still have succeeded
+    // We'll let the frontend decide how to handle this case
+    return;
+  }
 }
 
 function shuffle(array) {
@@ -123,8 +129,22 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
   }
 
   try {
+    // Validate inputs
+    if (!publicKey) {
+      return [false, null, null, "Wallet not connected"];
+    }
+
+    if (!connection) {
+      return [false, null, null, "No connection available"];
+    }
+
     // Always send approximately $0.10 worth of SOL at current market price
     const lamports = await getLamportsForUsd(TARGET_USD);
+
+    // Validate lamports amount
+    if (!lamports || lamports <= 0) {
+      return [false, null, null, "Invalid transaction amount"];
+    }
 
     // Add a memo so wallets show context (many display memos in the approval UI)
     const memoProgramId = new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
@@ -143,37 +163,65 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
         lamports,
     });
 
-    const transaction = new Transaction().add(
-      transferIx,
-      memoIx
-    );
+    // Create and properly prepare the transaction
+    const transaction = new Transaction();
+    transaction.add(transferIx, memoIx);
     transaction.feePayer = publicKey;
 
-    const signature = await sendTransaction(transaction, connection);
-    // Confirm via randomized RPCs to avoid a single endpoint rate-limiting us
-    await confirmWithFallback(signature, "confirmed");
+    // Get the latest blockhash and set it on the transaction
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
 
-    // MINT FUNCTIONALITY DISABLED - Just return success without minting
-    // try {
-    //   const resp = await fetch("/api/mint", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ userPublicKey: publicKey.toString() }),
-    //   });
-    //   const json = await resp.json();
-    //   if (!resp.ok || !json.ok) {
-    //     const msg = json?.error || `Mint failed (${resp.status})`;
-    //     return [true, signature, null, msg];
-    //   }
-    //   return [true, signature, json.signature ?? null, null];
-    // } catch (mintErr) {
-    //   const msg = (mintErr && (mintErr.message || String(mintErr))) || "Mint failed";
-    //   return [true, signature, null, msg];
-    // }
-    
+    // More robust error handling for sendTransaction
+    let signature;
+    try {
+      // Check if wallet is still connected before sending transaction
+      if (!publicKey) {
+        return [false, null, null, "Wallet disconnected. Please reconnect."];
+      }
+      
+      // Call sendTransaction with the correct parameters
+      signature = await sendTransaction(transaction, connection, {
+        skipPreflight: false,
+        preflightCommitment: "confirmed"
+      });
+    } catch (walletError) {
+      console.error("Wallet sendTransaction error:", walletError);
+      // Handle specific wallet errors
+      if (walletError?.code === 4001) {
+        return [false, null, null, "Transaction rejected by wallet"];
+      } else if (walletError?.message?.includes("User rejected the request")) {
+        return [false, null, null, "Transaction rejected by wallet"];
+      } else if (walletError?.name === "WalletSendTransactionError") {
+        return [false, null, null, "Wallet connection error. Please check your wallet and try again."];
+      } else if (walletError?.message) {
+        // Check for common wallet error patterns
+        if (walletError.message.includes("disconnected") || walletError.message.includes("not connected")) {
+          return [false, null, null, "Wallet disconnected. Please reconnect your wallet and try again."];
+        } else if (walletError.message.includes("insufficient funds")) {
+          return [false, null, null, "Insufficient SOL balance for transaction."];
+        } else if (walletError.message.includes("Missing or invalid parameters")) {
+          return [false, null, null, "Transaction parameters error. Please try again."];
+        }
+        return [false, null, null, `Wallet error: ${walletError.message}`];
+      } else {
+        return [false, null, null, "Unknown wallet error occurred. Please check your wallet and try again."];
+      }
+    }
+
+    // Confirm via randomized RPCs to avoid a single endpoint rate-limiting us
+    try {
+      await confirmWithFallback(signature, "confirmed");
+    } catch (confirmationError) {
+      console.warn("Transaction confirmation failed, but transaction may have succeeded:", confirmationError);
+      // We don't return an error here because the transaction may have succeeded
+      // The user can check the transaction on the explorer
+    }
+
     // Return success without minting
     return [true, signature, null, null];
   } catch (err) {
-    return [false, null, null, err?.message || String(err) || null];
+    console.error("Transaction error:", err);
+    return [false, null, null, err?.message || String(err) || "Unknown error occurred"];
   }
 };

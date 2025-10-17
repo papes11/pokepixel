@@ -64,8 +64,21 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
+    <ConnectionProvider endpoint={endpoint} config={{ 
+      commitment: "confirmed",
+      confirmTransactionInitialTimeout: 60000 // Increase timeout to 60 seconds
+    }}>
+      <WalletProvider 
+        wallets={wallets} 
+        autoConnect 
+        onError={(error) => {
+          console.error("Wallet error:", error);
+          // Handle specific wallet errors
+          if (error?.name === "WalletSendTransactionError") {
+            console.error("WalletSendTransactionError occurred:", error.message);
+          }
+        }}
+      >
         <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
