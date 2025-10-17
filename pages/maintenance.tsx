@@ -174,7 +174,6 @@ export default function LaunchPage() {
             <LaunchScreen>
               <LaunchText>
                 Maintenance
-
                 <br />
                 IS in progress
                 <AnimatedDots>...</AnimatedDots>
