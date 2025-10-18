@@ -171,12 +171,12 @@ const GameboyMenu = () => {
   const [flashError, setFlashError] = React.useState(false);
 
   useEvent(Event.A, () => {
-    if (connected) {
+    // if (connected) {
       dispatch(hideGameboyMenu());
-    } else {
-      setFlashError(true);
-      window.setTimeout(() => setFlashError(false), 1500);
-    }
+    // } else {
+    //   setFlashError(true);
+    //   window.setTimeout(() => setFlashError(false), 1500);
+    // }
   });
 
   if (!show) return null;
@@ -184,14 +184,14 @@ const GameboyMenu = () => {
   return (
     <StyledGameboyMenu>
       <Text>SOLBOY</Text>
-      {!connected && (
+      {/* {!connected && (
         <ConnectHint $error={flashError} onClick={() => {
           setFlashError(true);
           window.setTimeout(() => setFlashError(false), 1500);
         }} role="button" aria-label="Connect wallet to play">
           Connect wallet to play
         </ConnectHint>
-      )}
+      )} */}
       <Nintendo src={nintendo} />
     </StyledGameboyMenu>
   );

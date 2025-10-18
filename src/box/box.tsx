@@ -10,8 +10,8 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { sendSolana } from "./transaction";
 import { boxStorage, BoxId } from "./box-storage";
 import useIsMobile from "../app/use-is-mobile";
-import { hasAnySPLToken } from "./wallet-check";
-import { REQUIRED_SPL_TOKEN_ADDRESSES } from "../app/constants";
+// import { hasAnySPLToken } from "./wallet-check";
+// import { REQUIRED_SPL_TOKEN_ADDRESSES } from "../app/constants";
 
 const BOX_SIZE_MOBILE = 16;
 const BOX_SIZE_TABLET = 32;
@@ -103,23 +103,23 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
         }
 
         try {
-          const hasRequiredTokens = await hasAnySPLToken(
-            connection,
-            publicKey,
-            REQUIRED_SPL_TOKEN_ADDRESSES
-          );
+          // const hasRequiredTokens = await hasAnySPLToken(
+          //   connection,
+          //   publicKey,
+          //   REQUIRED_SPL_TOKEN_ADDRESSES
+          // );
 
-          if (!hasRequiredTokens) {
-            setIsShowingMessage(true);
-            dispatch(hideConfirmationMenu());
-            dispatch(showText([
-              "Box Locked 🔒",
-              "Hold POKEPIXEL to open it!",
-              "No minimum required.",
-              "See docs for more info."
-            ]));
-            return;
-          }
+          // if (!hasRequiredTokens) {
+          //   setIsShowingMessage(true);
+          //   dispatch(hideConfirmationMenu());
+          //   dispatch(showText([
+          //     "Box Locked 🔒",
+          //     "Hold POKEPIXEL to open it!",
+          //     "minimum required 1pokepixel.",
+          //     "See docs for more info."
+          //   ]));
+          //   return;
+          // }
 
           // Mark box as opened immediately when player interacts
           boxStorage.markBoxAsOpened(boxId);

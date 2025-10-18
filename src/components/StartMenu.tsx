@@ -47,7 +47,7 @@ const StartMenu = () => {
             },
           },
           {
-            label: "Your Box",
+            label: "Quest Box",
             action: () =>
               dispatch(
                 showText([
