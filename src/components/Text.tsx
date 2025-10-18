@@ -56,7 +56,7 @@ const StyledText = styled.div<TextProps>`
   }
 
   @media (max-width: 1000px) {
-    height: 35%;
+    height: 40%;
   }
 
   ::after {
