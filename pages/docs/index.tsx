@@ -27,7 +27,7 @@ const SECTIONS: { key: DocKey; label: string }[] = [
 export default function DocsPage() {
   const [active, setActive] = React.useState<DocKey>("overview");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
-  const contractAddress = "76u9dmw7hRXqbgxTVohggdrPP5mev4Q2KPWtkyijpump";
+  const contractAddress = "coming soon";
   const [copied, setCopied] = React.useState(false);
 
   const copyContract = async () => {

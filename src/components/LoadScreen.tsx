@@ -59,52 +59,6 @@ const LoadScreen = () => {
     }
   }, [titleOpen, nameInputOpen, show]);
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      // Try modern clipboard API first
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        dispatch(showText(["✅ Contract Address copied to clipboard!"]));
-        return;
-      }
-      
-      // Fallback for older browsers and mobile
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      
-      const successful = document.execCommand('copy');
-      document.body.removeChild(textArea);
-      
-      if (successful) {
-        dispatch(showText(["✅ Contract Address copied to clipboard!"]));
-      } else {
-        throw new Error('Copy command failed');
-      }
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-      dispatch(showText([
-        "❌ Auto-copy failed on this device",
-        "",
-        "📋 Contract Address:",
-        text,
-        "",
-        "📱 Mobile users:",
-        "1. Long press the address above",
-        "2. Select 'Copy' from the menu",
-        "",
-        "💻 Desktop users:",
-        "1. Select the address above",
-        "2. Press Ctrl+C (or Cmd+C on Mac)"
-      ]));
-    }
-  }; 
- 
   const loadComplete = () => { 
     setLoaded(true); 
     setTimeout(() => { 
@@ -170,14 +124,6 @@ const LoadScreen = () => {
           "to maximize your rewards.", 
         ]) 
       ), 
-  }; 
-
-  const contractAddress = { 
-    label: "Official CA", 
-    action: () => {
-      const ca = "76u9dmw7hRXqbgxTVohggdrPP5mev4Q2KPWtkyijpump";
-      copyToClipboard(ca);
-    }, 
   }; 
 
   const social = { 
@@ -278,7 +224,7 @@ const LoadScreen = () => {
       <Menu 
         disabled={titleOpen || gameboyOpen || nameInputOpen || !isActive} 
         show={!loaded} 
-        menuItems={hasSave ? [continueGame, newGame, questBox, contractAddress, social, faq, docs] : [newGame, questBox, contractAddress, social, faq, docs]} 
+        menuItems={hasSave ? [continueGame, newGame, questBox, social, faq, docs] : [newGame, questBox, social, faq, docs]} 
         close={() => setLoaded(true)} 
         noExit 
         top="2px" 
