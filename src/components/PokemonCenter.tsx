@@ -77,9 +77,9 @@ const PokemonCenter = () => {
   const text = () => {
     if (stage === 0) return "Welcome to our POKéMON CENTER!";
     if ([1, 2].includes(stage))
-      return "We heal your POKéMON back to perfect health!";
+      return "We heal your POKéMON ";
     if (stage === 3) return "OK. We'll need your POKéMON.";
-    if (stage === 4) return "Thank you! Your POKéMON are fighting fit!";
+    if (stage === 4) return "Your POKéMON are fighting fit!";
     if (stage === 5) return "We hope to see you again!";
   };
 
