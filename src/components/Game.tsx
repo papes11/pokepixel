@@ -39,10 +39,8 @@ import React, { useEffect } from "react";
 import swampTimer from "../box/swamp-timer";
 import TransactionSuccess from "./TransactionSuccess";
 import MintSuccess from "./MintSuccess";
-import InstallPrompt from "./InstallPrompt";
 import NameInput from "./NameInput";
 import { selectTransactionSuccess, selectMintSuccess, selectNameInput } from "../state/uiSlice";
-import { usePWAInstall } from "../hooks/usePWAInstall";
 
 
 const Container = styled.div`
@@ -109,9 +107,6 @@ const Game = () => {
     dispatch(initializeName());
   }, [dispatch]);
   
-  // PWA Install functionality
-  const { showInstallPrompt, installApp, dismissPrompt } = usePWAInstall();
-
   // Generate multiple random box positions when the map changes
   const NUM_BOXES = 1; // Change this number for more/less boxes
   const [boxPositions, setBoxPositions] = React.useState<{ x: number; y: number; opened: boolean }[]>([]);
@@ -198,79 +193,75 @@ const Game = () => {
 
   const handleOpen = (x: number, y: number) => {
     // On open, hide and schedule next randomized interval
-    hideBoxes();
+    setBoxPositions(prev => prev.map(box => 
+      box.x === x && box.y === y ? {...box, opened: true} : box
+    ));
+    
+    // Schedule next box appearance
+    if (timerRef.current) clearTimeout(timerRef.current);
+    const next = swampTimer.scheduleNext();
+    const waitMs = Math.max(0, next.nextAtMs - Date.now());
+    timerRef.current = setTimeout(showBoxes, waitMs);
   };
 
-
   return (
-    <Container style={{ paddingTop: showInstallPrompt ? '72px' : '0' }}>
-      <StyledGame>
-        <BackgroundContainer
-          style={{
-            transform: `translate(${xToPx(-pos.x)}, ${yToPx(-pos.y)})`,
-          }}
-        >
-        <Background src={map.image} width={map.width} height={map.height} />
-          {map.trainers &&
-            map.trainers.map((trainer: TrainerType, index: number) => (
-              <Trainer key={index} trainer={trainer} />
-            ))}
-          {map.items &&
-            map.items.map((item: MapItemType, index: number) => (
-              <Item key={index} item={item} />
-            ))}
-          {/* Render multiple boxes at random positions for the current map */}
-          {boxPositions.map((box, idx) => (
-            <Box key={idx} x={box.x} y={box.y} type="dynamic" onOpen={handleOpen} />
-          ))}
-          {/* Render static boxes defined in map data */}
-          {map.boxes &&
-            map.boxes.map((boxPos, index) => (
-              <Box key={`static-${index}`} x={boxPos.x} y={boxPos.y} type="static" onOpen={handleOpen} />
-            ))}
-          <DebugOverlay />
-        </BackgroundContainer>
-        <Character />
-        
-      </StyledGame>
+    <Container>
+      <BackgroundContainer>
+        {map && (
+          <>
+            <Background src={map.image} width={map.width} height={map.height} />
+            <ColorOverlay />
+          </>
+        )}
+      </BackgroundContainer>
       
-
-      <ColorOverlay />
-      <TrainerEncounter />
-      <PokemonEncounter />
+      {map?.items?.map((item: MapItemType, index: number) => (
+        <Item key={index} item={item} />
+      ))}
+      
+      {map?.trainers?.map((trainer: TrainerType, index: number) => (
+        <Trainer key={index} trainer={trainer} />
+      ))}
+      
+      <Character />
+      
+      {boxPositions.map((box, index) => (
+        <Box 
+          key={index} 
+          x={box.x} 
+          y={box.y}
+          onOpen={(x, y) => handleOpen(x, y)}
+        />
+      ))}
+      
       <Text />
+      <StartMenu />
+      <ItemsMenu />
+      <PlayerMenu />
+      <GameboyMenu />
+      <EncounterHandler />
+      <PokemonEncounter />
+      <ActionOnPokemon />
       <PokemonCenter />
       <Pc />
       <PokeMart />
+      <SpinningHandler />
+      <DebugOverlay />
+      <TrainerEncounter />
       <TextThenAction />
-      <StartMenu />
-      <ItemsMenu />
       <LearnMove />
-      <PlayerMenu />
-      <ActionOnPokemon />
-      <Evolution />
+      <QuestHandler />
       <ConfirmationMenu />
-      {transactionSuccessSignature && <TransactionSuccess signature={transactionSuccessSignature} />}
-      {mintSuccessSignature && <MintSuccess signature={mintSuccessSignature} />}
-      {showInstallPrompt && (
-        <InstallPrompt 
-          onInstall={installApp} 
-          onDismiss={dismissPrompt} 
-        />
-      )}
-      <LoadScreen />
-      <TitleScreen />
-      <NameInput />
-      <GameboyMenu />
-
-      {/* Handlers */}
+      <Evolution />
       <MapChangeHandler />
       <KeyboardHandler />
       <MovementHandler />
       <SoundHandler />
-      <EncounterHandler />
-      <SpinningHandler />
-      <QuestHandler />
+      <TitleScreen />
+      <LoadScreen />
+      <NameInput />
+      {transactionSuccessSignature && <TransactionSuccess signature={transactionSuccessSignature} />}
+      {mintSuccessSignature && <MintSuccess signature={mintSuccessSignature} />}
     </Container>
   );
 };

@@ -1,11 +1,4 @@
-// next.config.js
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true
-});
-
-module.exports = withPWA({
+const nextConfig = {
   compiler: { styledComponents: true },
   images: { disableStaticImages: true },
   typedRoutes: false,
@@ -76,4 +69,6 @@ module.exports = withPWA({
     '@metaplex-foundation/umi',
     '@metaplex-foundation/umi-bundle-defaults',
   ],
-});
+};
+
+module.exports = nextConfig;
