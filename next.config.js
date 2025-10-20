@@ -1,4 +1,6 @@
-const nextConfig = {
+// next.config.js
+
+module.exports = {
   compiler: { styledComponents: true },
   images: { disableStaticImages: true },
   typedRoutes: false,
@@ -70,5 +72,3 @@ const nextConfig = {
     '@metaplex-foundation/umi-bundle-defaults',
   ],
 };
-
-module.exports = nextConfig;

@@ -58,7 +58,7 @@ const initialState: UiState = {
   playerMenu: false,
   titleMenu: true,
   nameInput: false,
-  loadMenu: true,
+  loadMenu: false,
   gameboyMenu: true,
   actionOnPokemon: null,
   pokeballThrowing: null,
@@ -105,6 +105,9 @@ export const uiSlice = createSlice({
     },
     hideNameInput: (state) => {
       state.nameInput = false;
+    },
+    showLoadMenu: (state) => {
+      state.loadMenu = true;
     },
     hideLoadMenu: (state) => {
       state.loadMenu = false;
@@ -215,6 +218,7 @@ export const {
   hideTitleMenu,
   showNameInput,
   hideNameInput,
+  showLoadMenu,
   hideLoadMenu,
   hideGameboyMenu,
   showText,

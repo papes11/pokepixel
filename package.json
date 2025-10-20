@@ -28,6 +28,7 @@
     "lucide-react": "^0.544.0",
     "mitt": "^3.0.1",
     "next": "^15.5.4",
+
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
@@ -44,15 +45,7 @@
   },
   "overrides": {
     "@noble/curves": "1.4.0",
-    "@noble/hashes": "1.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@metaplex-foundation/umi": "^1.4.1"
-  },
-  "resolutions": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@metaplex-foundation/umi": "^1.4.1"
+    "@noble/hashes": "1.4.0"
   },
   "scripts": {
     "dev": "set NEXT_DISABLE_DEVTOOLS=1 && next dev",
@@ -77,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^7.1.0",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/dateformat": "^5.0.0",

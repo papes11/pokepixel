@@ -18,6 +18,23 @@ const GlobalStyle = createGlobalStyle`
         color: var(--main);
     }
 
+    /* PWA Mobile Mode Styles */
+    @media (display-mode: standalone) {
+        body {
+            /* Force mobile layout even on larger screens when installed */
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #000;
+        }
+        
+        #__next {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--bg);
+        }
+    }
+
     button {
         background: none;
         border: none;
