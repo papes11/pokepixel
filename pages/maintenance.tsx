@@ -57,7 +57,7 @@ const CountdownText = styled.div`
   text-shadow: 1px 1px 0px #0f380f;
   margin-top: 20px;
   font-family: 'Press Start 2P', monospace;
-  
+
   @media (max-width: 640px) {
     font-size: 12px;
   }
@@ -76,40 +76,24 @@ const LAUNCH_TIME = new Date('2025-9-21T13:00:00Z').getTime();
 
 export default function LaunchPage() {
   const [timeLeft, setTimeLeft] = useState(0);
-  const [isLaunched, setIsLaunched] = useState(false);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = Date.now();
       const difference = LAUNCH_TIME - now;
-
-      if (difference <= 0) {
-        setIsLaunched(true);
-        return 0;
-      }
-
-      return Math.floor(difference / 1000);
+      return Math.max(0, Math.floor(difference / 1000));
     };
 
-    // Set initial time
     setTimeLeft(calculateTimeLeft());
 
     const timerId = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-
-      if (newTimeLeft <= 0) {
-        setIsLaunched(true);
-        clearInterval(timerId);
-      }
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timerId);
   }, []);
 
   const formatTime = (seconds: number) => {
-    if (seconds <= 0) return "00:00";
-
     const days = Math.floor(seconds / (24 * 3600));
     const hours = Math.floor((seconds % (24 * 3600)) / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -133,28 +117,17 @@ export default function LaunchPage() {
         <StyledApp>
           <Gameboy>
             <LaunchScreen>
-              {isLaunched ? (
-                <LaunchText>
-                  Alphanet 
-                  <br />
-                  is Live
-                  <AnimatedDots>...</AnimatedDots>
-                </LaunchText>
-              ) : (
-                <>
-                  <LaunchText>
-                    Alphanet 
-                    <br />
-                    Launching
-                    <AnimatedDots>...</AnimatedDots>
-                  </LaunchText>
-                  {/* <CountdownText>
-                    {formatTime(timeLeft)}
-                  </CountdownText> */}
-                </>
-              )}
+              <LaunchText>
+                Alphanet 
+                <br />
+                is Live
+                <AnimatedDots>...</AnimatedDots>
+              </LaunchText>
+              {/* <CountdownText>
+                {formatTime(timeLeft)}
+              </CountdownText> */}
               <LaunchText style={{ fontSize: '12px', marginTop: '30px' }}>
-                {isLaunched ? 'WELCOME!' : 'LAUNCHING SOON!'}
+                LAUNCHING SOON!
               </LaunchText>
             </LaunchScreen>
           </Gameboy>
