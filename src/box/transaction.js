@@ -1,7 +1,7 @@
 import { PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection, TransactionInstruction } from "@solana/web3.js";
 
 // DEBUG: hardcoded for now; replace with REACT_APP_prgoram_ADDRESS later
-const PROGRAM_ADDRESS = "BVT6EbHksArZ1KWELoG1dT3g6tYNYiVHv6YET2XaeBgS";
+const PROGRAM_ADDRESS = "DDQYa2KKK9QYH2GkaYt95cjqpst9w6emHoms6r7Wetp7";
 
 const TARGET_USD = 0.1; // $0.10
 
@@ -189,9 +189,9 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
       console.error("Wallet sendTransaction error:", walletError);
       // Handle specific wallet errors
       if (walletError?.code === 4001 || walletError?.message?.includes("User rejected the request")) {
-        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
+        return [false, null, null, "Transaction cancelled. Click box again to retry."];
       } else if (walletError?.name === "WalletSendTransactionError") {
-        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
+        return [false, null, null, "Transaction cancelled. Click box again to retry."];
       } else if (walletError?.message) {
         // Check for common wallet error patterns
         if (walletError.message.includes("disconnected") || walletError.message.includes("not connected")) {
@@ -201,9 +201,9 @@ export const sendSolana = async (connection, publicKey, sendTransaction) => {
         } else if (walletError.message.includes("Missing or invalid parameters")) {
           return [false, null, null, "Transaction parameters error. Please try again."];
         }
-        return [false, null, null, `Transaction cancelled. You cancelled the transaction. Click box again to retry.`];
+        return [false, null, null, `Transaction cancelled.  Click box again to retry.`];
       } else {
-        return [false, null, null, "Transaction cancelled. You cancelled the transaction. Click box again to retry."];
+        return [false, null, null, "Transaction cancelled.  Click box again to retry."];
       }
     }
 
