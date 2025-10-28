@@ -6,7 +6,6 @@ import { store } from "../src/state/store";
 import GlobalStyles from "../src/styles/GlobalStyles";
 import WalletContextProvider from "../src/wallets/wallet-provider";
 import "../src/App.css";
-import "../src/components/gameboy.css";
 import "../public/styles/css-pokepixel-gameboy.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
