@@ -5,6 +5,7 @@ type DocKey =
   | "getting-started"
   | "gameplay"
   | "mystery-boxes"
+  | "swap"
   | "roadmap"
   | "contract"
   | "faq"
@@ -17,6 +18,7 @@ const SECTIONS: { key: DocKey; label: string }[] = [
   { key: "getting-started", label: "Getting Started" },
   { key: "gameplay", label: "Gameplay" },
   { key: "mystery-boxes", label: "Mystery Boxes" },
+  { key: "swap", label: "Token Swap" },
   { key: "roadmap", label: "Roadmap" },
   { key: "contract", label: "Official Contract" },
   { key: "faq", label: "FAQ" },
@@ -109,11 +111,11 @@ export default function DocsPage() {
                   PokéPixel is a free-to-play pixel adventure game built on Solana, where you can explore, earn rewards, and level up — no tokens required to start!
                 </p>
                 <p>
-                  During the <strong>AlphaNet</strong>, everyone can play for free. In future updates, some features may require holding a small amount of PokéPixel tokens to unlock special gameplay options.
+                  During the <strong>BetaNet v1</strong>, everyone can play for free. In future updates, some features may require holding a small amount of PokéPixel tokens to unlock special gameplay options.
                 </p>
                 <p>
                   <strong>Your main mission?</strong><br />
-                  Find hidden boxes, open them directly on Solana using your wallet, and earn rewards.
+                  Find hidden boxes, open them directly on Solana using your wallet, and immediately receive rewards.
                 </p>
 
                 <h2>📦 Quest Box & Reward Box</h2>
@@ -150,18 +152,47 @@ export default function DocsPage() {
                     <h3>🎁 Hidden Rewards</h3>
                     <p>Hidden boxes spawn over time — open them instantly using your connected wallet.</p>
                   </div>
+                  <div className="feature-card">
+                    <h3>✨ UI/UX Improvements</h3>
+                    <p>BetaNet v1 features updated UI with enhanced visual elements and improved user experience.</p>
+                  </div>
+                  <div className="feature-card">
+                    <h3>🔄 Box to Token Swap</h3>
+                    <p>Exchange your mystery boxes for SOL or Pokepixel tokens directly in-game.</p>
+                  </div>
+                  <div className="feature-card">
+                    <h3>🏆 Three-Tier Box System</h3>
+                    <p>Silver, Gold, and Diamond boxes with increasing rewards and rarity.</p>
+                  </div>
                 </div>
 
                 <div className="info-box">
-                  <h3>🧪 Currently in AlphaNet</h3>
-                  <p>Everything is free and experimental. In <strong>BetaNet</strong>, players can look forward to:</p>
+                  <h3>🚀 BetaNet v1 Now Live!</h3>
+                  <p>Everything is free and experimental. In <strong>BetaNet v1</strong>, players can look forward to:</p>
                   <ul>
-                    <li>More box types and hidden locations</li>
+                    <li>Enhanced three-tier box system (Silver, Gold, Diamond)</li>
+                    <li>New Swap Page feature for trading</li>
+                    <li>UI/UX improvements and bug fixes</li>
+                    <li>Optimized gameplay performance</li>
                     <li>Reward NFTs</li>
                     <li>Solana-based collectibles</li>
                     <li>Enhanced play-to-earn systems</li>
                   </ul>
-                  <p>If you missed the earlier Jupiter, Pixel, and other airdrops, this is your chance to join the early alpha and be part of the next wave.</p>
+                  <p>If you missed the earlier Jupiter, Pixel, and other airdrops, this is your chance to join the early beta and be part of the next wave.</p>
+                </div>
+                
+                <div className="tip-box">
+                  <h3>🔧 BetaNet v1 Optimizations & Bug Fixes</h3>
+                  <p>We've implemented several performance improvements and bug fixes in this update:</p>
+                  <ul>
+                    <li>Optimized box spawning algorithm for better distribution</li>
+                    <li>Fixed transaction confirmation issues on mobile devices</li>
+                    <li>Improved wallet connection stability</li>
+                    <li>Enhanced game performance on lower-end devices</li>
+                    <li>Resolved issues with box respawning timers</li>
+                    <li>Fixed UI rendering bugs on various screen sizes</li>
+                    <li>Improved error handling for network interruptions</li>
+                  </ul>
                 </div>
               </section>
             )}
@@ -249,6 +280,47 @@ export default function DocsPage() {
                   <h3>💡 Why use the wallet browser?</h3>
                   <p>Mobile browsers (Safari, Chrome) don't support wallet extensions. Wallet apps provide built-in browsers specifically designed for blockchain apps like PokéPixel.</p>
                 </div>
+                
+                <h2>🔄 Exchanging Boxes for Tokens</h2>
+                <p>BetaNet v1 introduces a new Box to Token Swap feature that allows you to exchange your mystery boxes for SOL or Pokepixel tokens. You must have boxes in your inventory to swap them.</p>
+                
+                <div className="steps">
+                  <div className="step">
+                    <div className="step-number">1</div>
+                    <div className="step-content">
+                      <h3>Connect Your Wallet</h3>
+                      <p>Ensure your Solana wallet is connected to the game.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">2</div>
+                    <div className="step-content">
+                      <h3>Visit the Swap Page</h3>
+                      <p>Navigate to the Swap page from the main menu or by visiting /swap directly.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">3</div>
+                    <div className="step-content">
+                      <h3>Select Box Type</h3>
+                      <p>Choose which type of box you want to swap (Silver, Gold, or Diamond).</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">4</div>
+                    <div className="step-content">
+                      <h3>Choose Tokens</h3>
+                      <p>Select whether you want SOL or Pokepixel tokens in return.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">5</div>
+                    <div className="step-content">
+                      <h3>Confirm Transaction</h3>
+                      <p>Specify the amount and confirm the swap transaction in your wallet.</p>
+                    </div>
+                  </div>
+                </div>
               </section>
             )}
 
@@ -279,22 +351,26 @@ export default function DocsPage() {
             {active === "mystery-boxes" && (
               <section>
                 <h1>Mystery Boxes</h1>
-                <p>Mystery boxes are special in-game items that can be found and opened for rewards. There are two main types of mystery boxes in Pokepixel:</p>
+                <p>Mystery boxes are special in-game items that can be found and opened for rewards. In BetaNet v1, we've introduced a new three-tier system for enhanced gameplay:</p>
                 
                 <div className="box-types">
                   <div className="box-type-card">
-                    <h3>Quest Boxes</h3>
-                    <p>These boxes are earned through completing quests and advancing through the game. They are tied to your character's progression and achievements.</p>
+                    <h3>🥉 Silver Boxes</h3>
+                    <p>Common boxes that respawn frequently. Contain basic rewards like small amounts of SOL or common items.</p>
                   </div>
                   <div className="box-type-card">
-                    <h3>Reward Boxes</h3>
-                    <p>These boxes appear randomly throughout the game world. They respawn periodically as you explore different areas, giving you ongoing opportunities to find rewards.</p>
+                    <h3>🥇 Gold Boxes</h3>
+                    <p>Uncommon boxes with better rewards. Appear less frequently but offer higher value items and tokens.</p>
+                  </div>
+                  <div className="box-type-card">
+                    <h3>💎 Diamond Boxes</h3>
+                    <p>Rare boxes with the highest value rewards. Contain exclusive NFTs, large SOL amounts, and rare collectibles.</p>
                   </div>
                 </div>
                 
                 <h2>How to Find and Open Boxes</h2>
                 <p>To find boxes, explore different areas of the game world. When you walk over a box, you can interact with it using your Solana wallet.</p>
-                <p>Each box can only be opened once. After opening a box, it will disappear and may respawn after a period of time, depending on the box type.</p>
+                <p>Each box can only be opened once. After opening a box, you immediately receive your rewards and the box disappears.</p>
                 
                 <h3>Opening Requirements</h3>
                 <p>To open a box, you must:</p>
@@ -304,25 +380,29 @@ export default function DocsPage() {
                 </ol>
                 
                 <div className="rewards-section">
-                  <h2>Potential Rewards</h2>
-                  <div className="rewards-grid">
-                    <div className="reward-item">
-                      <span className="reward-icon">🖼️</span>
-                      <span>NFTs & cNFTs</span>
-                    </div>
-                    <div className="reward-item">
-                      <span className="reward-icon">💰</span>
-                      <span>SOL Rewards</span>
-                    </div>
-                    <div className="reward-item">
-                      <span className="reward-icon">⚡</span>
-                      <span>Rare Items</span>
-                    </div>
-                    <div className="reward-item">
-                      <span className="reward-icon">🎯</span>
-                      <span>Pokepixel Tokens</span>
-                    </div>
-                  </div>
+                  <h2>Potential Rewards by Box Tier</h2>
+                  <h3>🥉 Silver Box Rewards</h3>
+                  <ul>
+                    <li>0.01-0.05 SOL</li>
+                    <li>Common items</li>
+                    <li>Basic Pokepixel tokens</li>
+                  </ul>
+                  
+                  <h3>🥇 Gold Box Rewards</h3>
+                  <ul>
+                    <li>0.05-0.15 SOL</li>
+                    <li>Uncommon items</li>
+                    <li>Moderate Pokepixel tokens</li>
+                    <li>Occasional NFTs</li>
+                  </ul>
+                  
+                  <h3>💎 Diamond Box Rewards</h3>
+                  <ul>
+                    <li>0.15-0.5 SOL</li>
+                    <li>Rare items</li>
+                    <li>Large Pokepixel token amounts</li>
+                    <li>Exclusive NFTs and cNFTs</li>
+                  </ul>
                 </div>
 
                 <div className="tips">
@@ -332,6 +412,7 @@ export default function DocsPage() {
                     <li>Higher level accounts get access to better rewards</li>
                     <li>Complete quests to unlock special Quest Boxes</li>
                     <li>Boxes that have been opened will respawn after some time</li>
+                    <li>Diamond boxes are rare - keep exploring to find them!</li>
                   </ul>
                 </div>
               </section>
@@ -344,24 +425,115 @@ export default function DocsPage() {
                   <div className="roadmap-phase">
                     <div className="phase-header">
                       <h3>Alpha Phase</h3>
-                      <span className="phase-status current">Current</span>
+                      <span className="phase-status">Completed</span>
                     </div>
                     <p>Core gameplay live, early community building and testing.</p>
                   </div>
                   <div className="roadmap-phase">
                     <div className="phase-header">
-                      <h3>Beta Phase</h3>
+                      <h3>Beta Phase v1</h3>
+                      <span className="phase-status current">Current</span>
+                    </div>
+                    <p>Enhanced gameplay with three-tier box system, token swap features, and social features rollout.</p>
+                  </div>
+                  <div className="roadmap-phase">
+                    <div className="phase-header">
+                      <h3>Beta Phase v2</h3>
                       <span className="phase-status upcoming">Upcoming</span>
                     </div>
-                    <p>Expanded quests, swap features, and social features rollout.</p>
+                    <p>Advanced trading features, expanded quests, and additional box types.</p>
                   </div>
                   <div className="roadmap-phase">
                     <div className="phase-header">
                       <h3>Super Phase</h3>
-                      <span className="phase-status upcoming">Upcoming</span>
+                      <span className="phase-status upcoming">Future</span>
                     </div>
-                    <p>Full ecosystem launch and broader blockchain integrations.</p>
+                    <p>Full ecosystem launch with NFT marketplace, governance tokens, and broader blockchain integrations.</p>
                   </div>
+                </div>
+              </section>
+            )}
+
+            {active === "swap" && (
+              <section>
+                <h1>Box to Token Swap</h1>
+                <p>BetaNet v1 introduces the new Box to Token Swap feature, allowing players to exchange their mystery boxes for SOL or Pokepixel tokens directly within the game. You must have boxes in your inventory to swap them.</p>
+                
+                <h2>How to Access the Swap Page</h2>
+                <div className="steps">
+                  <div className="step">
+                    <div className="step-number">1</div>
+                    <div className="step-content">
+                      <h3>Connect Your Wallet</h3>
+                      <p>Ensure your Solana wallet is connected to the game.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">2</div>
+                    <div className="step-content">
+                      <h3>Navigate to Swap</h3>
+                      <p>Click on the "Swap" option in the main menu or visit the dedicated swap page.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">3</div>
+                    <div className="step-content">
+                      <h3>Select Box Type</h3>
+                      <p>Choose which type of box you want to swap (Silver, Gold, or Diamond).</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">4</div>
+                    <div className="step-content">
+                      <h3>Select Token</h3>
+                      <p>Choose whether you want SOL or Pokepixel tokens in return.</p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="step-number">5</div>
+                    <div className="step-content">
+                      <h3>Enter Amount & Confirm</h3>
+                      <p>Specify the number of boxes you wish to swap and confirm the transaction.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <h2>Swap Rates</h2>
+                <div className="feature-grid">
+                  <div className="feature-card">
+                    <h3>🥈 Silver Box</h3>
+                    <p>1 Box = 0.1 SOL or 1000 POKE</p>
+                  </div>
+                  <div className="feature-card">
+                    <h3>🥇 Gold Box</h3>
+                    <p>1 Box = 0.25 SOL or 2500 POKE</p>
+                  </div>
+                  <div className="feature-card">
+                    <h3>💎 Diamond Box</h3>
+                    <p>1 Box = 0.5 SOL or 5000 POKE</p>
+                  </div>
+                </div>
+                
+                <div className="info-box">
+                  <h3>💡 Swap Benefits</h3>
+                  <ul>
+                    <li>Convert your boxes to liquid tokens</li>
+                    <li>Low transaction fees (0.5%)</li>
+                    <li>Instant processing</li>
+                    <li>Secure blockchain-based swaps</li>
+                    <li>No intermediaries</li>
+                    <li>Direct wallet-to-wallet transfers</li>
+                  </ul>
+                </div>
+                
+                <div className="tip-box">
+                  <h3>⚠️ Important Notes</h3>
+                  <ul>
+                    <li>You must have boxes in your inventory to swap them</li>
+                    <li>Swaps are irreversible once confirmed</li>
+                    <li>Network fees are paid in SOL</li>
+                    <li>Minimum swap amount is 1 box</li>
+                  </ul>
                 </div>
               </section>
             )}
@@ -392,7 +564,7 @@ export default function DocsPage() {
                   </div>
                   <div className="faq-item">
                     <h3>How do I play?</h3>
-                    <p>Connect your Solana wallet, explore the map using keyboard arrows or on-screen controls, and interact with objects and NPCs to find mystery boxes. Each box you open on-chain contributes to future airdrops and rewards.</p>
+                    <p>Connect your Solana wallet, explore the map using keyboard arrows or on-screen controls, and interact with objects and NPCs to find mystery boxes. When you find a box, walk over it and press the action button to open it and immediately receive your rewards.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Is there a cost to play?</h3>
@@ -416,7 +588,7 @@ export default function DocsPage() {
                   </div>
                   <div className="faq-item">
                     <h3>How do mystery boxes work?</h3>
-                    <p>There are two types of boxes in Pokepixel: Quest Boxes and Reward Boxes. Quest Boxes are earned through completing in-game quests and achievements. Reward Boxes appear randomly throughout the game world and respawn periodically as you explore. Each box can only be opened once, after which it will disappear and may respawn after some time.</p>
+                    <p>There are two types of boxes in Pokepixel: Quest Boxes and Reward Boxes. Quest Boxes are earned through completing in-game quests and achievements. Reward Boxes appear randomly throughout the game world and respawn periodically as you explore. When you open a box, you immediately receive rewards such as SOL, tokens, or NFTs. Each box can only be opened once, after which it will disappear and may respawn after some time.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Can I get boxes to respawn faster?</h3>
@@ -425,6 +597,14 @@ export default function DocsPage() {
                   <div className="faq-item">
                     <h3>What SPL tokens are required to open boxes?</h3>
                     <p>To open boxes, you must hold at least one of the specific SPL tokens in your wallet. The exact token addresses are configured by the game developers and can be found in the game's documentation or by checking the required token list in the game settings.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>Can I swap my boxes for tokens?</h3>
+                    <p>Yes! BetaNet v1 introduces a new Box to Token Swap feature. You can exchange your Silver, Gold, or Diamond boxes for SOL or Pokepixel tokens directly in the game. Visit the Swap page, select your box type and desired token, and confirm the transaction. Note that you must have the boxes in your inventory to swap them.</p>
+                  </div>
+                  <div className="faq-item">
+                    <h3>What are the swap rates for boxes?</h3>
+                    <p>Swap rates vary by box type: 1 Silver Box = 0.1 SOL or 1000 POKE, 1 Gold Box = 0.25 SOL or 2500 POKE, 1 Diamond Box = 0.5 SOL or 5000 POKE. A small 0.5% transaction fee applies to all swaps.</p>
                   </div>
                   <div className="faq-item">
                     <h3>Is this affiliated with Pokémon?</h3>

@@ -173,6 +173,23 @@ body {
               inset 2px 2px 5px rgba(255, 255, 255, 0.5),
               inset -1px -1px 4px rgba(0, 0, 0, 0.6);
   z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.gameboy .screen-area .power .indicator .led.disconnected {
+  background: #FF4500; /* Red for disconnected */
+  box-shadow: 0px 0px 18px rgba(255, 69, 0, 1),
+              0px 0px 25px rgba(255, 69, 0, 0.6),
+              inset 2px 2px 5px rgba(255, 255, 255, 0.5),
+              inset -1px -1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.gameboy .screen-area .power .indicator .led.connected {
+  background: #32CD32; /* Green for connected */
+  box-shadow: 0px 0px 18px rgba(50, 205, 50, 1),
+              0px 0px 25px rgba(50, 205, 50, 0.6),
+              inset 2px 2px 5px rgba(255, 255, 255, 0.5),
+              inset -1px -1px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Display screen */

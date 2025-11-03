@@ -64,7 +64,7 @@ const AnimatedDots = styled.span`
   animation: blink 1.5s infinite;
 `;
 
-/* === Floating Ghosts === */
+/* === Floating Elements === */
 const float = keyframes`
   0% {
     transform: translate(0, 0);
@@ -88,43 +88,22 @@ const float = keyframes`
   }
 `;
 
-const Ghost = styled.div<{ top: number; left: number; delay: number; size: number }>`
+const FloatingElement = styled.div<{ top: number; left: number; delay: number; size: number }>`
   position: absolute;
   top: ${(p) => p.top}%;
   left: ${(p) => p.left}%;
   width: ${(p) => p.size}px;
-  height: ${(p) => p.size * 1.2}px;
-  background: radial-gradient(circle at 50% 30%, #bdfcff 40%, transparent 70%);
-  border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+  height: ${(p) => p.size}px;
+  background: radial-gradient(circle at 50% 50%, #8bac0f 40%, transparent 70%);
+  border-radius: 50%;
   animation: ${float} 5s ease-in-out infinite;
   animation-delay: ${(p) => p.delay}s;
-  box-shadow: 0 0 10px #bdfcff, 0 0 20px #bdfcff;
+  box-shadow: 0 0 10px #8bac0f, 0 0 20px #8bac0f;
   opacity: 0.8;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
-    height: 40%;
-    background: #bdfcff;
-    border-radius: 50% 50% 60% 60%;
-    opacity: 0.6;
-  }
-
-  &::before {
-    content: "👻";
-    position: absolute;
-    top: -20%;
-    left: 10%;
-    font-size: ${(p) => p.size * 0.7}px;
-    opacity: 0.9;
-  }
 `;
 
 export default function LaunchPage() {
-  const [ghosts, setGhosts] = useState<
+  const [elements, setElements] = useState<
     { top: number; left: number; delay: number; size: number }[]
   >([]);
 
@@ -135,7 +114,7 @@ export default function LaunchPage() {
       delay: Math.random() * 5,
       size: 30 + Math.random() * 20,
     }));
-    setGhosts(generated);
+    setElements(generated);
   }, []);
 
   return (
@@ -145,20 +124,20 @@ export default function LaunchPage() {
         <StyledApp>
           <Gameboy>
             <LaunchScreen>
-              {ghosts.map((g, i) => (
-                <Ghost key={i} {...g} />
+              {elements.map((g, i) => (
+                <FloatingElement key={i} {...g} />
               ))}
 
               <LaunchText>
-                Alphanet
+                Betanet v1
                 <br />
                 is Live
                 <AnimatedDots>...</AnimatedDots>
               </LaunchText>
 
               <LaunchText style={{ fontSize: "12px", marginTop: "30px" }}>
-                LAUNCHING SOON! <br />
-                🎃 Happy Halloween 🎃
+                Box Tier & Swap Page Update! <br />
+                Check Docs for Details!
               </LaunchText>
             </LaunchScreen>
           </Gameboy>

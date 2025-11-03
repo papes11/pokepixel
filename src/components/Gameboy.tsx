@@ -48,6 +48,12 @@ const Gameboy = ({ children }: Props) => {
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
   const [caCopied, setCaCopied] = React.useState(false);
   const { connected } = useWallet();
+  const [isConnected, setIsConnected] = React.useState(false);
+
+  // Ensure we update the connection status when it changes
+  React.useEffect(() => {
+    setIsConnected(connected);
+  }, [connected]);
 
   const contractAddress = "coming soon";
 
@@ -208,11 +214,11 @@ const Gameboy = ({ children }: Props) => {
         <div className="screen-area">
           <div className="power">
             <div className="indicator">
-              {/* <div className={`led ${connected ? 'connected' : 'disconnected'}`}></div> */}
-              <div className="led"></div>
+              <div className={`led ${isConnected ? 'connected' : 'disconnected'}`}></div>
+              {/* <div className="led"></div> */}
               
             </div>
-            Alphanet
+            BETAV1
           </div>
           <div className="toplogo">POKEPIXEL</div>
 
