@@ -3,7 +3,7 @@ const BOX_STORAGE_KEY = 'pokepixel_opened_boxes';
 
 // Cooldown periods in milliseconds
 const COOLDOWN_PERIODS = {
-  static: 15 * 60 * 1000, // 1 hour for static boxes
+  static: 5 * 60 * 1000, // 5 minutes for static boxes
   dynamic: 0 // No cooldown for dynamic boxes
 };
 
@@ -12,7 +12,7 @@ export interface BoxId {
   x: number;
   y: number;
   type: 'static' | 'dynamic';
-}
+};
 
 export interface OpenedBoxData {
   boxId: string;

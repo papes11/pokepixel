@@ -101,8 +101,8 @@ export const swampTimer = {
       }
     }
 
-    // New install or tampered: set first-run to 3 minutes
-    const firstDelay = 3 * 60 * 1000; // 
+    // New install or tampered: set first-run to 5 minutes
+    const firstDelay = 5 * 60 * 1000; // 5 minutes
     const state: SwampTimerState = { nextAtMs: now() + firstDelay, seen: false };
     swampTimer.setState(state);
     // Mark seen helper key (redundant signal)
@@ -129,7 +129,7 @@ export const swampTimer = {
 
   // Force fresh 5-minute timer only on NEW game entry (not refreshes)
   startFreshGameTimer(): SwampTimerState {
-    const freshDelay = 1 * 60 * 1000; // 5 minutes from new game entry
+    const freshDelay = 5 * 60 * 1000; // 5 minutes from new game entry
     const freshState: SwampTimerState = { nextAtMs: now() + freshDelay, seen: false };
     swampTimer.setState(freshState);
     return freshState;
@@ -158,5 +158,3 @@ export const swampTimer = {
 };
 
 export default swampTimer;
-
-

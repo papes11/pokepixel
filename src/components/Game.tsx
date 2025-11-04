@@ -113,7 +113,7 @@ const Game = () => {
   const timerRef = React.useRef<NodeJS.Timeout>();
   const cycleStartedRef = React.useRef<boolean>(false);
 
-  const VISIBLE_DURATION = 30000; // 30 seconds visible window
+  const VISIBLE_DURATION = 60000; // 30 seconds visible window
 
   const showBoxes = React.useCallback(() => {
     if (!map) return;
@@ -192,8 +192,9 @@ const Game = () => {
   }, [loadMenu, showBoxes]);
 
   const handleOpen = (x: number, y: number) => {
-    // On open, hide and schedule next randomized interval
-    hideBoxes();
+    // On open, hide only the specific box that was opened and schedule next randomized interval
+    // Remove only the specific box from boxPositions instead of hiding all boxes
+    setBoxPositions(prevPositions => prevPositions.filter(box => !(box.x === x && box.y === y)));
   };
 
 

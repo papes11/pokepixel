@@ -13,7 +13,7 @@ import useIsMobile from "../app/use-is-mobile";
 // import { hasAnySPLToken } from "./wallet-check";
 // import { REQUIRED_SPL_TOKEN_ADDRESSES } from "../app/constants";
 
-const BOX_SIZE_MOBILE = 16;
+const BOX_SIZE_MOBILE = 26;
 const BOX_SIZE_TABLET = 32;
 const BOX_SIZE_DESKTOP = 64;
 
@@ -121,10 +121,11 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
           //   return;
           // }
 
-          // Mark box as opened immediately when player interacts
-          boxStorage.markBoxAsOpened(boxId);
+          // Don't mark box as opened immediately when player interacts
+          // boxStorage.markBoxAsOpened(boxId);
           
-          onOpen(x, y);
+          // Don't call onOpen immediately - we'll call it only on successful transaction
+          // onOpen(x, y);
           
           // Always show the same message regardless of device
           const postMessage = "Transaction sent wait up!";
@@ -149,6 +150,10 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   if (success && signature) {
                     // Show a combined success message and link via TransactionSuccess
                     dispatch(showTransactionSuccess(signature));
+                    // Mark box as opened only when transaction is successful
+                    boxStorage.markBoxAsOpened(boxId);
+                    // Only call onOpen when transaction is successful
+                    onOpen(x, y);
                   } else if (!success) {
                     // Handle transaction failure
                     const errorMessage = mintErr || "Transaction failed. Please try again.";
@@ -156,21 +161,28 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                     if (errorMessage.includes("cancelled") || errorMessage.includes("rejected")) {
                       dispatch(showText([
                         "Transaction cancelled",
-                        "You cancelled the transaction",
-                        "Click box again to retry",
-                        "or use build in wallet browser"
+                        "Try wallet browser phantom, trust, mises",
+                        "Click box again to retry"
                       ]));
+                      // Don't mark box as opened for cancelled transactions
+                      // Don't call onOpen for cancelled transactions
                     } else {
                       dispatch(showText([
                         "Transaction failed",
                         errorMessage,
                         "Please try again use build in wallet browser"
                       ]));
+                      // Don't mark box as opened for failed transactions
+                      // Don't call onOpen for failed transactions
                     }
                   } else if (mintErr) {
                     dispatch(showText([
                       "Transaction sent wait up!",
                     ]));
+                    // Mark box as opened when transaction is sent
+                    boxStorage.markBoxAsOpened(boxId);
+                    // Call onOpen when transaction is sent
+                    onOpen(x, y);
                   }
                 }).catch((error) => {
                   dispatch(hideConfirmationMenu());
@@ -200,21 +212,32 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
                   if (errorMessage.includes("cancelled") || errorMessage.includes("rejected")) {
                     dispatch(showText([
                       "Transaction cancelled",
-                      "You cancelled the transaction",
+                      "Try wallet browser phantom, trust, mises",
                       "Click box again to retry"
                     ]));
+                    // Don't mark box as opened for cancelled transactions
+                    // Don't call onOpen for cancelled transactions
                   } else {
                     dispatch(showText([
                       "Transaction failed",
                       errorMessage,
                       "Please try again"
                     ]));
+                    // Don't mark box as opened for failed transactions
+                    // Don't call onOpen for failed transactions
                   }
                 });
               },
               cancel: () => {
                 dispatch(hideConfirmationMenu());
                 setIsShowingMessage(false); // Reset the message state
+                // Inform user that box is still available during visibility time
+                dispatch(showText([
+                  "Transaction cancelled",
+                  "Try wallet browser phantom, trust, mises",
+                  "Click box again to retry"
+                ]));
+                // Don't call onOpen for cancelled transactions
               },
             })
           );
@@ -252,7 +275,7 @@ const Box: React.FC<BoxProps> = ({ x, y, type = 'dynamic', onOpen }) => {
 
   return (
     <img
-      src={"/boxx.png"}
+      src={type === 'static' ? "/silver.png" : "/gold.png"}
       alt="Mystery Box"
       style={{
         position: "absolute",
