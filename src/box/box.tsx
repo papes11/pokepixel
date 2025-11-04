@@ -13,7 +13,7 @@ import useIsMobile from "../app/use-is-mobile";
 // import { hasAnySPLToken } from "./wallet-check";
 // import { REQUIRED_SPL_TOKEN_ADDRESSES } from "../app/constants";
 
-const BOX_SIZE_MOBILE = 26;
+const BOX_SIZE_MOBILE = 28;
 const BOX_SIZE_TABLET = 32;
 const BOX_SIZE_DESKTOP = 64;
 

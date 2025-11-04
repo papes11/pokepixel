@@ -686,7 +686,7 @@ export default function DocsPage() {
   :global(html, body) { 
     margin: 0; 
     padding: 0; 
-    background: #ffffff;
+    background: linear-gradient(135deg, #000000 0%, #1a001a 100%);
     width: 100%;
     overflow-x: hidden;
     scroll-padding-top: 80px; /* Smooth scrolling offset for fixed navbar */
@@ -703,8 +703,8 @@ export default function DocsPage() {
     min-height: 100vh; 
     display: flex; 
     flex-direction: column; 
-    background: #ffffff; 
-    color: #111826; 
+    background: transparent; 
+    color: #f8e7ff; 
     width: 100%;
     margin: 0;
     padding: 0;
@@ -712,14 +712,15 @@ export default function DocsPage() {
   
   .docs-nav { 
     height: 64px; 
-    border-bottom: 1px solid #e5e7eb; 
-    background: #ffffff; 
+    border-bottom: 1px solid rgba(75, 0, 130, 0.5); 
+    background: linear-gradient(135deg, #2F1B41 0%, #1B1024 100%); 
     position: sticky; 
     top: 0; 
     z-index: 30; 
     width: 100%;
     margin: 0;
     padding: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   }
   
   .nav-container {
@@ -748,7 +749,8 @@ export default function DocsPage() {
   .brand span { 
     font-weight: 700; 
     font-size: 18px; 
-    color: #111827; 
+    color: #FF8C00; 
+    text-shadow: 0px 0px 12px rgba(255, 140, 0, 0.8);
     flex: 1; 
   }
   
@@ -760,6 +762,8 @@ export default function DocsPage() {
     line-height: 1; 
     cursor: pointer; 
     padding: 6px 8px; 
+    color: #FF8C00; 
+    text-shadow: 0px 0px 12px rgba(255, 140, 0, 0.8);
   }
 
   .docs-main { 
@@ -771,11 +775,13 @@ export default function DocsPage() {
     margin: 0;
     padding: 0;
     min-height: calc(100vh - 64px);
+    background: radial-gradient(1200px 400px at 20% -10%, rgba(75,0,130,0.15), transparent),
+                radial-gradient(900px 300px at 100% 0%, rgba(255,69,0,0.08), transparent);
   }
   
   .docs-sidebar { 
-    border-right: 1px solid #e5e7eb; 
-    background: #fafafa; 
+    border-right: 1px solid rgba(75, 0, 130, 0.5); 
+    background: linear-gradient(180deg, #251633 0%, #110A18 100%); 
     position: sticky; 
     top: 64px; 
     height: calc(100vh - 64px); 
@@ -783,6 +789,7 @@ export default function DocsPage() {
     width: 100%;
     margin: 0;
     padding: 0;
+    box-shadow: inset 0 0 18px rgba(0,0,0,0.6);
   }
   
   .sidebar-content {
@@ -798,7 +805,7 @@ export default function DocsPage() {
     background: transparent; 
     padding: 14px 24px; 
     margin: 0;
-    color: #374151; 
+    color: #d6c3ff; 
     cursor: pointer; 
     border-right: 3px solid transparent;
     transition: all 0.2s ease;
@@ -806,15 +813,16 @@ export default function DocsPage() {
   }
   
   .nav-item:hover { 
-    background: #f3f4f6; 
-    color: #111827; 
+    background: rgba(75, 0, 130, 0.25); 
+    color: #ffffff; 
   }
   
   .nav-item.active { 
-    background: #eff6ff; 
-    color: #1d4ed8; 
-    font-weight: 600; 
-    border-right-color: #1d4ed8;
+    background: rgba(75, 0, 130, 0.35); 
+    color: #FF8C00; 
+    text-shadow: 0 0 8px rgba(255,140,0,0.6);
+    font-weight: 700; 
+    border-right-color: #FF4500;
   }
 
   .docs-content { 
@@ -823,6 +831,7 @@ export default function DocsPage() {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    color: #f8e7ff;
   }
   
   .content-container {
@@ -835,8 +844,9 @@ export default function DocsPage() {
   .docs-content h1 { 
     margin: 0 0 24px 0; 
     font-size: 32px; 
-    color: #111827; 
-    font-weight: 700;
+    color: #FF8C00; 
+    text-shadow: 0 0 14px rgba(255,140,0,0.5);
+    font-weight: 800;
     /* Add scroll margin to account for fixed navbar */
     scroll-margin-top: 80px;
     /* Add padding top to ensure visibility */
@@ -846,8 +856,9 @@ export default function DocsPage() {
   .docs-content h2 { 
     margin: 32px 0 16px 0;
     font-size: 24px;
-    color: #111827;
-    font-weight: 600;
+    color: #ffa64d;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255,140,0,0.35);
     /* Add scroll margin for h2 as well */
     scroll-margin-top: 80px;
     padding-top: 16px;
@@ -864,12 +875,12 @@ export default function DocsPage() {
   .docs-content h3 { 
     margin: 24px 0 12px 0; 
     font-size: 18px; 
-    color: #111827; 
-    font-weight: 600;
+    color: #e6d7ff; 
+    font-weight: 700;
   }
   
   .docs-content p, .docs-content li { 
-    color: #374151; 
+    color: #000000; 
     line-height: 1.7; 
     font-size: 16px; 
     margin-bottom: 16px;
@@ -897,26 +908,30 @@ export default function DocsPage() {
   }
 
   .feature-card {
-    background: #f8fafc;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 24px;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s ease;
+    border: 1px solid #4B0082;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5), inset 0 3px 10px rgba(255,255,255,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .feature-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
   }
 
   .feature-card h3 {
     margin: 0 0 12px 0;
     font-size: 18px;
+    color: #FF8C00;
+    text-shadow: 0 0 8px rgba(255,140,0,0.5);
   }
 
   .feature-card p {
     margin: 0;
     font-size: 14px;
-    color: #64748b;
+    color: #000000;
   }
 
   /* Steps */
@@ -935,16 +950,18 @@ export default function DocsPage() {
   }
 
   .step-number {
-    background: #1d4ed8;
-    color: white;
+    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
+    color: #FF8C00;
     width: 32px;
     height: 32px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
+    alignogens: center;
     justify-content: center;
-    font-weight: 600;
+    font-weight: 800;
+    box-shadow: 0 0 10px rgba(255,69,0,0.35);
     flex-shrink: 0;
+    border: 2px solid #4B0082;
   }
 
   .step-content h3 {
@@ -966,10 +983,11 @@ export default function DocsPage() {
   }
 
   .gameplay-item {
-    background: #f8fafc;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #1d4ed8;
+    border-left: 4px solid #4B0082;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .gameplay-item h3 {
@@ -979,7 +997,7 @@ export default function DocsPage() {
   .gameplay-item p {
     margin: 0;
     font-size: 14px;
-    color: #64748b;
+    color: #000000;
   }
 
   /* Rewards */
@@ -1058,17 +1076,19 @@ export default function DocsPage() {
 
   /* Contract */
   .contract-card {
-    background: #f8fafc;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 24px;
     border-radius: 8px;
     margin: 24px 0;
     width: 100%;
+    border: 1px solid #4B0082;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .contract-address {
     display: block;
-    background: #1e293b;
-    color: #f1f5f9;
+    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
+    color: #FF8C00;
     padding: 16px;
     border-radius: 8px;
     font-family: 'Monaco', 'Courier New', monospace;
@@ -1076,10 +1096,12 @@ export default function DocsPage() {
     margin: 16px 0;
     word-break: break-all;
     width: 100%;
+    border: 1px solid #4B0082;
+    box-shadow: inset 0 3px 10px rgba(255,255,255,0.05);
   }
 
   .contract-note {
-    color: #64748b;
+    color: #000000;
     font-size: 14px;
     margin: 0;
   }
@@ -1092,18 +1114,20 @@ export default function DocsPage() {
   }
 
   .copy-btn {
-    background: #1d4ed8;
-    color: #ffffff;
+    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
+    color: #FF8C00;
     border-radius: 8px;
     padding: 10px 14px;
-    font-weight: 600;
-    border: none;
+    font-weight: 800;
+    border: 1px solid #4B0082;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-shadow: 0 0 8px rgba(255,140,0,0.5);
   }
 
   .copy-btn:hover {
-    background: #1e40af;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.4);
   }
 
   /* FAQ */
@@ -1116,9 +1140,11 @@ export default function DocsPage() {
   }
 
   .faq-item {
-    background: #f8fafc;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 24px;
     border-radius: 8px;
+    border: 1px solid #4B0082;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .faq-item h3 {
@@ -1127,16 +1153,17 @@ export default function DocsPage() {
 
   .faq-item p {
     margin: 0;
-    color: #64748b;
+    color: #000000;
   }
 
   /* Tips */
   .tips {
-    background: #f0f9ff;
+    background: rgba(75,0,130,0.25);
     padding: 20px;
     border-radius: 8px;
     margin: 24px 0;
     width: 100%;
+    border-left: 4px solid #4B0082;
   }
 
   .tips h3 {
@@ -1157,47 +1184,49 @@ export default function DocsPage() {
   }
 
   .box-type-card {
-    background: #f0f9ff;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #FF4500;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .box-type-card h3 {
     margin: 0 0 8px 0;
-    color: #1e40af;
+    color: #FF8C00;
+    text-shadow: 0 0 8px rgba(255,140,0,0.5);
   }
 
   .box-type-card p {
     margin: 0;
-    color: #64748b;
+    color: #000000;
     font-size: 14px;
   }
 
   /* Info Box */
   .info-box {
-    background: #fef3c7;
+    background: rgba(255, 140, 0, 0.12);
     padding: 24px;
     border-radius: 8px;
-    border-left: 4px solid #f59e0b;
+    border-left: 4px solid #FF8C00;
     margin: 32px 0;
     width: 100%;
   }
 
   .info-box h3 {
     margin: 0 0 12px 0;
-    color: #92400e;
+    color: #FF8C00;
   }
 
   .info-box p {
     margin: 8px 0;
-    color: #78350f;
+    color: #000000;
   }
 
   .info-box ul {
     margin: 12px 0;
     padding-left: 24px;
-    color: #78350f;
+    color: #000000;
   }
 
   .info-box li {
@@ -1206,41 +1235,41 @@ export default function DocsPage() {
 
   /* Mobile Warning */
   .mobile-warning {
-    background: #fee2e2;
+    background: rgba(255,69,0,0.12);
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #ef4444;
+    border-left: 4px solid #FF4500;
     margin: 24px 0;
     width: 100%;
   }
 
   .mobile-warning p {
     margin: 8px 0;
-    color: #991b1b;
+    color: #000000;
   }
 
   .mobile-warning strong {
-    color: #7f1d1d;
+    color: #FF4500;
   }
 
   /* Tip Box */
   .tip-box {
-    background: #dcfce7;
+    background: rgba(50,205,50,0.12);
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #22c55e;
+    border-left: 4px solid #32CD32;
     margin: 24px 0;
     width: 100%;
   }
 
   .tip-box h3 {
     margin: 0 0 12px 0;
-    color: #166534;
+    color: #9cff9c;
   }
 
   .tip-box p {
     margin: 0;
-    color: #15803d;
+    color: #000000;
   }
 
   /* License & Credits */
@@ -1251,7 +1280,7 @@ export default function DocsPage() {
   .license-content p {
     margin: 16px 0;
     line-height: 1.6;
-    color: #475569;
+    color: #000000;
   }
 
   .disclaimer-box {
@@ -1270,7 +1299,7 @@ export default function DocsPage() {
   .disclaimer-box ul {
     margin: 12px 0;
     padding-left: 24px;
-    color: #78350f;
+    color: #000000;
   }
 
   .disclaimer-box li {
@@ -1285,31 +1314,34 @@ export default function DocsPage() {
   }
 
   .credit-card {
-    background: #f8fafc;
+    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
     padding: 24px;
     border-radius: 8px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid #4B0082;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .credit-card h3 {
     margin: 0 0 12px 0;
-    color: #1e40af;
+    color: #FF8C00;
+    text-shadow: 0 0 8px rgba(255,140,0,0.5);
   }
 
   .credit-card p {
     margin: 8px 0;
-    color: #475569;
+    color: #000000;
     line-height: 1.6;
   }
 
   .docs-footer { 
-    border-top: 1px solid #e5e7eb; 
-    background: #ffffff; 
+    border-top: 1px solid rgba(75,0,130,0.5); 
+    background: linear-gradient(135deg, #2F1B41 0%, #1B1024 100%); 
     padding: 24px; 
     text-align: center; 
-    color: #6b7280; 
+    color: #d6c3ff; 
     width: 100%;
     margin: 0;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
   }
 
   .footer-container {
@@ -1327,15 +1359,16 @@ export default function DocsPage() {
       bottom: 0; 
       width: 82%; 
       max-width: 320px; 
-      border-right: 1px solid #e5e7eb; 
+      border-right: 1px solid rgba(75,0,130,0.5); 
       border-bottom: none; 
-      background: #ffffff; 
+      background: linear-gradient(180deg, #251633 0%, #110A18 100%); 
       transform: translateX(-100%); 
       transition: transform 200ms ease; 
       z-index: 40; 
       height: auto; 
       padding: 0;
       overflow: auto; 
+      box-shadow: inset 0 0 18px rgba(0,0,0,0.6);
     }
     .sidebar-content {
       padding: 16px 0;
