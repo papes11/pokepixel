@@ -63,7 +63,7 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
   useEffect(() => {
     // Set a fixed global target time that all users will count down to
     // Change this to whatever fixed time you want (example: November 5, 2025 at 12:00 UTC)
-    const target = new Date('2025-11-07T17:30:00Z');
+    const target = new Date('2025-11-05T17:30:00Z');
 
     const updateCountdown = () => {
       const current = new Date();
