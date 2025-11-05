@@ -8,7 +8,9 @@ import Game from "../src/components/Game";
 import MaintenancePage from "./maintenance";
 
 // Toggle this to enable/disable maintenance mode
-const MAINTENANCE_MODE = false;
+// When hosting on Vercel, set to true for a 3-minute maintenance period
+// After 3 minutes, the game will be accessible to everyone
+const MAINTENANCE_MODE = true;
 
 const StyledApp = styled.div`
   background: black;
@@ -27,9 +29,11 @@ const StyledApp = styled.div`
 `;
 
 export default function HomePage() {
+  const [isMaintenanceActive, setIsMaintenanceActive] = React.useState(true);
+  
   // Show maintenance page if maintenance mode is enabled
-  if (MAINTENANCE_MODE) {
-    return <MaintenancePage />;
+  if (MAINTENANCE_MODE && isMaintenanceActive) {
+    return <MaintenancePage onLaunch={() => setIsMaintenanceActive(false)} />;
   }
 
   return (
