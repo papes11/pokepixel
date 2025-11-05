@@ -64,59 +64,7 @@ const AnimatedDots = styled.span`
   animation: blink 1.5s infinite;
 `;
 
-/* === Floating Elements === */
-const float = keyframes`
-  0% {
-    transform: translate(0, 0);
-    opacity: 0.6;
-  }
-  25% {
-    transform: translate(10px, -20px);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-10px, -40px);
-    opacity: 0.8;
-  }
-  75% {
-    transform: translate(15px, -20px);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.6;
-  }
-`;
-
-const FloatingElement = styled.div<{ top: number; left: number; delay: number; size: number }>`
-  position: absolute;
-  top: ${(p) => p.top}%;
-  left: ${(p) => p.left}%;
-  width: ${(p) => p.size}px;
-  height: ${(p) => p.size}px;
-  background: radial-gradient(circle at 50% 50%, #8bac0f 40%, transparent 70%);
-  border-radius: 50%;
-  animation: ${float} 5s ease-in-out infinite;
-  animation-delay: ${(p) => p.delay}s;
-  box-shadow: 0 0 10px #8bac0f, 0 0 20px #8bac0f;
-  opacity: 0.8;
-`;
-
 export default function LaunchPage() {
-  const [elements, setElements] = useState<
-    { top: number; left: number; delay: number; size: number }[]
-  >([]);
-
-  useEffect(() => {
-    const generated = Array.from({ length: 5 }).map(() => ({
-      top: Math.random() * 80,
-      left: Math.random() * 80,
-      delay: Math.random() * 5,
-      size: 30 + Math.random() * 20,
-    }));
-    setElements(generated);
-  }, []);
-
   return (
     <WalletContextProvider>
       <Provider store={store}>
@@ -124,10 +72,6 @@ export default function LaunchPage() {
         <StyledApp>
           <Gameboy>
             <LaunchScreen>
-              {elements.map((g, i) => (
-                <FloatingElement key={i} {...g} />
-              ))}
-
               <LaunchText>
                 Betanet v1
                 <br />

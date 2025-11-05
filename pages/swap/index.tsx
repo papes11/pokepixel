@@ -30,9 +30,8 @@ export default function SwapPage() {
             <section className="swap-panel">
               <div className="swap-header">
                 <div className="mode">Instant</div>
-                <div className="balance">Balance: 0.0000 SOL</div>
+                <div className="balance">BOX: 0.0000</div>
               </div>
-
               <div className="swap-row">
                 <div className="asset">
                   <button className="asset-btn">BOX</button>
@@ -77,11 +76,11 @@ export default function SwapPage() {
                 <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X/Twitter">
                   X
                 </a>
-                <a href="https://discord.com" target="_blank" rel="noreferrer" aria-label="Discord">
-                  Discord
+                <a href="https://telegram.com" target="_blank" rel="noreferrer" aria-label="Discord">
+                  Telegram
                 </a>
-                <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub">
-                  GitHub
+                <a href="http://pump.fun/" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  pumpfun
                 </a>
               </div>
               <span>© {new Date().getFullYear()} Pokepixel. All rights reserved.</span>

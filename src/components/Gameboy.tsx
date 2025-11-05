@@ -55,7 +55,7 @@ const Gameboy = ({ children }: Props) => {
     setIsConnected(connected);
   }, [connected]);
 
-  const contractAddress = "coming soon";
+  const contractAddress = "https://www.pokepixel.xyz/docs";
 
   const copyCA = React.useCallback(async () => {
     try {
@@ -257,7 +257,7 @@ const Gameboy = ({ children }: Props) => {
           onClick={copyCA}
           style={{ right: 15,}}
         >
-          <span style={{ fontSize: 8, fontWeight: 700 }}>{caCopied ? "Copied" : "CA"}</span>
+          <span style={{ fontSize: 8, fontWeight: 700 }}>{caCopied ? "Copied" : "DOCS"}</span>
         </button>
       )}
 
