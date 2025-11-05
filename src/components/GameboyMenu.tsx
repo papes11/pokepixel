@@ -12,7 +12,7 @@ import { hideGameboyMenu, selectGameboyMenu } from "../state/uiSlice";
 import PixelImage from "../styles/PixelImage";
 
 // Define the SPL token mint address that users need to hold (replace with actual token address)
-const REQUIRED_TOKEN_MINT_ADDRESS = "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"; // Example token address
+const REQUIRED_TOKEN_MINT_ADDRESS = "6XV9E6HgVwkdyzfnES4DVDjgAsKfPeNgKwYgYBumpump"; // Example token address
 const REQUIRED_TOKEN_AMOUNT = 1000; // 1000 tokens required
 
 const StyledGameboyMenu = styled.div`
