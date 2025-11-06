@@ -269,7 +269,7 @@ body {
 }
 
 .swap-action:disabled {
-  background: #4B0082;
+  background: linear-gradient(180deg, #FF8C00 0%, #FF4500 100%); 
   color: #d6c3ff;
   cursor: not-allowed;
   box-shadow: none;

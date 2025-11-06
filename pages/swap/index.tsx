@@ -146,7 +146,7 @@ const SwapContent = () => {
         <section className="swap-panel">
           <div className="swap-header">
             <div className="mode">Instant</div>
-            <div className="balance">All treasure: {transactionCount}</div>
+            <div className="balance">Treasure loot: {transactionCount}</div>
           </div>
           
           {error && (
@@ -157,7 +157,7 @@ const SwapContent = () => {
           
           <div className="swap-row">
             <div className="asset">
-              <button className="asset-btn">Treasure box</button>
+              <button className="asset-btn">Box</button>
               <div className="asset-sub">you pay</div>
             </div>
             <input 
