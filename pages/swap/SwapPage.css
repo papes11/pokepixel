@@ -158,8 +158,9 @@ body {
 }
 
 .balance { 
-  color: #d6c3ff; 
-  font-size: 14px; 
+  color: #ff0000; 
+  font-weight: 800; 
+  letter-spacing: 0.5px; 
 }
 
 .swap-row {
@@ -261,7 +262,20 @@ body {
   letter-spacing: 1px; 
   border: none; 
   cursor: pointer; 
+  align-items: center;
+  justify-content: center;
+  display: flex;
   box-shadow: 0 12px 30px rgba(255,69,0,0.3); 
+}
+
+.swap-action:disabled {
+  background: #4B0082;
+  color: #d6c3ff;
+  cursor: not-allowed;
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .swap-footer {
@@ -290,6 +304,120 @@ body {
   font-weight: 800; 
 }
 
+/* New styles for transaction analysis */
+.loading-message, .info-message, .error-message {
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(75,0,130,0.35);
+}
+
+.loading-message {
+  color: #d6c3ff;
+}
+
+.info-message {
+  color: #FF8C00;
+  background: rgba(255, 140, 0, 0.1);
+}
+
+.error-message {
+  color: #FF4500;
+  background: rgba(255, 69, 0, 0.1);
+}
+
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: linear-gradient(180deg, rgba(47,27,65,0.92) 0%, rgba(27,16,36,0.92)100%);
+  border: 1px solid #4B0082;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  color: #FFFFFF; /* White text for better visibility */
+}
+
+.popup-content h2 {
+  color: #FF8C00; /* Orange heading */
+  text-align: center;
+  margin-top: 0;
+}
+
+.swap-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.swap-item {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background: rgba(75,0,130,0.35);
+  border-radius: 8px;
+  width: 100%;
+  text-align: center;
+  color: #FFFFFF; /* White text */
+}
+
+.swap-arrow {
+  font-size: 24px;
+  color: #FF8C00; /* Orange arrow */
+}
+
+.popup-message {
+  color: #FFFFFF; /* White text for message */
+  text-align: center;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.popup-button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popup-button.confirm {
+  background: linear-gradient(180deg, #FF8C00 0%, #FF4500 100%);
+  color: #FFFFFF; /* White text on orange button */
+}
+
+.popup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.popup-button:active {
+  transform: translateY(0);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 600px) {
   .swap-row { 
@@ -298,5 +426,25 @@ body {
   
   .amount { 
     text-align: left; 
+  }
+  
+  .walletconnect {
+    width: 120px;
+    height: 36px;
+  }
+  
+  .brand span {
+    font-size: 14px;
+  }
+  
+  .popup-content {
+    padding: 16px;
+  }
+  
+  .popup-actions {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 }
