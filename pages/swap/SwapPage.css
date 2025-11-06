@@ -127,7 +127,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px;
+  padding: 20px 16px;
   background: radial-gradient(1200px 400px at 20% -10%, rgba(75,0,130,0.15), transparent),
               radial-gradient(900px 300px at 100% 0%, rgba(255,69,0,0.08), transparent);
 }
@@ -160,7 +160,7 @@ body {
 .balance { 
   color: #ff0000; 
   font-weight: 800; 
-  letter-spacing: 0.5px; 
+  letter-spacing: 0px; 
 }
 
 .swap-row {
