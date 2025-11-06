@@ -39,8 +39,8 @@ body {
   height: 64px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 24px;
+  gap: 8px;
+  padding: 0 10px;
 }
 
 .brand img { 
