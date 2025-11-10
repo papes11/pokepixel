@@ -102,7 +102,7 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
         color: 'red',
         opacity: 1
       }}>
-        Hold 1k $pokepixel to play
+        {/* Hold 1k $pokepixel to play */}
       </div>
     );
   }
