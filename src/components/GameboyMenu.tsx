@@ -251,7 +251,7 @@ const GameboyMenu = () => {
       )}
       {connected && !hasRequiredTokens && (
         <TokenCheckMessage>
-          Hold 1k $pokepixel to play
+          ⚠️ Wallet not on Access list?
         </TokenCheckMessage>
       )}
     </StyledGameboyMenu>
