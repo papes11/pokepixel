@@ -12,9 +12,7 @@ import { hideGameboyMenu, selectGameboyMenu } from "../state/uiSlice";
 import PixelImage from "../styles/PixelImage";
 import SPL from "./SPL";
 
-// Define the SPL token mint address that users need to hold (replace with actual token address)
-// const REQUIRED_TOKEN_MINT_ADDRESS = "6XV9E6HgVwkdyzfnES4DVDjgAsKfPeNgKwYgYBumpump"; // Example token address
-// const REQUIRED_TOKEN_AMOUNT = 1000; // 1000 tokens required
+
 
 const StyledGameboyMenu = styled.div`
   position: absolute;
@@ -250,6 +248,11 @@ const GameboyMenu = () => {
         }} role="button" aria-label="Connect wallet to play">
           Connect wallet to play
         </ConnectHint>
+      )}
+      {connected && !hasRequiredTokens && (
+        <TokenCheckMessage>
+          Hold 1k $pokepixel to play
+        </TokenCheckMessage>
       )}
     </StyledGameboyMenu>
   );

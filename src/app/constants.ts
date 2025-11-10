@@ -11,5 +11,5 @@ export const TRAINER_VISION = 5; // How far trainers can see
 export const MENU_MAX_HEIGHT = 9;
 
 // SPL Token mint address required to play the game
-// export const REQUIRED_GAME_TOKEN_MINT_ADDRESS = "6XV9E6HgVwkdyzfnES4DVDjgAsKfPeNgKwYgYBumpump"; // Example token address - replace with actual token
-// export const REQUIRED_GAME_TOKEN_AMOUNT = 1000; // 1000 tokens required to play
+export const REQUIRED_GAME_TOKEN_MINT_ADDRESS = "comingsoon"; // Example token address - replace with actual token
+export const REQUIRED_GAME_TOKEN_AMOUNT = 1000; // 1000 tokens required to play

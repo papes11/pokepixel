@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, AccountLayout } from "@solana/spl-token";
+import { REQUIRED_GAME_TOKEN_MINT_ADDRESS, REQUIRED_GAME_TOKEN_AMOUNT } from "../app/constants";
 
-
-
-const REQUIRED_TOKEN_MINT_ADDRESS = "comingsoon"; // Example token address
-const REQUIRED_TOKEN_AMOUNT = 1000; // 1000 tokens required
-
-
+// Function to check if wallet has required SPL token balance
 const checkTokenBalance = async (publicKey: any) => {
   try {
     // Use the same RPC endpoint as the rest of the app
@@ -30,8 +26,8 @@ const checkTokenBalance = async (publicKey: any) => {
       
       // Check if this account holds tokens from our target contract and has sufficient balance
       // Note: tokenInfo.amount is a BigInt, so we need to compare appropriately
-      if (accountMintAddress === REQUIRED_TOKEN_MINT_ADDRESS && 
-          tokenInfo.amount >= BigInt(REQUIRED_TOKEN_AMOUNT * 1000000)) { // Assuming 6 decimals
+      if (accountMintAddress === REQUIRED_GAME_TOKEN_MINT_ADDRESS && 
+          tokenInfo.amount >= BigInt(REQUIRED_GAME_TOKEN_AMOUNT * 1000000)) { // Assuming 6 decimals
         return true;
       }
     }
@@ -52,7 +48,7 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
   const [hasRequiredTokens, setHasRequiredTokens] = useState(false);
   const [checkingTokens, setCheckingTokens] = useState(false);
 
-  
+  // Check token balance when wallet is connected
   useEffect(() => {
     const checkTokens = async () => {
       if (connected && publicKey) {
@@ -110,11 +106,6 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
       </div>
     );
   }
-
-  // Always return true to indicate that the user has the required tokens
-  React.useEffect(() => {
-    onTokenCheckComplete(true);
-  }, [onTokenCheckComplete]);
 
   return null;
 };
