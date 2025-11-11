@@ -46,7 +46,6 @@ const MicOff = FaMicrophoneSlash as any;
 const Gameboy = ({ children }: Props) => {
   const isSmallScreen = useIsSmallScreen(); // Use 1000px breakpoint to match CSS
   const [musicUiMuted, setMusicUiMuted] = React.useState(false);
-  const [caCopied, setCaCopied] = React.useState(false);
   const { connected } = useWallet();
   const [isConnected, setIsConnected] = React.useState(false);
 
@@ -56,27 +55,10 @@ const Gameboy = ({ children }: Props) => {
   }, [connected]);
 
   const contractAddress = "https://www.pokepixel.xyz/docs";
-
-  const copyCA = React.useCallback(async () => {
-    try {
-      if (navigator.clipboard && (window as any).isSecureContext !== false) {
-        await navigator.clipboard.writeText(contractAddress);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = contractAddress;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        ta.style.top = "-9999px";
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      setCaCopied(true);
-      setTimeout(() => setCaCopied(false), 1200);
-    } catch {}
-  }, []);
+  
+  // URLs for swap and docs
+  const swapUrl = "/swap";
+  const docsUrl = "/docs";
 
   // Emit helpers that stop propagation (avoid passive listener preventDefault warnings)
   const emitPrevent = (ev: Event, extra?: Event[]) => (e: React.TouchEvent | React.MouseEvent) => {
@@ -250,14 +232,26 @@ const Gameboy = ({ children }: Props) => {
         </button>
       )}
 
+      {/* Swap and Docs buttons for mobile */}
+      {isSmallScreen && (
+        <button
+          className="copyswap"
+          aria-label="Go to Swap"
+          onClick={() => window.open(swapUrl, "_blank")}
+          style={{ left: 15 }}
+        >
+          <span style={{ fontSize: 8, fontWeight: 700 }}>Swap</span>
+        </button>
+      )}
+
       {isSmallScreen && (
         <button
           className="copyca"
-          aria-label="Copy contract address"
-          onClick={copyCA}
-          style={{ right: 15,}}
+          aria-label="Go to Docs"
+          onClick={() => window.open(docsUrl, "_blank")}
+          style={{ right: 15 }}
         >
-          <span style={{ fontSize: 8, fontWeight: 700 }}>{caCopied ? "Copied" : "DOCS"}</span>
+          <span style={{ fontSize: 8, fontWeight: 700 }}>Docs</span>
         </button>
       )}
 
@@ -289,11 +283,13 @@ const Gameboy = ({ children }: Props) => {
               </button>
             </div>
           )}
+          
+          {/* Swap button for desktop - left side */}
           {!isSmallScreen && (
             <div style={{ position: "absolute", left: 24, top: 16 }}>
               <button
-                aria-label="Copy contract address"
-                onClick={copyCA}
+                aria-label="Go to Swap"
+                onClick={() => window.open(swapUrl, "_blank")}
                 style={{
                   padding: "6px 10px",
                   borderRadius: 8,
@@ -305,7 +301,29 @@ const Gameboy = ({ children }: Props) => {
                   alignItems: "center",
                 }}
               >
-                <span style={{ fontWeight: 700 }}>{caCopied ? "Copied" : "CA"}</span>
+                <span style={{ fontWeight: 700 }}>Swap</span>
+              </button>
+            </div>
+          )}
+          
+          {/* Docs button for desktop - right side */}
+          {!isSmallScreen && (
+            <div style={{ position: "absolute", right: 24, top: 16 }}>
+              <button
+                aria-label="Go to Docs"
+                onClick={() => window.open(docsUrl, "_blank")}
+                style={{
+                  padding: "6px 10px",
+                  borderRadius: 8,
+                  border: "2px solid #333",
+                  background: "#f9f2fa",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>Docs</span>
               </button>
             </div>
           )}
@@ -373,8 +391,8 @@ const Gameboy = ({ children }: Props) => {
         </div>
       </div>
 
-      <Speaker />
-      <Speaker />
+      
+      
 
       <Speaker1 />
     </div>
