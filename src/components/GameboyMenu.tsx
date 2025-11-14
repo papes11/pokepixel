@@ -11,6 +11,7 @@ import { Event } from "../app/emitter";
 import { hideGameboyMenu, selectGameboyMenu } from "../state/uiSlice";
 import PixelImage from "../styles/PixelImage";
 import SPL from "./SPL";
+import { REQUIRED_GAME_TOKEN_MINT_ADDRESS, REQUIRED_GAME_TOKEN_AMOUNT } from "../app/constants";
 
 
 
@@ -183,50 +184,69 @@ const TokenCheckMessage = styled.div`
   }
 `;
 
+const ToggleButton = styled.button`
+  margin-top: 15px;
+  padding: 8px 16px;
+  font-family: "PressStart2P", sans-serif;
+  font-size: 0.6rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
 // Function to check if wallet has required SPL token balance
-// const checkTokenBalance = async (publicKey: any) => {
-//   try {
-//     // Use the same RPC endpoint as the rest of the app
-//     const connection = new Connection("https://mainnet.helius-rpc.com/?api-key=fb1251b4-9828-40cb-a869-09bc2a7a9ee5");
-//     
-//     // Get all token accounts owned by the wallet
-//     const tokenAccounts = await connection.getTokenAccountsByOwner(publicKey, {
-//       programId: TOKEN_PROGRAM_ID,
-//     });
-//
-//     // Check each token account to see if it matches our target token
-//     for (const { account } of tokenAccounts.value) {
-//       // Convert Buffer to Uint8Array for AccountLayout.decode
-//       const accountData = new Uint8Array(account.data);
-//       const tokenInfo = AccountLayout.decode(accountData);
-//       
-//       // Convert the mint address to string for comparison
-//       const accountMintAddress = tokenInfo.mint.toString();
-//       
-//       // Check if this account holds tokens from our target contract and has sufficient balance
-//       // Note: tokenInfo.amount is a BigInt, so we need to compare appropriately
-//       if (accountMintAddress === REQUIRED_TOKEN_MINT_ADDRESS && 
-//           tokenInfo.amount >= BigInt(REQUIRED_TOKEN_AMOUNT * 1000000)) { // Assuming 6 decimals
-//         return true;
-//       }
-//     }
-//     
-//     return false;
-//   } catch (error) {
-//     console.error("Error checking SPL token balance:", error);
-//     return false;
-//   }
-// };
+const checkTokenBalance = async (publicKey: any) => {
+  try {
+    // Use the same RPC endpoint as the rest of the app
+    const connection = new Connection("https://mainnet.helius-rpc.com/?api-key=fb1251b4-9828-40cb-a869-09bc2a7a9ee5");
+    
+    // Get all token accounts owned by the wallet
+    const tokenAccounts = await connection.getTokenAccountsByOwner(publicKey, {
+      programId: TOKEN_PROGRAM_ID,
+    });
+
+    // Check each token account to see if it matches our target token
+    for (const { account } of tokenAccounts.value) {
+      // Convert Buffer to Uint8Array for AccountLayout.decode
+      const accountData = new Uint8Array(account.data);
+      const tokenInfo = AccountLayout.decode(accountData);
+      
+      // Convert the mint address to string for comparison
+      const accountMintAddress = tokenInfo.mint.toString();
+      
+      // Check if this account holds tokens from our target contract and has sufficient balance
+      // Note: tokenInfo.amount is a BigInt, so we need to compare appropriately
+      if (accountMintAddress === REQUIRED_GAME_TOKEN_MINT_ADDRESS && 
+          tokenInfo.amount >= BigInt(REQUIRED_GAME_TOKEN_AMOUNT * 1000000)) { // Assuming 6 decimals
+        return true;
+      }
+    }
+    
+    return false;
+  } catch (error) {
+    console.error("Error checking SPL token balance:", error);
+    return false;
+  }
+};
 
 const GameboyMenu = () => {
   const dispatch = useDispatch();
   const show = useSelector(selectGameboyMenu);
   const { connected, publicKey } = useWallet();
   const [flashError, setFlashError] = React.useState(false);
-  const [hasRequiredTokens, setHasRequiredTokens] = useState(false);
+  const [hasRequiredTokens, setHasRequiredTokens] = useState(true); // Default to true to bypass token check
+  const [bypassMode, setBypassMode] = useState(false); // Toggle state for bypass mode
 
   useEvent(Event.A, () => {
-    if (connected && hasRequiredTokens) {
+    // Allow playing based on bypass mode setting
+    if (connected && (bypassMode || hasRequiredTokens)) {
       dispatch(hideGameboyMenu());
     } else {
       setFlashError(true);
@@ -240,7 +260,7 @@ const GameboyMenu = () => {
     <StyledGameboyMenu>
       <Text>SOLBOY</Text>
       <Nintendo src={nintendo} />
-      <SPL onTokenCheckComplete={setHasRequiredTokens} />
+      <SPL onTokenCheckComplete={setHasRequiredTokens} bypassMode={bypassMode} />
       {!connected && (
         <ConnectHint $error={flashError} onClick={() => {
           setFlashError(true);
@@ -249,7 +269,12 @@ const GameboyMenu = () => {
           Connect wallet to play
         </ConnectHint>
       )}
-      {connected && !hasRequiredTokens && (
+      
+      
+      
+      
+      {/* Show token check message only when not in bypass mode and wallet is connected but user doesn't have tokens */}
+      {connected && !hasRequiredTokens && !bypassMode && (
         <TokenCheckMessage>
           ⚠️ Wallet not on Access list?
         </TokenCheckMessage>

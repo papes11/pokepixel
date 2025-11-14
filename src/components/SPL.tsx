@@ -41,16 +41,25 @@ const checkTokenBalance = async (publicKey: any) => {
 
 interface SPLProps {
   onTokenCheckComplete: (hasRequiredTokens: boolean) => void;
+  bypassMode?: boolean; // Add bypassMode prop
 }
 
-const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
+const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete, bypassMode = true }) => {
   const { connected, publicKey } = useWallet();
-  const [hasRequiredTokens, setHasRequiredTokens] = useState(false);
+  const [hasRequiredTokens, setHasRequiredTokens] = useState(true); // Default to true to bypass token check
   const [checkingTokens, setCheckingTokens] = useState(false);
 
-  // Check token balance when wallet is connected
+  // Check token balance when wallet is connected or when bypassMode changes
   useEffect(() => {
     const checkTokens = async () => {
+      // If bypass mode is enabled, skip token check
+      if (bypassMode) {
+        setHasRequiredTokens(true);
+        onTokenCheckComplete(true);
+        return;
+      }
+      
+      // Otherwise, perform actual token check
       if (connected && publicKey) {
         setCheckingTokens(true);
         try {
@@ -71,7 +80,7 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
     };
 
     checkTokens();
-  }, [connected, publicKey, onTokenCheckComplete]);
+  }, [connected, publicKey, onTokenCheckComplete, bypassMode]);
 
   if (!connected) {
     return null;
@@ -92,7 +101,7 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
     );
   }
 
-  if (!hasRequiredTokens) {
+  if (!hasRequiredTokens && !bypassMode) {
     return (
       <div style={{ 
         marginTop: '8px',
@@ -102,7 +111,7 @@ const SPL: React.FC<SPLProps> = ({ onTokenCheckComplete }) => {
         color: 'red',
         opacity: 1
       }}>
-        {/* Hold 1k $pokepixel to play */}
+        Hold 1k $pokepixel to play
       </div>
     );
   }
