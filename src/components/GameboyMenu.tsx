@@ -242,7 +242,7 @@ const GameboyMenu = () => {
   const { connected, publicKey } = useWallet();
   const [flashError, setFlashError] = React.useState(false);
   const [hasRequiredTokens, setHasRequiredTokens] = useState(true); // Default to true to bypass token check
-  const [bypassMode, setBypassMode] = useState(false); // Toggle state for bypass mode
+  const [bypassMode, setBypassMode] = useState(true); // Toggle state for bypass mode
 
   useEvent(Event.A, () => {
     // Allow playing based on bypass mode setting
