@@ -229,6 +229,7 @@ const Gameboy = ({ children }: Props) => {
           }}
         >
           {musicUiMuted ? <MicOff size={14} /> : <Mic size={14} />}
+
         </button>
       )}
 
@@ -240,7 +241,7 @@ const Gameboy = ({ children }: Props) => {
           onClick={() => window.open(swapUrl, "_blank")}
           style={{ left: 15 }}
         >
-          <span style={{ fontSize: 8, fontWeight: 700 }}>Swap</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: "#C0C0C0" }}>SWAP</span>
         </button>
       )}
 
@@ -251,7 +252,7 @@ const Gameboy = ({ children }: Props) => {
           onClick={() => window.open(docsUrl, "_blank")}
           style={{ right: 15 }}
         >
-          <span style={{ fontSize: 8, fontWeight: 700 }}>Docs</span>
+          <span style={{ fontSize: 10, fontWeight: 700, color: "#C0C0C0" }}>DOCS</span>
         </button>
       )}
 
@@ -269,13 +270,15 @@ const Gameboy = ({ children }: Props) => {
                 style={{
                   padding: "6px 10px",
                   borderRadius: 8,
-                  border: "2px solid #333",
-                  background: "#f9f2fa",
+                  border: "2px solid #333333",
+                  background: "linear-gradient(135deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%)",
                   fontWeight: 700,
                   cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 6,
+                  color: "#C0C0C0",
+                  boxShadow: "-1px 1px 5px black, 0px 0px 5px black inset"
                 }}
               >
                 {musicUiMuted ? <MicOff size={14} /> : <Mic size={14} />}
@@ -293,37 +296,41 @@ const Gameboy = ({ children }: Props) => {
                 style={{
                   padding: "6px 10px",
                   borderRadius: 8,
-                  border: "2px solid #333",
-                  background: "#f9f2fa",
+                  border: "2px solid #333333",
+                  background: "linear-gradient(135deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%)",
                   fontWeight: 700,
                   cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
+                  color: "#C0C0C0",
+                  boxShadow: "-1px 1px 5px black, 0px 0px 5px black inset"
                 }}
               >
-                <span style={{ fontWeight: 700 }}>Swap</span>
+                <span style={{ fontWeight: 700 }}>SWAP</span>
               </button>
             </div>
           )}
           
           {/* Docs button for desktop - right side */}
           {!isSmallScreen && (
-            <div style={{ position: "absolute", right: 24, top: 16 }}>
+            <div style={{ position: "absolute", right: 120, top: 16 }}>
               <button
                 aria-label="Go to Docs"
                 onClick={() => window.open(docsUrl, "_blank")}
                 style={{
                   padding: "6px 10px",
                   borderRadius: 8,
-                  border: "2px solid #333",
-                  background: "#f9f2fa",
+                  border: "2px solid #333333",
+                  background: "linear-gradient(135deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%)",
                   fontWeight: 700,
                   cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
+                  color: "#C0C0C0",
+                  boxShadow: "-1px 1px 5px black, 0px 0px 5px black inset"
                 }}
               >
-                <span style={{ fontWeight: 700 }}>Docs</span>
+                <span style={{ fontWeight: 700 }}>DOCS</span>
               </button>
             </div>
           )}

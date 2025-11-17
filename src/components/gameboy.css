@@ -15,7 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #000000 0%, #1a001a 100%);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
 }
 
 /* Main gameboy container */
@@ -29,12 +29,12 @@ body {
   border-radius: 35px 35px 45px 45px;
   padding: 20px;
   margin: 0 auto;
-  background: #3c992f;
-  box-shadow: 0px -12px 0px rgba(76, 175, 80, 0.6), 
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
+  box-shadow: 0px -12px 0px rgba(70, 70, 70, 0.6), 
               0px 15px 35px rgba(0, 0, 0, 0.65),
-              inset 0px 4px 12px rgba(255, 255, 255, 0.5),
-              inset 0px -4px 12px rgba(0, 0, 0, 0.2);
-  border: 5px solid rgba(76, 175, 80, 0.4);
+              inset 0px 4px 12px rgba(255, 255, 255, 0.1),
+              inset 0px -4px 12px rgba(0, 0, 0, 0.5);
+  border: 5px solid #C0C0C0;
   font-family: sans-serif;
   user-select: none;
   cursor: default;
@@ -51,10 +51,10 @@ body {
   width: calc(100% - 10px);
   height: 60px;
   border-radius: 60%;
-  background: #3c992f;
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5),
-              inset 0px 2px 5px rgba(255, 255, 255, 0.3);
-  border-bottom: 10px solid #2E7D32;
+              inset 0px 2px 5px rgba(255, 255, 255, 0.05);
+  border-bottom: 10px solid #1a1a1a;
 }
 
 @media (min-width: 1000px) {
@@ -101,7 +101,7 @@ body {
               0px 4px 15px rgba(0, 0, 0, 0.5),
               inset 0px 5px 12px rgba(0, 0, 0, 0.95),
               inset 0px -5px 12px rgba(255, 255, 255, 0.04);
-  border: 6px solid #2E7D32;
+  border: 6px solid #C0C0C0;
 }
 
 @media (min-width: 1000px) {
@@ -142,7 +142,6 @@ body {
   top: 10px;
 }
 
-
 /* Power indicator */
 .gameboy .screen-area .power {
   position: absolute;
@@ -164,12 +163,12 @@ body {
 .gameboy .screen-area .power .indicator .led {
   position: relative;
   display: inline-block;
-  background: #FF4500;
+  background: #C0C0C0;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  box-shadow: 0px 0px 18px rgba(255, 69, 0, 1),
-              0px 0px 25px rgba(255, 69, 0, 0.6),
+  box-shadow: 0px 0px 18px rgba(192, 192, 192, 1),
+              0px 0px 25px rgba(192, 192, 192, 0.6),
               inset 2px 2px 5px rgba(255, 255, 255, 0.5),
               inset -1px -1px 4px rgba(0, 0, 0, 0.6);
   z-index: 5;
@@ -177,17 +176,17 @@ body {
 }
 
 .gameboy .screen-area .power .indicator .led.disconnected {
-  background: #FF4500; /* Red for disconnected */
-  box-shadow: 0px 0px 18px rgba(255, 69, 0, 1),
-              0px 0px 25px rgba(255, 69, 0, 0.6),
+  background: #808080; /* Gray for disconnected */
+  box-shadow: 0px 0px 18px rgba(128, 128, 128, 1),
+              0px 0px 25px rgba(128, 128, 128, 0.6),
               inset 2px 2px 5px rgba(255, 255, 255, 0.5),
               inset -1px -1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .gameboy .screen-area .power .indicator .led.connected {
-  background: #32CD32; /* Green for connected */
-  box-shadow: 0px 0px 18px rgba(50, 205, 50, 1),
-              0px 0px 25px rgba(50, 205, 50, 0.6),
+  background: #C0C0C0; /* Silver for connected */
+  box-shadow: 0px 0px 18px rgba(192, 192, 192, 1),
+              0px 0px 25px rgba(192, 192, 192, 0.6),
               inset 2px 2px 5px rgba(255, 255, 255, 0.5),
               inset -1px -1px 4px rgba(0, 0, 0, 0.6);
 }
@@ -201,9 +200,9 @@ body {
   border-radius: 12px;
   margin-bottom: 15px;
   overflow: hidden;
-  border: 7px solid #2E7D32;
+  border: 7px solid #333333;
   box-shadow: inset 0px 6px 18px rgba(0, 0, 0, 0.2),
-              inset 0px -6px 18px rgba(255, 255, 255, 0.6),
+              inset 0px -6px 18px rgba(255, 255, 255, 0.1),
               0px 4px 10px rgba(0, 0, 0, 0.4),
               0px 0px 20px rgba(0, 255, 0, 0.1);
 }
@@ -226,11 +225,11 @@ body {
   display: inline;
   font-weight: bold;
   font-style: italic;
-  color: #FFD700;
+  color: #C0C0C0;
   font-size: 24px;
   margin-right: 6px;
-  text-shadow: 0px 0px 15px rgba(255, 215, 0, 1),
-               0px 0px 25px rgba(255, 215, 0, 0.6),
+  text-shadow: 0px 0px 15px rgba(192, 192, 192, 1),
+               0px 0px 25px rgba(192, 192, 192, 0.6),
                0px 2px 5px rgba(0, 0, 0, 0.6);
   letter-spacing: 1.5px;
 }
@@ -252,32 +251,31 @@ body {
 }
 
 .gameboy .screen-area .label .subtitle .c {
-  color: #8B008B;
+  color: #A9A9A9;
   font-size: 22px;
 }
 
 .gameboy .screen-area .label .subtitle .o1 {
-  color: #4B0082;
+  color: #808080;
   font-size: 20px;
 }
 
 .gameboy .screen-area .label .subtitle .l {
-  color: #228B22;
+  color: #C0C0C0;
   font-size: 22px;
   transform: rotateZ(-10deg);
 }
 
 .gameboy .screen-area .label .subtitle .o2 {
-  color: #DAA520;
+  color: #A9A9A9;
   font-size: 20px;
 }
 
 .gameboy .screen-area .label .subtitle .r {
-  color: #1E90FF;
+  color: #808080;
   font-size: 22px;
 }
 
-/* Nintendo branding */
 /* Connect wallet button - exact match */
 .gameboy .walletconnect {
   position: relative;
@@ -319,13 +317,13 @@ body {
 }
 
 .wallet-button-disconnected {
-  background: linear-gradient(180deg, #81C784 0%, #66BB6A 30%, #4CAF50 60%, #388E3C 100%);
-  color: #1A1A1A;
+  background: linear-gradient(180deg, #C0C0C0 0%, #A9A9A9 30%, #808080 60%, #696969 100%);
+  color: #000000;
   text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.8),
                0px 0px 20px rgba(255, 255, 255, 0.4),
                0px 2px 4px rgba(0, 0, 0, 0.8);
-  border: 5px solid #2E7D32;
-  border-bottom: 2px solid white;
+  border: 5px solid #696969;
+  border-bottom: 2px solid #333333;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.8),
               0px 4px 12px rgba(0, 0, 0, 0.5),
               inset 0px 3px 10px rgba(255, 255, 255, 0.1),
@@ -333,11 +331,11 @@ body {
 }
 
 .wallet-button-connected {
-  background: #4CAF50;
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #C0C0C0 0%, #A9A9A9 30%, #808080 60%, #696969 100%);
+  color: #000000;
   text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
-  border: 5px solid #2E7D32;
-  border-bottom: 2px solid white;
+  border: 5px solid #696969;
+  border-bottom: 2px solid #333333;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.8),
               0px 4px 12px rgba(0, 0, 0, 0.5),
               inset 0px 3px 10px rgba(255, 255, 255, 0.1),
@@ -349,7 +347,7 @@ body {
               inset 0px 6px 18px rgba(0, 0, 0, 0.95);
   border-bottom-width: 4px;
   line-height: 45px;
-  background: linear-gradient(180deg, #110A18 0%, #08050C 50%, #000000 100%);
+  background: linear-gradient(180deg, #111111 0%, #000000 50%, #000000 100%);
 }
 
 /* Controls */
@@ -357,8 +355,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 /* D-pad */
 .gameboy .controls .dpad {
@@ -374,11 +370,11 @@ body {
   width: 33%;
   height: 33%;
   position: absolute;
-  background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 30%, #1F1F1F 60%, #0F0F0F 100%);
+  background: #C0C0C0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
-  border: 4px solid #2E7D32;
+  border: 4px solid #333333;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.7),
               0px 3px 8px rgba(0, 0, 0, 0.4),
               inset 0px 3px 10px rgba(255, 255, 255, 0.08),
@@ -392,7 +388,7 @@ body {
   text-align: center;
   height: 100%;
   font-size: 25px;
-  color: #4CAF50;
+  color: #C0C0C0;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 1),
                0px 0px 8px rgba(0, 0, 0, 0.5);
 }
@@ -401,14 +397,15 @@ body {
 .gameboy .controls .dpad .up {
   top: calc(0% + 4px);
   left: 33%;
-  border-top: 4px solid #2E7D32;
-  border-left: 4px solid #2E7D32;
-  border-right: 4px solid #2E7D32;
+  border-top: 4px solid #333333;
+  border-left: 4px solid #333333;
+  border-right: 4px solid #333333;
   border-radius: 5px 5px 0px 0px;
 }
 
 .gameboy .controls .dpad .up:active {
-  background: linear-gradient(to top, #1F1F1F 0%, #0F0F0F 100%);
+  background: linear-gradient(to top, #1a1a1a 0%, #000000 100%);
+  transform: translateY(2px);
 }
 
 .gameboy .controls .dpad .up i {
@@ -419,15 +416,16 @@ body {
 .gameboy .controls .dpad .right {
   top: 33%;
   left: calc(66% - 4px);
-  border-top: 4px solid #2E7D32;
-  border-bottom: 4px solid #2E7D32;
-  border-right: 4px solid #2E7D32;
+  border-top: 4px solid #333333;
+  border-bottom: 4px solid #333333;
+  border-right: 4px solid #333333;
   border-radius: 0px 5px 5px 0px;
   box-shadow: 0px -2px 0px #888 inset;
 }
 
 .gameboy .controls .dpad .right:active {
-  background: linear-gradient(to right, #1F1F1F 0%, #0F0F0F 100%);
+  background: linear-gradient(to right, #1a1a1a 0%, #000000 100%);
+  transform: translateX(-2px);
 }
 
 .gameboy .controls .dpad .right i {
@@ -438,23 +436,24 @@ body {
 .gameboy .controls .dpad .down {
   top: calc(66% - 4px);
   left: 33%;
-  border-left: 4px solid #2E7D32;
-  border-bottom: 4px solid #2E7D32;
-  border-right: 4px solid #2E7D32;
+  border-left: 4px solid #333333;
+  border-bottom: 4px solid #333333;
+  border-right: 4px solid #333333;
   border-radius: 0px 0px 5px 5px;
   box-shadow: 0px -2px 0px #888 inset;
 }
 
 .gameboy .controls .dpad .down:active {
-  background: linear-gradient(to bottom, #1F1F1F 0%, #0F0F0F 100%);
+  background: linear-gradient(to bottom, #1a1a1a 0%, #000000 100%);
+  transform: translateY(-2px);
 }
 
 .gameboy .controls .dpad .left {
   top: 33%;
   left: calc(0% + 4px);
-  border-top: 4px solid #2E7D32;
-  border-bottom: 4px solid #2E7D32;
-  border-left: 4px solid #2E7D32;
+  border-top: 4px solid #333333;
+  border-bottom: 4px solid #333333;
+  border-left: 4px solid #333333;
   border-radius: 5px 0px 0px 5px;
   box-shadow: 0px -2px 0px #888 inset;
 }
@@ -465,7 +464,8 @@ body {
 }
 
 .gameboy .controls .dpad .left:active {
-  background: linear-gradient(to left, #1F1F1F 0%, #0F0F0F 100%);
+  background: linear-gradient(to left, #1a1a1a 0%, #000000 100%);
+  transform: translateX(2px);
 }
 
 .gameboy .controls .dpad .middle {
@@ -480,8 +480,8 @@ body {
   top: 20%;
   left: 20%;
   display: inline-block;
-  border: 1px solid #2E7D32;
-  background: linear-gradient(135deg, #1F1F1F 0%, #0F0F0F 100%);
+  border: 1px solid #333333;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   border-radius: 50%;
   height: 60%;
   width: 60%;
@@ -505,8 +505,8 @@ body {
   height: 48px;
   line-height: 42px;
   border-radius: 50%;
-  background: #7e318e;
-  border: 5px solid #4A148C;
+  background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 50%, #808080 100%);
+  border: 5px solid #696969;
   border-bottom: 2px solid #000;
   box-shadow: 0px 7px 22px rgba(0, 0, 0, 0.8),
               0px 4px 12px rgba(0, 0, 0, 0.5),
@@ -514,7 +514,7 @@ body {
               inset 0px -4px 10px rgba(0, 0, 0, 0.7);
   text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5),
                0px 2px 4px rgba(0, 0, 0, 0.8);
-  color: #FFFFFF;
+  color: #000000;
   text-align: center;
   user-select: none;
   cursor: pointer;
@@ -527,7 +527,8 @@ body {
               inset 0px 6px 18px rgba(0, 0, 0, 0.95);
   border-bottom-width: 4px;
   line-height: 45px;
-  background: #7e318e;
+  background: linear-gradient(135deg, #A9A9A9 0%, #808080 50%, #696969 100%);
+  transform: translateY(3px);
 }
 
 .gameboy .controls .a-b .a {
@@ -551,7 +552,7 @@ body {
 .gameboy .start-select .select,
 .gameboy .start-select .start {
   display: inline-block;
-  color: #111;
+  color: #2c2a2a;
   text-shadow: 0;
   letter-spacing: -1px;
   width: 60px;
@@ -569,9 +570,9 @@ body {
   height: 10px;
   margin-bottom: 0px;
   border-radius: 40%;
-  background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 30%, #1F1F1F 60%, #0F0F0F 100%);
+  background: #C0C0C0;
   background-repeat: no-repeat;
-  border: 3px solid #2E7D32;
+  border: 3px solid #333333;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6),
               0px 2px 5px rgba(0, 0, 0, 0.3),
               inset 0px 2px 4px rgba(255, 255, 255, 0.12);
@@ -580,9 +581,10 @@ body {
 
 .gameboy .start-select .select:active::before,
 .gameboy .start-select .start:active::before {
-  background: linear-gradient(135deg, #0F0F0F 0%, #000000 50%, #000000 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 50%, #000000 100%);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7),
               inset 0px 3px 8px rgba(0, 0, 0, 0.9);
+  transform: translateY(2px);
 }
 
 /* Speakers */
@@ -636,58 +638,54 @@ body {
 
 .gameboy .speaker .dot.closed,
 .gameboy .speaker1 .dot.closed {
-  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 50%, #81C784 100%);
+  background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 50%, #808080 100%);
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.35),
               0px 0px 2px rgba(255, 255, 255, 0.2);
 }
-
-
 
 .gameboy .music-toggle {
   position: absolute;
   margin-left: 0px;
   padding: 15px;
   border-radius: 57px;
-  background: #4CAF50;
-  border: 2px solid #2E7D32;
+  background: #C0C0C0;
+  border: 2px solid #333333;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   top: 550px;
-  border-bottom: 2px solid #f4ecec;
+  border-bottom: 2px solid #333333;
   box-shadow: -1px 1px 5px black, 0px 0px 5px black inset;
-  
+  color: #C0C0C0;
 }
 
 .gameboy .music-toogle:hover {
-  background: #66BB6A;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 50%, #000000 100%);
   transform: scale(1.05);
 }
-
 
 .gameboy .copyca {
   position: absolute;
   margin-left: 0px;
   padding:10px;
   border-radius: 57px;
-  border: 2px solid #2E7D32;
-  background: #4CAF50;
-  
+  border: 2px solid #333333;
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%);
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   top: 300px;
-  border-bottom: 2px solid #f4ecec;
+  border-bottom: 2px solid #333333;
   box-shadow: -1px 1px 5px black, 0px 0px 5px black inset;
-  
+  color: #C0C0C0;
 }
 
 .gameboy .copyca:hover {
-  background: #66BB6A;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 50%, #000000 100%);
   transform: scale(1.05);
 }
 
@@ -696,21 +694,20 @@ body {
   margin-left: 0px;
   padding:10px;
   border-radius: 57px;
-  border: 2px solid #2E7D32;
-  background: #4CAF50;
-  
+  border: 2px solid #333333;
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 50%, #1a1a1a 100%);
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   top: 300px;
-  border-bottom: 2px solid #f4ecec;
+  border-bottom: 2px solid #333333;
   box-shadow: -1px 1px 5px black, 0px 0px 5px black inset;
-  
+  color: #C0C0C0;
 }
 
 .gameboy .copyswap:hover {
-  background: #66BB6A;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 50%, #000000 100%);
   transform: scale(1.05);
 }
