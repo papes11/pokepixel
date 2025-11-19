@@ -198,7 +198,7 @@ const SwapContent = () => {
         <div className="popup-overlay">
           <div className="popup-content">
             <div className="loading-message">
-              Checking box loot transactions on blockchain...
+              Checking box loot on blockchain...
             </div>
           </div>
         </div>
