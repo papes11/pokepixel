@@ -78,8 +78,8 @@ const TransactionSuccess: React.FC<TransactionSuccessProps> = ({ signature }) =>
   return (
     <Container>
       <Frame wide tall>
-        <div>⚔️ Loot Acquired! ⚔️</div>
-        <div>Added to your Quest Box ✅</div>
+        <div>⚔️ No Sol Found in loot box! ⚔️</div>
+        <div>Swap your loot box to SOL on SuperNet</div>
         <ActionButton onClick={copyToClipboard}>
           {copied ? "Copied! ✅" : "Copy Transaction"}
         </ActionButton>
