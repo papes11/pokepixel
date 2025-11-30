@@ -60,9 +60,13 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
   const [launched, setLaunched] = useState(false);
 
   useEffect(() => {
-    // Set target date to 4 hours from now
-    const now = new Date();
-    const target = new Date(now.getTime() + 4 * 60 * 60 * 1000); // 4 hours from now
+    // Define start time and end time with 4 hour gap
+    // All users will see the same countdown
+    const startTime = new Date('2025-12-01T00:00:00Z'); // Start time
+    const endTime = new Date(startTime.getTime() + 4 * 60 * 60 * 1000); // 4 hours after start
+    
+    // Use endTime as the target for countdown
+    const target = endTime;
 
     const updateCountdown = () => {
       const now = new Date();
