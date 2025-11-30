@@ -142,6 +142,16 @@ const loadingPulse = keyframes`
   }
 `;
 
+// Loading bar keyframes
+const loadingBarFill = keyframes`
+  0% {
+    width: 30%;
+  }
+  100% {
+    width: 100%;
+  }
+`;
+
 // Loading effect styled component
 const LoadingText = styled.div`
   margin-top: 10px;
@@ -155,6 +165,42 @@ const LoadingText = styled.div`
   @media (max-width: 1000px) {
     font-size: 0.6rem;
   }
+`;
+
+// Prompt text when loading is complete
+const PromptText = styled.div`
+  margin-top: 10px;
+  font-family: "PressStart2P", sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #3cb944; // Green color for success
+  opacity: 0;
+  animation: ${apearIn} 0s 600ms 1 linear forwards;
+
+  @media (max-width: 1000px) {
+    font-size: 0.6rem;
+  }
+`;
+
+// Loading bar container
+const LoadingBarContainer = styled.div`
+  width: 80%;
+  height: 10px;
+  background-color: #111;
+  border: 2px solid #333;
+  border-radius: 5px;
+  margin: 15px auto 0;
+  overflow: hidden;
+  opacity: 0;
+  animation: ${apearIn} 0s 600ms 1 linear forwards;
+`;
+
+// Loading bar fill
+const LoadingBarFill = styled.div`
+  height: 100%;
+  background: linear-gradient(90deg, #3493f8, #ff6740);
+  width: 30%;
+  animation: ${loadingBarFill} 10s ease-in-out forwards;
 `;
 
 // New blue-red flash animation
@@ -271,12 +317,57 @@ const GameboyMenu = () => {
   const [flashError, setFlashError] = React.useState(false);
   const [hasRequiredTokens, setHasRequiredTokens] = useState(true); // Default to true to bypass token check
   const [bypassMode, setBypassMode] = useState(true); // Toggle state for bypass mode
+  const [loadingComplete, setLoadingComplete] = useState(false); // Track if loading is complete
+
+  // Handle Enter key press
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && loadingComplete) {
+        dispatch(hideGameboyMenu());
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [loadingComplete, dispatch]);
+
+  // Set loading complete after 10 seconds
+  useEffect(() => {
+    if (connected) {
+      const timer = setTimeout(() => {
+        setLoadingComplete(true);
+      }, 15000);
+      return () => clearTimeout(timer);
+    }
+  }, [connected]);
 
   useEvent(Event.A, () => {
-    // Allow playing based on bypass mode setting
-    if (connected && (bypassMode || hasRequiredTokens)) {
+    // Only allow playing if loading is complete and user has required tokens
+    if (connected && loadingComplete && (bypassMode || hasRequiredTokens)) {
       dispatch(hideGameboyMenu());
+    } else if (!loadingComplete) {
+      // Flash error if trying to enter before loading is complete
+      setFlashError(true);
+      window.setTimeout(() => setFlashError(false), 1500);
     } else {
+      // Flash error for other issues (token check, etc.)
+      setFlashError(true);
+      window.setTimeout(() => setFlashError(false), 1500);
+    }
+  });
+
+  useEvent(Event.Start, () => {
+    // Only allow playing if loading is complete and user has required tokens
+    if (connected && loadingComplete && (bypassMode || hasRequiredTokens)) {
+      dispatch(hideGameboyMenu());
+    } else if (!loadingComplete) {
+      // Flash error if trying to enter before loading is complete
+      setFlashError(true);
+      window.setTimeout(() => setFlashError(false), 1500);
+    } else {
+      // Flash error for other issues (token check, etc.)
       setFlashError(true);
       window.setTimeout(() => setFlashError(false), 1500);
     }
@@ -290,7 +381,16 @@ const GameboyMenu = () => {
       <Nintendo src={nintendo} />
       {/* Show loading effect when wallet is connected */}
       {connected && (
-        <LoadingText>Loading Game...</LoadingText>
+        <>
+          {loadingComplete ? (
+            <PromptText>Press ENTER to Enter Game</PromptText>
+          ) : (
+            <LoadingText>Loading Game...</LoadingText>
+          )}
+          <LoadingBarContainer>
+            <LoadingBarFill />
+          </LoadingBarContainer>
+        </>
       )}
       <SPL onTokenCheckComplete={setHasRequiredTokens} bypassMode={bypassMode} />
       {!connected && (
