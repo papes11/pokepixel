@@ -10,7 +10,7 @@ import MaintenancePage from "./maintenance";
 // Toggle this to enable/disable maintenance mode
 // When hosting on Vercel, set to true for a 3-minute maintenance period
 // After 3 minutes, the game will be accessible to everyone
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 const StyledApp = styled.div`
   background: black;

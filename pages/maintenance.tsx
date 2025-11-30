@@ -6,7 +6,6 @@ import WalletContextProvider from "../src/wallets/wallet-provider";
 import { Provider } from "react-redux";
 import { store } from "../src/state/store";
 
-// Add prop type definition
 interface LaunchPageProps {
   onLaunch?: () => void;
 }
@@ -61,21 +60,17 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
   const [launched, setLaunched] = useState(false);
 
   useEffect(() => {
-    // Set a fixed global target time that all users will count down to
-    // Change this to whatever fixed time you want (example: November 5, 2025 at 12:00 UTC)
-    const target = new Date('2025-11-05T17:30:00Z');
+    // Set target date to December 5th, 2025
+    const target = new Date("2025-12-05T00:00:00Z");
 
     const updateCountdown = () => {
-      const current = new Date();
-      const diff = target.getTime() - current.getTime();
+      const now = new Date();
+      const diff = target.getTime() - now.getTime();
 
       if (diff <= 0) {
         setLaunched(true);
-        setTimeLeft("00:00:00");
-        // Call onLaunch callback if provided
-        if (onLaunch) {
-          onLaunch();
-        }
+        setTimeLeft("00:00");
+        if (onLaunch) onLaunch();
         return;
       }
 
@@ -84,13 +79,14 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      // Format time display
       if (days > 0) {
         setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
       } else if (hours > 0) {
         setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
       } else {
-        setTimeLeft(`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`);
+        setTimeLeft(
+          `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+        );
       }
     };
 
@@ -108,13 +104,13 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
             <LaunchScreen>
               {!launched ? (
                 <>
-                  <LaunchText>Launching In</LaunchText>
+                  <LaunchText>SuperNet Updating Mode: ON</LaunchText>
                   <LaunchText style={{ fontSize: "16px", marginTop: "20px" }}>
                     {timeLeft}
                   </LaunchText>
                 </>
               ) : (
-                <LaunchText>🚀 Launching Now!</LaunchText>
+                <LaunchText>⚡ SuperNet Update Active!</LaunchText>
               )}
             </LaunchScreen>
           </Gameboy>
