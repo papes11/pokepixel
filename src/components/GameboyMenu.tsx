@@ -123,10 +123,38 @@ const apearIn = keyframes`
 `;
 
 const Nintendo = styled(PixelImage)`
-  height: 8%;
+  height: 10%;
   opacity: 100%;
 
   animation: ${apearIn} 0s 300ms 1 linear forwards;
+`;
+
+// New loading animation keyframes
+const loadingPulse = keyframes`
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+`;
+
+// Loading effect styled component
+const LoadingText = styled.div`
+  margin-top: 10px;
+  font-family: "PressStart2P", sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #3493f8;
+  opacity: 0;
+  animation: ${apearIn} 0s 600ms 1 linear forwards, ${loadingPulse} 1.5s infinite;
+
+  @media (max-width: 1000px) {
+    font-size: 0.6rem;
+  }
 `;
 
 // New blue-red flash animation
@@ -260,6 +288,10 @@ const GameboyMenu = () => {
     <StyledGameboyMenu>
       <Text>SOLBOY</Text>
       <Nintendo src={nintendo} />
+      {/* Show loading effect when wallet is connected */}
+      {connected && (
+        <LoadingText>Loading Game...</LoadingText>
+      )}
       <SPL onTokenCheckComplete={setHasRequiredTokens} bypassMode={bypassMode} />
       {!connected && (
         <ConnectHint $error={flashError} onClick={() => {

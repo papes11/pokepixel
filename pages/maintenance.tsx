@@ -60,8 +60,9 @@ export default function LaunchPage({ onLaunch }: LaunchPageProps) {
   const [launched, setLaunched] = useState(false);
 
   useEffect(() => {
-    // Set target date to December 5th, 2025
-    const target = new Date("2025-12-05T00:00:00Z");
+    // Set target date to 4 hours from now
+    const now = new Date();
+    const target = new Date(now.getTime() + 4 * 60 * 60 * 1000); // 4 hours from now
 
     const updateCountdown = () => {
       const now = new Date();
