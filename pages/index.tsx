@@ -3,7 +3,11 @@
 // and configure them in your global CSS file for the exact look.
 import "./styles.css"
 import Image from 'next/image';
-import { useState, type ChangeEvent } from 'react'; // Importing types for event handling
+import { useState, type ChangeEvent } from 'react';
+import Link from "next/link";
+
+
+
 
 export default function HomePage(): JSX.Element {
 
@@ -57,7 +61,7 @@ export default function HomePage(): JSX.Element {
       
       {/* 🚀 Navigation Bar */}
       <header className="navbar">
-        <a href="/" className="logo">
+        <Link href="/" className="logo">
           <Image 
             src="/log.png" 
             alt="POKEPIXEL Logo" 
@@ -65,7 +69,7 @@ export default function HomePage(): JSX.Element {
             height={40}
             className="logo-image"
           />
-        </a>
+        </Link>
         
         {/* Checkbox and Label for the Hamburger Menu (CSS Hack) */}
         <input 
