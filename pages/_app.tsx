@@ -8,6 +8,9 @@ import WalletContextProvider from "../src/wallets/wallet-provider";
 import "../src/App.css";
 import "../public/styles/css-pokepixel-gameboy.css";
 
+// Import Tailwind CSS directly to ensure it's loaded
+import "../src/App.css";
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   // Minimal polyfills formerly in CRA's src/index.tsx
   if (typeof window !== "undefined") {
@@ -30,5 +33,3 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </WalletContextProvider>
   );
 }
-
-
