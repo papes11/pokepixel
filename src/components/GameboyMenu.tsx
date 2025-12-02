@@ -4,7 +4,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { Connection } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, AccountLayout } from "@solana/spl-token";
 
-import nintendo from "../assets/title-screen/solana1.png";
+import nintendo from "../../public/log.png";
 import { useDispatch, useSelector } from "react-redux";
 import useEvent from "../app/use-event";
 import { Event } from "../app/emitter";
@@ -123,7 +123,8 @@ const apearIn = keyframes`
 `;
 
 const Nintendo = styled(PixelImage)`
-  height: 10%;
+  height: 100%;
+  position: absolute;
   opacity: 100%;
 
   animation: ${apearIn} 0s 300ms 1 linear forwards;
@@ -154,7 +155,7 @@ const loadingBarFill = keyframes`
 
 // Loading effect styled component
 const LoadingText = styled.div`
-  margin-top: 10px;
+  margin-top: 120px;
   font-family: "PressStart2P", sans-serif;
   font-size: 0.8rem;
   text-align: center;
@@ -169,7 +170,7 @@ const LoadingText = styled.div`
 
 // Prompt text when loading is complete
 const PromptText = styled.div`
-  margin-top: 10px;
+  margin-top: 120px;
   font-family: "PressStart2P", sans-serif;
   font-size: 0.8rem;
   text-align: center;
@@ -217,7 +218,7 @@ const blueRedFlash = keyframes`
 `;
 
 const ConnectHint = styled.div<{ $error?: boolean }>`
-  margin-top: 8px;
+  margin-top: 100px;
   font-family: "PressStart2P", sans-serif;
   font-size: 0.9rem;
   text-align: center;
@@ -377,7 +378,7 @@ const GameboyMenu = () => {
 
   return (
     <StyledGameboyMenu>
-      <Text>SOLBOY</Text>
+      {/* <Text>SOLBOY</Text> */}
       <Nintendo src={nintendo} />
       {/* Show loading effect when wallet is connected */}
       {connected && (

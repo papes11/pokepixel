@@ -97,7 +97,7 @@ export default function HomePage(): JSX.Element {
           <h1 className="silver-text">PLAY. EARN. OWN. THE FUTURE OF WEB3 GAMING</h1>
           <p className="silver-text">Dive into POKEPIXEL, a decentralized adventure powered by Solana. Connect your wallet, find hidden treasure, open loot boxes, collect items, battle, trade, and earn crypto rewards.</p>
           <div className="hero-actions">
-            <button className="btn primary-btn" onClick={() => handleNavigation('/game')}>EXPLORE POKEPIXEL</button>
+            <button className="btn primary-btn" onClick={() => handleNavigation('/game')}>ENTER BETAV1</button>
             <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('/docs', false, true)}>LEARN MORE</button>
           </div>
         </div>
