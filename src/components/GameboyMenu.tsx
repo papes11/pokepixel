@@ -76,43 +76,6 @@ const colorAnimation = keyframes`
   }
 `;
 
-const Text = styled.div`
-  margin-top: 13%;
-  font-family: "PressStart2P", sans-serif;
-  font-size: 9rem;
-  font-weight: 700;
-  font-style: italic;
-  text-align: center;
-  opacity: 0;
-  width: 300vw;
-  transform: skew(-5deg);
-  overflow: hidden;
-  white-space: nowrap;
-  color: #3232fc;
-  background: -webkit-linear-gradient(
-    0deg,
-    #3493f8 40%,
-    #3cb944 40%,
-    #3cb944 45%,
-    #ffb5fe 45%,
-    #ffb5fe 50%,
-    #ff6740 50%,
-    #ff6740 55%,
-    #ffd759 55%,
-    #ffd759 60%,
-    var(--bg) 60%
-  );
-  background-position: -100vw;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: ${colorAnimation} 3s 1 linear forwards;
-  animation: ${colorAnimation} 3s 1 linear forwards;
-
-  @media (max-width: 1000px) {
-    font-size: 2.5rem;
-  }
-`;
-
 const apearIn = keyframes`
   0% {
     opacity: 0;
