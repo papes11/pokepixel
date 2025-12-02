@@ -3,6 +3,7 @@
 // and configure them in your global CSS file for the exact look.
 import "./styles.css"
 import Image from 'next/image';
+import Link from "next/link";
 import { useState, type ChangeEvent } from 'react'; // Importing types for event handling
 
 export default function HomePage(): JSX.Element {
