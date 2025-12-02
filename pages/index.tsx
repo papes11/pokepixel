@@ -165,12 +165,12 @@ export default function HomePage(): JSX.Element {
       {/* 📝 Footer */}
       <footer className="footer">
         <div className="footer-links">
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-          <a href="#">Contact</a>
+          <a href="/docs#license">Terms</a>
+          <a href="/docs#license">Privacy</a>
+          <a href="/docs#credit">Contact</a>
         </div>
         <div className="copyright silver-text">
-          &copy; 2024 POKEPIXEL
+          &copy; 2025 POKEPIXEL
         </div>
       </footer>
     </div>

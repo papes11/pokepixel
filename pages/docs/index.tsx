@@ -448,7 +448,7 @@ export default function DocsPage() {
                       <h3>Super Phase</h3>
                       <span className="phase-status upcoming">Future</span>
                     </div>
-                    <p>Full ecosystem launch with NFT marketplace, governance tokens, and broader blockchain integrations.</p>
+                    <p>Full ecosystem expansion and Rewards program, including the swap feature and advanced trading options. New features and updates to enhance the gaming experience and player engagement.</p>
                   </div>
                 </div>
               </section>
