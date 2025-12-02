@@ -347,7 +347,7 @@ const GameboyMenu = () => {
       {connected && (
         <>
           {loadingComplete ? (
-            <PromptText>Press ENTER to Enter Game</PromptText>
+            <PromptText>Press ENTER to Play</PromptText>
           ) : (
             <LoadingText>Loading Game...</LoadingText>
           )}

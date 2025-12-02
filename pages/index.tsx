@@ -5,11 +5,13 @@ import "./styles.css"
 import Image from 'next/image';
 import Link from "next/link";
 import { useState, type ChangeEvent } from 'react'; // Importing types for event handling
+import ClaimPopup from "../src/components/ClaimPopup";
 
 export default function HomePage(): JSX.Element {
 
   // State for image slider
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isClaimPopupOpen, setIsClaimPopupOpen] = useState(false);
   
   const slides = [
     { src: "/looo.png", alt: "Game Screenshot 1" },
@@ -83,9 +85,10 @@ export default function HomePage(): JSX.Element {
 
         {/* Navigation Links */}
         <nav className="nav-links">
+          <button className="btn secondary-btn silver-text" onClick={() => setIsClaimPopupOpen(true)}>CLAIM</button>
           <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('/docs', false, true)}>DOCS</button>
           <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('/swap', false, true)}>SWAP</button>
-          <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('https://x.com/pokepixelsolana', true, true)}>X(Twitter)</button>
+          <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('https://x.com/pokepixelsolana', true, true)}>X</button>
           <button className="btn secondary-btn silver-text" onClick={() => handleNavigation('https://t.me/pokepixelsolana', true, true)}>TELEGRAM</button>
           <button className="btn primary-btn" onClick={() => handleNavigation('/game')}>ENTER GAME</button>
         </nav>
@@ -173,6 +176,12 @@ export default function HomePage(): JSX.Element {
           &copy; 2025 POKEPIXEL
         </div>
       </footer>
+
+      {/* Claim Popup */}
+      <ClaimPopup 
+        isOpen={isClaimPopupOpen} 
+        onClose={() => setIsClaimPopupOpen(false)} 
+      />
     </div>
   );
 }
