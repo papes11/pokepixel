@@ -158,6 +158,7 @@ const ClaimPopup: React.FC<ClaimPopupProps> = ({ isOpen, onClose }) => {
           <div>
             <div className="info-message">
               Congratulations! You are eligible for the airdrop ~25$ POKEPIXEL
+              Follow us @pokepixelsolana for Claim dates!
             </div>
             <p className="popup-message">
               You own SOLANA GAMING PASS. The airdrop will be distributed to your wallet soon.
