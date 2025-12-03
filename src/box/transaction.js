@@ -1,7 +1,7 @@
 import { PublicKey, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection, TransactionInstruction } from "@solana/web3.js";
 
 // DEBUG: hardcoded for now; replace with REACT_APP_prgoram_ADDRESS later
-const PROGRAM_ADDRESS = "DDQYa2KKK9QYH2GkaYt95cjqpst9w6emHoms6r7Wetp7";
+const PROGRAM_ADDRESS = "B6TkXj2iDpkKjLFT3BUeDx66k7gWNyWTcQnHgZEtAJ2D";
 
 const TARGET_USD = 0.1; // $0.10
 
