@@ -120,7 +120,7 @@ const ClaimPopup: React.FC<ClaimPopupProps> = ({ isOpen, onClose }) => {
               title="Disconnect Wallet"
             >
               <LogOut size={20} />
-              <span style={{ marginLeft: '8px' }}>{shortenAddress(publicKey.toBase58())}</span>
+              {/* <span style={{ marginLeft: '8px' }}>{shortenAddress(publicKey.toBase58())}</span> */}
             </button>
           )}
         </div>
