@@ -161,7 +161,7 @@ const ClaimPopup: React.FC<ClaimPopupProps> = ({ isOpen, onClose }) => {
               Follow us @pokepixelsolana for Claim dates!
             </div>
             <p className="popup-message">
-              You own SOLANA GAMING PASS. The airdrop will be distributed to your wallet soon.
+              You own SOLANA GAMING PASS. Your wallet address is registered for the airdrop.
             </p>
           </div>
         ) : hasNFT === false ? (
