@@ -250,9 +250,9 @@ export default function SwapPage() {
                 <a href="https://telegram.com" target="_blank" rel="noreferrer" aria-label="Discord">
                   Telegram
                 </a>
-                <a href="https://pump.fun/coin/6XV9E6HgVwkdyzfnES4DVDjgAsKfPeNgKwYgYBumpump" target="_blank" rel="noreferrer" aria-label="GitHub">
+                {/* <a href="https://pump.fun/coin/6XV9E6HgVwkdyzfnES4DVDjgAsKfPeNgKwYgYBumpump" target="_blank" rel="noreferrer" aria-label="GitHub">
                   pumpfun
-                </a>
+                </a> */}
               </div>
               <span>© {new Date().getFullYear()} Pokepixel. All rights reserved.</span>
             </div>

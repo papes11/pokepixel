@@ -686,10 +686,12 @@ export default function DocsPage() {
   :global(html, body) { 
     margin: 0; 
     padding: 0; 
-    background: linear-gradient(135deg, #000000 0%, #1a001a 100%);
+    background: #000000;
+    color: #c0c0c0;
     width: 100%;
     overflow-x: hidden;
     scroll-padding-top: 80px; /* Smooth scrolling offset for fixed navbar */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   /* Override global game CSS on docs: ensure normal flow and no centering */
   :global(body) {
@@ -703,8 +705,8 @@ export default function DocsPage() {
     min-height: 100vh; 
     display: flex; 
     flex-direction: column; 
-    background: transparent; 
-    color: #f8e7ff; 
+    background: #000000; 
+    color: #c0c0c0; 
     width: 100%;
     margin: 0;
     padding: 0;
@@ -712,8 +714,8 @@ export default function DocsPage() {
   
   .docs-nav { 
     height: 64px; 
-    border-bottom: 1px solid rgba(75, 0, 130, 0.5); 
-    background: linear-gradient(135deg, #2F1B41 0%, #1B1024 100%); 
+    border-bottom: 1px solid #333333; 
+    background: #111111; 
     position: sticky; 
     top: 0; 
     z-index: 30; 
@@ -749,8 +751,7 @@ export default function DocsPage() {
   .brand span { 
     font-weight: 700; 
     font-size: 18px; 
-    color: #FF8C00; 
-    text-shadow: 0px 0px 12px rgba(255, 140, 0, 0.8);
+    color: #c0c0c0; 
     flex: 1; 
   }
   
@@ -762,8 +763,7 @@ export default function DocsPage() {
     line-height: 1; 
     cursor: pointer; 
     padding: 6px 8px; 
-    color: #FF8C00; 
-    text-shadow: 0px 0px 12px rgba(255, 140, 0, 0.8);
+    color: #c0c0c0; 
   }
 
   .docs-main { 
@@ -775,13 +775,12 @@ export default function DocsPage() {
     margin: 0;
     padding: 0;
     min-height: calc(100vh - 64px);
-    background: radial-gradient(1200px 400px at 20% -10%, rgba(75,0,130,0.15), transparent),
-                radial-gradient(900px 300px at 100% 0%, rgba(255,69,0,0.08), transparent);
+    background: #000000;
   }
   
   .docs-sidebar { 
-    border-right: 1px solid rgba(75, 0, 130, 0.5); 
-    background: linear-gradient(180deg, #251633 0%, #110A18 100%); 
+    border-right: 1px solid #333333; 
+    background: #111111; 
     position: sticky; 
     top: 64px; 
     height: calc(100vh - 64px); 
@@ -805,7 +804,7 @@ export default function DocsPage() {
     background: transparent; 
     padding: 14px 24px; 
     margin: 0;
-    color: #d6c3ff; 
+    color: #c0c0c0; 
     cursor: pointer; 
     border-right: 3px solid transparent;
     transition: all 0.2s ease;
@@ -813,16 +812,15 @@ export default function DocsPage() {
   }
   
   .nav-item:hover { 
-    background: rgba(75, 0, 130, 0.25); 
+    background: #222222; 
     color: #ffffff; 
   }
   
   .nav-item.active { 
-    background: rgba(75, 0, 130, 0.35); 
-    color: #FF8C00; 
-    text-shadow: 0 0 8px rgba(255,140,0,0.6);
+    background: #222222; 
+    color: #ffffff; 
     font-weight: 700; 
-    border-right-color: #FF4500;
+    border-right-color: #c0c0c0;
   }
 
   .docs-content { 
@@ -831,7 +829,7 @@ export default function DocsPage() {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    color: #f8e7ff;
+    color: #c0c0c0;
   }
   
   .content-container {
@@ -844,8 +842,7 @@ export default function DocsPage() {
   .docs-content h1 { 
     margin: 0 0 24px 0; 
     font-size: 32px; 
-    color: #FF8C00; 
-    text-shadow: 0 0 14px rgba(255,140,0,0.5);
+    color: #ffffff; 
     font-weight: 800;
     /* Add scroll margin to account for fixed navbar */
     scroll-margin-top: 80px;
@@ -856,9 +853,8 @@ export default function DocsPage() {
   .docs-content h2 { 
     margin: 32px 0 16px 0;
     font-size: 24px;
-    color: #ffa64d;
+    color: #e0e0e0;
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(255,140,0,0.35);
     /* Add scroll margin for h2 as well */
     scroll-margin-top: 80px;
     padding-top: 16px;
@@ -875,23 +871,24 @@ export default function DocsPage() {
   .docs-content h3 { 
     margin: 24px 0 12px 0; 
     font-size: 18px; 
-    color: #e6d7ff; 
+    color: #d0d0d0; 
     font-weight: 700;
   }
   
   .docs-content p, .docs-content li { 
-    color: #000000; 
+    color: #c0c0c0; 
     line-height: 1.7; 
     font-size: 16px; 
     margin-bottom: 16px;
   }
   
   .docs-content code { 
-    background:rgb(5, 5, 5); 
+    background: #111111; 
     padding: 4px 8px; 
     border-radius: 6px; 
     font-family: 'Monaco', 'Courier New', monospace;
     font-size: 14px;
+    color: #c0c0c0;
   }
   
   .docs-content ul, .docs-content ol { 
@@ -908,10 +905,10 @@ export default function DocsPage() {
   }
 
   .feature-card {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
+    background: #111111;
     padding: 24px;
     border-radius: 12px;
-    border: 1px solid #4B0082;
+    border: 1px solid #333333;
     box-shadow: 0 8px 25px rgba(0,0,0,0.5), inset 0 3px 10px rgba(255,255,255,0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -924,80 +921,13 @@ export default function DocsPage() {
   .feature-card h3 {
     margin: 0 0 12px 0;
     font-size: 18px;
-    color: #FF8C00;
-    text-shadow: 0 0 8px rgba(255,140,0,0.5);
+    color: #ffffff;
   }
 
   .feature-card p {
     margin: 0;
     font-size: 14px;
-    color: #000000;
-  }
-
-  /* Steps */
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin: 32px 0;
-    width: 100%;
-  }
-
-  .step {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-  }
-
-  .step-number {
-    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
-    color: #FF8C00;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    alignogens: center;
-    justify-content: center;
-    font-weight: 800;
-    box-shadow: 0 0 10px rgba(255,69,0,0.35);
-    flex-shrink: 0;
-    border: 2px solid #4B0082;
-  }
-
-  .step-content h3 {
-    margin: 0 0 8px 0;
-  }
-
-  .step-content p {
-    margin: 0;
-    color: #64748b;
-  }
-
-  /* Gameplay Grid */
-  .gameplay-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin: 32px 0;
-    width: 100%;
-  }
-
-  .gameplay-item {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #4B0082;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-  }
-
-  .gameplay-item h3 {
-    margin: 0 0 8px 0;
-  }
-
-  .gameplay-item p {
-    margin: 0;
-    font-size: 14px;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   /* Rewards */
@@ -1019,14 +949,16 @@ export default function DocsPage() {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: #f0f9ff;
+    background: #111111;
     border-radius: 8px;
     text-align: center;
+    border: 1px solid #333333;
   }
 
   .reward-icon {
     font-size: 24px;
     margin-bottom: 8px;
+    color: #c0c0c0;
   }
 
   /* Roadmap */
@@ -1039,10 +971,11 @@ export default function DocsPage() {
   }
 
   .roadmap-phase {
-    background: #f8fafc;
+    background: #111111;
     padding: 24px;
     border-radius: 8px;
-    border-left: 4px solid #1d4ed8;
+    border-left: 4px solid #333333;
+    border: 1px solid #333333;
   }
 
   .phase-header {
@@ -1055,6 +988,7 @@ export default function DocsPage() {
   .phase-header h3 {
     margin: 0;
     flex: 1;
+    color: #ffffff;
   }
 
   .phase-status {
@@ -1062,33 +996,35 @@ export default function DocsPage() {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
+    background: #222222;
+    color: #c0c0c0;
   }
 
   .phase-status.current {
-    background: #dcfce7;
-    color: #166534;
+    background: #333333;
+    color: #ffffff;
   }
 
   .phase-status.upcoming {
-    background: #fef3c7;
-    color: #92400e;
+    background: #222222;
+    color: #a0a0a0;
   }
 
   /* Contract */
   .contract-card {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
+    background: #111111;
     padding: 24px;
     border-radius: 8px;
     margin: 24px 0;
     width: 100%;
-    border: 1px solid #4B0082;
+    border: 1px solid #333333;
     box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .contract-address {
     display: block;
-    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
-    color: #FF8C00;
+    background: #111111;
+    color: #c0c0c0;
     padding: 16px;
     border-radius: 8px;
     font-family: 'Monaco', 'Courier New', monospace;
@@ -1096,12 +1032,12 @@ export default function DocsPage() {
     margin: 16px 0;
     word-break: break-all;
     width: 100%;
-    border: 1px solid #4B0082;
+    border: 1px solid #333333;
     box-shadow: inset 0 3px 10px rgba(255,255,255,0.05);
   }
 
   .contract-note {
-    color: #000000;
+    color: #a0a0a0;
     font-size: 14px;
     margin: 0;
   }
@@ -1114,18 +1050,18 @@ export default function DocsPage() {
   }
 
   .copy-btn {
-    background: linear-gradient(180deg, #2F1B41 0%, #1B1024 100%);
-    color: #FF8C00;
+    background: #111111;
+    color: #c0c0c0;
     border-radius: 8px;
     padding: 10px 14px;
     font-weight: 800;
-    border: 1px solid #4B0082;
+    border: 1px solid #333333;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    text-shadow: 0 0 8px rgba(255,140,0,0.5);
   }
 
   .copy-btn:hover {
+    background: #222222;
     transform: translateY(-1px);
     box-shadow: 0 8px 18px rgba(0,0,0,0.4);
   }
@@ -1140,38 +1076,45 @@ export default function DocsPage() {
   }
 
   .faq-item {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
+    background: #111111;
     padding: 24px;
     border-radius: 8px;
-    border: 1px solid #4B0082;
+    border: 1px solid #333333;
     box-shadow: 0 8px 20px rgba(0,0,0,0.45);
   }
 
   .faq-item h3 {
     margin: 0 0 12px 0;
+    color: #ffffff;
   }
 
   .faq-item p {
     margin: 0;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   /* Tips */
   .tips {
-    background: rgba(75,0,130,0.25);
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 8px;
     margin: 24px 0;
     width: 100%;
-    border-left: 4px solid #4B0082;
+    border-left: 4px solid #333333;
+    border: 1px solid #333333;
   }
 
   .tips h3 {
     margin: 0 0 12px 0;
+    color: #ffffff;
   }
 
   .tips ul {
     margin: 0;
+  }
+
+  .tips li {
+    color: #c0c0c0;
   }
 
   /* Box Types */
@@ -1184,92 +1127,96 @@ export default function DocsPage() {
   }
 
   .box-type-card {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
+    background: #111111;
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #FF4500;
+    border-left: 4px solid #333333;
     box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    border: 1px solid #333333;
   }
 
   .box-type-card h3 {
     margin: 0 0 8px 0;
-    color: #FF8C00;
-    text-shadow: 0 0 8px rgba(255,140,0,0.5);
+    color: #ffffff;
   }
 
   .box-type-card p {
     margin: 0;
-    color: #000000;
+    color: #c0c0c0;
     font-size: 14px;
   }
 
   /* Info Box */
   .info-box {
-    background: rgba(255, 140, 0, 0.12);
+    background: #1a1a1a;
     padding: 24px;
     border-radius: 8px;
-    border-left: 4px solid #FF8C00;
+    border-left: 4px solid #333333;
     margin: 32px 0;
     width: 100%;
+    border: 1px solid #333333;
   }
 
   .info-box h3 {
     margin: 0 0 12px 0;
-    color: #FF8C00;
+    color: #ffffff;
   }
 
   .info-box p {
     margin: 8px 0;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   .info-box ul {
     margin: 12px 0;
     padding-left: 24px;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   .info-box li {
     margin: 6px 0;
+    color: #c0c0c0;
   }
 
   /* Mobile Warning */
   .mobile-warning {
-    background: rgba(255,69,0,0.12);
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #FF4500;
+    border-left: 4px solid #333333;
     margin: 24px 0;
     width: 100%;
+    border: 1px solid #333333;
   }
 
   .mobile-warning p {
     margin: 8px 0;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   .mobile-warning strong {
-    color: #FF4500;
+    color: #ffffff;
   }
 
   /* Tip Box */
   .tip-box {
-    background: rgba(50,205,50,0.12);
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #32CD32;
+    border-left: 4px solid #333333;
     margin: 24px 0;
     width: 100%;
+    border: 1px solid #333333;
   }
 
   .tip-box h3 {
     margin: 0 0 12px 0;
-    color: #9cff9c;
+    color: #ffffff;
   }
 
   .tip-box p {
     margin: 0;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   /* License & Credits */
@@ -1280,30 +1227,32 @@ export default function DocsPage() {
   .license-content p {
     margin: 16px 0;
     line-height: 1.6;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   .disclaimer-box {
-    background: #fef3c7;
+    background: #1a1a1a;
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #f59e0b;
+    border-left: 4px solid #333333;
     margin: 24px 0;
+    border: 1px solid #333333;
   }
 
   .disclaimer-box h3 {
     margin: 0 0 12px 0;
-    color: #92400e;
+    color: #ffffff;
   }
 
   .disclaimer-box ul {
     margin: 12px 0;
     padding-left: 24px;
-    color: #000000;
+    color: #c0c0c0;
   }
 
   .disclaimer-box li {
     margin: 8px 0;
+    color: #c0c0c0;
   }
 
   .credits-content {
@@ -1314,31 +1263,31 @@ export default function DocsPage() {
   }
 
   .credit-card {
-    background: linear-gradient(180deg, rgba(47,27,65,0.85) 0%, rgba(27,16,36,0.85) 100%);
+    background: #111111;
     padding: 24px;
     border-radius: 8px;
-    border-left: 4px solid #4B0082;
+    border-left: 4px solid #333333;
     box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    border: 1px solid #333333;
   }
 
   .credit-card h3 {
     margin: 0 0 12px 0;
-    color: #FF8C00;
-    text-shadow: 0 0 8px rgba(255,140,0,0.5);
+    color: #ffffff;
   }
 
   .credit-card p {
     margin: 8px 0;
-    color: #000000;
+    color: #c0c0c0;
     line-height: 1.6;
   }
 
   .docs-footer { 
-    border-top: 1px solid rgba(75,0,130,0.5); 
-    background: linear-gradient(135deg, #2F1B41 0%, #1B1024 100%); 
+    border-top: 1px solid #333333; 
+    background: #111111; 
     padding: 24px; 
     text-align: center; 
-    color: #d6c3ff; 
+    color: #c0c0c0; 
     width: 100%;
     margin: 0;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.4);
@@ -1359,9 +1308,9 @@ export default function DocsPage() {
       bottom: 0; 
       width: 82%; 
       max-width: 320px; 
-      border-right: 1px solid rgba(75,0,130,0.5); 
+      border-right: 1px solid #333333; 
       border-bottom: none; 
-      background: linear-gradient(180deg, #251633 0%, #110A18 100%); 
+      background: #111111; 
       transform: translateX(-100%); 
       transition: transform 200ms ease; 
       z-index: 40; 
