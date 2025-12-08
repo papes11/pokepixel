@@ -151,7 +151,7 @@ export default function HomePage(): JSX.Element {
             </div>
           </div>
         </div>
-        <h2 className="highlight-title silver-text">Alpha & Beta Highlights</h2>
+        <h2 className="highlight-title silver-text">Alpha&Beta Highlights</h2>
           <div className="video-container">
             <iframe 
               src="https://www.youtube.com/embed/IF01-Uk0wnM" 
